@@ -1,0 +1,2 @@
+gcloud config set project save-your-train
+gcloud app deploy --quiet app.yaml
