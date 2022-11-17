@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.*": true,
+    },
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave" : true,
+    "python.languageServer": "Pylance"
+}
