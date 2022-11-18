@@ -1,2 +1,7 @@
+# mobileApp
+mobileApp/.DS_Store
+mobileApp/save-your-train.xcodeproj/project.xcworkspace/xcuserdata/martihug.xcuserdatad/UserInterfaceState.xcuserstate
+
+# restAPI
 .venv
 **/__pycache__
