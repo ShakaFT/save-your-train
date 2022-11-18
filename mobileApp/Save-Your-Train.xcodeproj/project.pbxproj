@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */; };
-		7A73D5E82927A3260001FA5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* ContentView.swift */; };
+		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
 		7A73D5ED2927A3270001FA5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		7A73D5E22927A3260001FA5F /* Save-Your-Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save-Your-Train.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save_Your_TrainApp.swift; sourceTree = "<group>"; };
-		7A73D5E72927A3260001FA5F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7A73D5E92927A3270001FA5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */,
-				7A73D5E72927A3260001FA5F /* ContentView.swift */,
+				7A73D5E72927A3260001FA5F /* MainView.swift */,
 				7A73D5E92927A3270001FA5F /* Assets.xcassets */,
 				7A73D5EB2927A3270001FA5F /* Preview Content */,
 			);
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A73D5E82927A3260001FA5F /* ContentView.swift in Sources */,
+				7A73D5E82927A3260001FA5F /* MainView.swift in Sources */,
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

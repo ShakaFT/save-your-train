@@ -11,7 +11,7 @@ import SwiftUI
 struct Save_Your_TrainApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
