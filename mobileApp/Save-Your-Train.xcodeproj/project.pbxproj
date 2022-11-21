@@ -14,6 +14,7 @@
 		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
 		7A73D5ED2927A3270001FA5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */; };
+		7A8DE3F5292B7296005CFB06 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3F4292B7296005CFB06 /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7A73D5E92927A3270001FA5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7A8DE3F4292B7296005CFB06 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				7A0022F5292B5D5B00CB80F3 /* ExerciseView.swift */,
 				7A0022F7292B5D8600CB80F3 /* HistoryView.swift */,
 				7A0022F9292B5DA300CB80F3 /* ProfileView.swift */,
+				7A8DE3F4292B7296005CFB06 /* Constant.swift */,
 				7A73D5E92927A3270001FA5F /* Assets.xcassets */,
 				7A73D5EB2927A3270001FA5F /* Preview Content */,
 			);
@@ -151,6 +154,7 @@
 				7A0022FA292B5DA300CB80F3 /* ProfileView.swift in Sources */,
 				7A73D5E82927A3260001FA5F /* MainView.swift in Sources */,
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
+				7A8DE3F5292B7296005CFB06 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
