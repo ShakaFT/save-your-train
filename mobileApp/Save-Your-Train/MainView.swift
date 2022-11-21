@@ -12,7 +12,7 @@ struct MainView: View {
         TabView {
             ExerciseView()
                 .tabItem {
-                    Label("Exercice", systemImage: "square.and.pencil")
+                    Label("Exercice", systemImage: getExerciseIcon())
                 }
             HistoryView()
                 .tabItem {
@@ -23,6 +23,13 @@ struct MainView: View {
                     Label("Profil", systemImage: "person.crop.circle.fill")
                 }
         }
+    }
+    
+    func getExerciseIcon() -> String {
+        if(Double(UIDevice.current.systemVersion)! < 16.0 ){
+            return "square.and.pencil"
+        }
+        return "dumbbell.fill"
     }
 }
 
