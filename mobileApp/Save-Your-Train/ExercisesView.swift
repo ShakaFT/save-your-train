@@ -1,5 +1,5 @@
 //
-//  ExerciseView.swift
+//  ExercisesView.swift
 //  Save-Your-Train
 //
 //  Created by Hugo Martin on 21/11/2022.
@@ -7,22 +7,21 @@
 
 import SwiftUI
 
-struct ExerciseView: View {
+struct ExercisesView: View {
+    @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
+    
+    @Environment(\.managedObjectContext) var element
+    
     var body: some View {
-        
         NavigationView {
             ZStack {
                     List {
-                        Text("A")
-                        Text("B")
-                        Text("C")
-                        Text("A")
-                        Text("B")
-                        Text("C")
-                        Text("A")
-                        Text("B")
-                        Text("C")
-                        Text("A")
+                        ForEach(exercises) { Exercise in
+                            HStack {
+                                Text(Exercise.exerciseName ?? "")
+                                Text(Exercise.exerciseDescription ?? "").foregroundColor(.gray)
+                            }
+                        }.onDelete(perform: removeExercise)
                     }
                 VStack{
                     Spacer()
@@ -38,7 +37,7 @@ struct ExerciseView: View {
                                 .frame(width: 70, height: 70)
                         }
                         Spacer()
-                        Button(action: addExercise ) {
+                        NavigationLink(destination: AddExercise()) {
                             Image(systemName: "plus.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
@@ -47,11 +46,9 @@ struct ExerciseView: View {
                     .padding()
                 }
             }
+            .navigationTitle("Exercices")
+            .navigationBarTitleDisplayMode(.inline)
         }
-    }
-    
-    func addExercise() {
-        
     }
     
     func getPreviousExercises() {
@@ -61,10 +58,18 @@ struct ExerciseView: View {
     func getNextExercises() {
         
     }
+    
+    func removeExercise(at offsets: IndexSet) {
+     for offset in offsets {
+        let exercise = exercises[offset]
+            element.delete(exercise)
+        }
+     try? element.save()
+    }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
+struct ExercisesView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseView()
+        ExercisesView()
     }
 }
