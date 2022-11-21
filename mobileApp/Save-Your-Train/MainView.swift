@@ -9,15 +9,24 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        VStack {
-            Text("Hello, world!")
-                .padding()
-            Text("test")
+        TabView {
+            ExerciseView()
+                .tabItem {
+                    Label("Exercice", systemImage: "square.and.pencil")
+                }
+            HistoryView()
+                .tabItem {
+                    Label("Historique", systemImage: "chart.bar.xaxis")
+                }
+            ProfileView()
+                .tabItem {
+                    Label("Profil", systemImage: "person.crop.circle.fill")
+                }
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
     }
