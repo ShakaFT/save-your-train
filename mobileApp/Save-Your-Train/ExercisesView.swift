@@ -16,10 +16,10 @@ struct ExercisesView: View {
         NavigationView {
             ZStack {
                     List {
-                        ForEach(exercises) { Exercise in
+                        ForEach(exercises) { exercise in
                             HStack {
-                                Text(Exercise.exerciseName ?? "")
-                                Text(Exercise.exerciseDescription ?? "").foregroundColor(.gray)
+                                Text(exercise.exerciseName ?? "")
+                                Text(exercise.exerciseDescription ?? "").foregroundColor(.gray)
                             }
                         }.onDelete(perform: removeExercise)
                     }

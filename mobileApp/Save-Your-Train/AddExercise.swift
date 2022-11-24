@@ -9,13 +9,13 @@ import SwiftUI
 
 struct AddExercise: View {
     @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
-    @State private var name: String = ""
+    @State public var name: String = ""
     @State private var description: String = ""
     @State private var disabled: Bool = true
+    @State private var error: String = ""
     
     var body: some View {
         NavigationView {
@@ -27,6 +27,11 @@ struct AddExercise: View {
                             .textFieldStyle(.roundedBorder)
                             .onChange(of: name, perform: {activeButton(name: $0)})
                     }.padding()
+                    
+                    Text(error)
+                        .foregroundColor(.red)
+                        .padding(.horizontal)
+                        .font(.system(size: 14).bold())
                     
                     HStack {
                         Text("Description")
@@ -65,11 +70,22 @@ struct AddExercise: View {
     }
     
     func activeButton(name: String) {
-        if (name.isEmpty) {
+        if (name.isEmpty || checkExerciseExists(name: name)) {
             self.disabled = true
         } else {
             self.disabled = false
         }
+    }
+    
+    func checkExerciseExists(name: String) -> Bool {
+        for exercise in exercises {
+            if (exercise.exerciseName == name) {
+                self.error = "Cet exercice existe déjà"
+                return true
+            }
+        }
+        self.error = ""
+        return false
     }
 }
 
@@ -78,3 +94,4 @@ struct AddExercise_Previews: PreviewProvider {
         AddExercise()
     }
 }
+
