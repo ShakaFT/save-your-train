@@ -12,6 +12,7 @@
 		7A0022F6292B5D5B00CB80F3 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */; };
 		7A0022F8292B5D8600CB80F3 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F7292B5D8600CB80F3 /* HistoryView.swift */; };
 		7A0022FA292B5DA300CB80F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F9292B5DA300CB80F3 /* ProfileView.swift */; };
+		7A4E50432931087600D9876D /* ActiveHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E50422931087600D9876D /* ActiveHistory.swift */; };
 		7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */; };
 		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
@@ -21,6 +22,14 @@
 		7A8DE3F9292B7ADD005CFB06 /* ActiveExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3F8292B7ADC005CFB06 /* ActiveExercise.swift */; };
 		7A8DE3FF292B9183005CFB06 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3FD292B9183005CFB06 /* Data.xcdatamodeld */; };
 		7A8DE401292B91C7005CFB06 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE400292B91C7005CFB06 /* DataController.swift */; };
+		7A8E1EA1292F81AF00302B25 /* WeightRepetRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EA0292F81AF00302B25 /* WeightRepetRest.swift */; };
+		7A8E1EA3292F81EB00302B25 /* WeightRepet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EA2292F81EB00302B25 /* WeightRepet.swift */; };
+		7A8E1EA5292F820500302B25 /* ExecRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EA4292F820500302B25 /* ExecRest.swift */; };
+		7A8E1EA7292F821100302B25 /* Exec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EA6292F821100302B25 /* Exec.swift */; };
+		7A8E1EA9292F822D00302B25 /* RepetRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EA8292F822D00302B25 /* RepetRest.swift */; };
+		7A8E1EAB292F823D00302B25 /* Repet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EAA292F823D00302B25 /* Repet.swift */; };
+		7A8E1EAD292F827E00302B25 /* WeightExecRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EAC292F827E00302B25 /* WeightExecRest.swift */; };
+		7A8E1EAF292F828E00302B25 /* WeightExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E1EAE292F828E00302B25 /* WeightExec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +38,7 @@
 		7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		7A0022F7292B5D8600CB80F3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		7A0022F9292B5DA300CB80F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		7A4E50422931087600D9876D /* ActiveHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveHistory.swift; sourceTree = "<group>"; };
 		7A73D5E22927A3260001FA5F /* Save-Your-Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save-Your-Train.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save_Your_TrainApp.swift; sourceTree = "<group>"; };
 		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -39,6 +49,14 @@
 		7A8DE3F8292B7ADC005CFB06 /* ActiveExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveExercise.swift; sourceTree = "<group>"; };
 		7A8DE3FE292B9183005CFB06 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		7A8DE400292B91C7005CFB06 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		7A8E1EA0292F81AF00302B25 /* WeightRepetRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRepetRest.swift; sourceTree = "<group>"; };
+		7A8E1EA2292F81EB00302B25 /* WeightRepet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRepet.swift; sourceTree = "<group>"; };
+		7A8E1EA4292F820500302B25 /* ExecRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecRest.swift; sourceTree = "<group>"; };
+		7A8E1EA6292F821100302B25 /* Exec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exec.swift; sourceTree = "<group>"; };
+		7A8E1EA8292F822D00302B25 /* RepetRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetRest.swift; sourceTree = "<group>"; };
+		7A8E1EAA292F823D00302B25 /* Repet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repet.swift; sourceTree = "<group>"; };
+		7A8E1EAC292F827E00302B25 /* WeightExecRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightExecRest.swift; sourceTree = "<group>"; };
+		7A8E1EAE292F828E00302B25 /* WeightExec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightExec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +89,12 @@
 		7A73D5E42927A3260001FA5F /* Save-Your-Train */ = {
 			isa = PBXGroup;
 			children = (
+				7A8E1E9F292F808200302B25 /* ExerciseCase */,
 				7A8DE3FD292B9183005CFB06 /* Data.xcdatamodeld */,
 				7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */,
 				7A73D5E72927A3260001FA5F /* MainView.swift */,
 				7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */,
+				7A4E50422931087600D9876D /* ActiveHistory.swift */,
 				7A8DE3F8292B7ADC005CFB06 /* ActiveExercise.swift */,
 				7A8DE3F6292B7AC9005CFB06 /* AddExercise.swift */,
 				7A0022F7292B5D8600CB80F3 /* HistoryView.swift */,
@@ -95,6 +115,21 @@
 				7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7A8E1E9F292F808200302B25 /* ExerciseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E1EA0292F81AF00302B25 /* WeightRepetRest.swift */,
+				7A8E1EA2292F81EB00302B25 /* WeightRepet.swift */,
+				7A8E1EAC292F827E00302B25 /* WeightExecRest.swift */,
+				7A8E1EAE292F828E00302B25 /* WeightExec.swift */,
+				7A8E1EA4292F820500302B25 /* ExecRest.swift */,
+				7A8E1EA6292F821100302B25 /* Exec.swift */,
+				7A8E1EA8292F822D00302B25 /* RepetRest.swift */,
+				7A8E1EAA292F823D00302B25 /* Repet.swift */,
+			);
+			path = ExerciseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,14 +205,23 @@
 				7468C869292F77CF00CB156E /* Network.swift in Sources */,
 				7A0022F6292B5D5B00CB80F3 /* ExercisesView.swift in Sources */,
 				7A8DE3F7292B7AC9005CFB06 /* AddExercise.swift in Sources */,
+				7A8E1EA1292F81AF00302B25 /* WeightRepetRest.swift in Sources */,
+				7A8E1EA9292F822D00302B25 /* RepetRest.swift in Sources */,
+				7A4E50432931087600D9876D /* ActiveHistory.swift in Sources */,
 				7A0022F8292B5D8600CB80F3 /* HistoryView.swift in Sources */,
 				7A8DE3F9292B7ADD005CFB06 /* ActiveExercise.swift in Sources */,
+				7A8E1EAD292F827E00302B25 /* WeightExecRest.swift in Sources */,
+				7A8E1EAB292F823D00302B25 /* Repet.swift in Sources */,
 				7A8DE3FF292B9183005CFB06 /* Data.xcdatamodeld in Sources */,
 				7A8DE401292B91C7005CFB06 /* DataController.swift in Sources */,
+				7A8E1EAF292F828E00302B25 /* WeightExec.swift in Sources */,
 				7A0022FA292B5DA300CB80F3 /* ProfileView.swift in Sources */,
+				7A8E1EA5292F820500302B25 /* ExecRest.swift in Sources */,
+				7A8E1EA3292F81EB00302B25 /* WeightRepet.swift in Sources */,
 				7A73D5E82927A3260001FA5F /* MainView.swift in Sources */,
 				7418CA842930FC0C00A9C468 /* DataModels.swift in Sources */,
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
+				7A8E1EA7292F821100302B25 /* Exec.swift in Sources */,
 				7A8DE3F5292B7296005CFB06 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
