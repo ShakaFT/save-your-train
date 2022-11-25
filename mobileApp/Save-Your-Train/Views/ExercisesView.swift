@@ -1,45 +1,38 @@
-//
-//  ExercisesView.swift
-//  Save-Your-Train
-//
-//  Created by Hugo Martin on 21/11/2022.
-//
-
 import SwiftUI
 
 struct ExercisesView: View {
-    @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
     
+    @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
     @Environment(\.managedObjectContext) var element
     
     var body: some View {
         NavigationView {
             ZStack {
                     List {
-                        ForEach(exercises) { exercise in
-                            NavigationLink(destination: ActiveExercise(name: exercise.exerciseName!, description: exercise.exerciseDescription!)){
+                        ForEach(self.exercises) { (exercise: Exercise) in
+                            NavigationLink(destination: ActiveExerciseView(name: exercise.exerciseName!, description: exercise.exerciseDescription!)){
                                 HStack {
-                                    Text(exercise.exerciseName ?? "")
-                                    Text(exercise.exerciseDescription ?? "").foregroundColor(.gray)
+                                    Text(exercise.exerciseName!)
+                                    Text(exercise.exerciseDescription ?? "Aucune description").foregroundColor(.gray)
                                 }
                             }
-                        }.onDelete(perform: removeExercise)
+                        }.onDelete(perform: self.removeExercise)
                     }
                 VStack{
                     Spacer()
                     HStack {
-                        Button(action: getPreviousExercises ) {
+                        Button(action: self.getPreviousExercises) {
                             Image(systemName: "arrow.backward.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
                         }
-                        Button(action: getNextExercises ) {
+                        Button(action: self.getNextExercises ) {
                             Image(systemName: "arrow.right.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
                         }
                         Spacer()
-                        NavigationLink(destination: AddExercise()) {
+                        NavigationLink(destination: AddExerciseView()) {
                             Image(systemName: "plus.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
@@ -62,11 +55,10 @@ struct ExercisesView: View {
     }
     
     func removeExercise(at offsets: IndexSet) {
-     for offset in offsets {
-        let exercise = exercises[offset]
-            element.delete(exercise)
+        for offset in offsets {
+            self.element.delete(self.exercises[offset])
         }
-     try? element.save()
+        try? self.element.save()
     }
 }
 

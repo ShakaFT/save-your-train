@@ -1,10 +1,3 @@
-//
-//  HistoryView.swift
-//  Save-Your-Train
-//
-//  Created by Hugo Martin on 21/11/2022.
-//
-
 import SwiftUI
 
 struct HistoryView: View {
@@ -15,24 +8,24 @@ struct HistoryView: View {
         NavigationView {
             ZStack {
                     List {
-                        ForEach(histories) { (history: History) in
-                            NavigationLink(destination: ActiveHistory()) {
+                        ForEach(self.histories) { (history: History) in
+                            NavigationLink(destination: ActiveHistoryView()) {
                                 HStack {
-                                    Text(history.name ?? "")
-                                    Text(getDate(timestamp: history.dateMs))
+                                    Text(history.name!)
+                                    Text(self.getDate(timestamp: history.dateMs))
                                 }
                             }
-                        }.onDelete(perform: removeHistory)
+                        }.onDelete(perform: self.removeHistory)
                     }
                 VStack{
                     Spacer()
                     HStack {
-                        Button(action: getPreviousHistories ) {
+                        Button(action: self.getPreviousHistories ) {
                             Image(systemName: "arrow.backward.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
                         }
-                        Button(action: getNextHistories ) {
+                        Button(action: self.getNextHistories ) {
                             Image(systemName: "arrow.right.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
@@ -47,21 +40,21 @@ struct HistoryView: View {
     }
     
     func removeHistory(at offsets: IndexSet) {
-     for offset in offsets {
-        let history = histories[offset]
-            element.delete(history)
+        for offset in offsets {
+            self.element.delete(self.histories[offset])
         }
-     try? element.save()
+        try? self.element.save()
     }
     
     func getDate(timestamp: Double) -> String {
-        let date = Date(timeIntervalSince1970: timestamp)
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier) //Set timezone that you want
+        let date: Date = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm" //Specify your format that you want
-        let strDate = dateFormatter.string(from: date)
-        return strDate
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        
+        return dateFormatter.string(from: date)
     }
     
     func getPreviousHistories() {

@@ -1,16 +1,6 @@
-//
-//  ContentView.swift
-//  Save-Your-Train
-//
-//  Created by Hugo Martin on 18/11/2022.
-//
-
 import SwiftUI
 
 struct MainView: View {
-    
-    @FetchRequest(entity: History.entity(), sortDescriptors: []) var histories: FetchedResults<History>
-    @Environment(\.managedObjectContext) var element
     
     var body: some View {
         TabView {

@@ -1,10 +1,3 @@
-//
-//  ExternalApi.swift
-//  Save-Your-Train
-//
-//  Created by Florent Tornicelli on 24/11/2022.
-//
-
 import Foundation
 
 let constants: Constants = Constants()
@@ -35,7 +28,7 @@ func addRemoteExercise(exercise: ExerciseModel) {
         }
         DispatchQueue.main.async {
             do {
-                let exercisesList = try JSONDecoder().decode(AddExerciseModel.self, from: data!)
+                let _ = try JSONDecoder().decode(AddExerciseModel.self, from: data!)
             } catch let error {
                 print("An error as occured during recovery of values from restApi : \(error)")
             }

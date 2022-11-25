@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddExercise: View {
+struct AddExerciseView: View {
     @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
@@ -62,8 +62,8 @@ struct AddExercise: View {
     }
     
     func addExercise() {
-        let exerciseData: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
-        addRemoteExercise(exercise: exerciseData)
+        //let exerciseData: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
+        // addRemoteExercise(exercise: exerciseData)
         
         let exercise = Exercise(context: element)
         exercise.exerciseName = name
@@ -92,9 +92,9 @@ struct AddExercise: View {
     }
 }
 
-struct AddExercise_Previews: PreviewProvider {
+struct AddExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExercise()
+        AddExerciseView()
     }
 }
 

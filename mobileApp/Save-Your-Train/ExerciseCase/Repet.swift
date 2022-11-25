@@ -22,7 +22,7 @@ struct Repet: View {
             ZStack {
                 VStack(spacing: UIScreen.main.bounds.height * 0.25) {
                     VStack {
-                        Text("Nombre de répétition").font(.system(size: 30))
+                        Text("Nombre de répétitions").font(.system(size: 30))
                         Text(repetition).font(.system(size: 70))
                         Text(nbSeries == 1 ? "Série restante :" : "Séries restantes :").font(.system(size: 30))
                         Text(String(nbSeries)).font(.system(size: 40))
