@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     
+    @FetchRequest(entity: History.entity(), sortDescriptors: []) var histories: FetchedResults<History>
+    @Environment(\.managedObjectContext) var element
+    
     var body: some View {
         TabView {
             ExercisesView()
@@ -23,7 +26,11 @@ struct MainView: View {
                 .tabItem {
                     Label("Profil", systemImage: "person.crop.circle.fill")
                 }
-        }
+        }.onAppear(perform: {
+            for h in histories {
+                element.delete(h)
+            }
+        })
     }
     
     func getExerciseIcon() -> String {

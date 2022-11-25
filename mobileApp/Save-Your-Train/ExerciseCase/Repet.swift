@@ -47,10 +47,10 @@ struct Repet: View {
     
     func stopExercise() {
         let history = History(context: element)
-        history.name = name
-        history.series = series.isEmpty ? "1" : series
-        history.repetition = repetition
-        history.dateMs = NSDate().timeIntervalSince1970
+        //history.name = name
+        //history.series = series.isEmpty ? "1" : series
+        //history.repetition = repetition
+        //history.dateMs = NSDate().timeIntervalSince1970
         try? element.save()
         self.presentationMode.wrappedValue.dismiss()
     }

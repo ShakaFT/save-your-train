@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @FetchRequest(sortDescriptors: []) var histories: FetchedResults<History>
+    @FetchRequest(entity: History.entity(), sortDescriptors: []) var histories: FetchedResults<History>
     
     @Environment(\.managedObjectContext) var element
     var body: some View {
         NavigationView {
             ZStack {
                     List {
-                        ForEach(histories) { history in
+                        ForEach(histories) { (history: History) in
                             NavigationLink(destination: ActiveHistory()) {
                                 HStack {
                                     Text(history.name ?? "")
