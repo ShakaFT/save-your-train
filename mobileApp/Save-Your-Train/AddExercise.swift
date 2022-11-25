@@ -54,7 +54,7 @@ struct AddExercise: View {
                 }
                 .disabled(disabled)
                 .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
                 .padding()
             }

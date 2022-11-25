@@ -17,9 +17,11 @@ struct ExercisesView: View {
             ZStack {
                     List {
                         ForEach(exercises) { exercise in
-                            HStack {
-                                Text(exercise.exerciseName ?? "")
-                                Text(exercise.exerciseDescription ?? "").foregroundColor(.gray)
+                            NavigationLink(destination: ActiveExercise(name: exercise.exerciseName!, description: exercise.exerciseDescription!)){
+                                HStack {
+                                    Text(exercise.exerciseName ?? "")
+                                    Text(exercise.exerciseDescription ?? "").foregroundColor(.gray)
+                                }
                             }
                         }.onDelete(perform: removeExercise)
                     }

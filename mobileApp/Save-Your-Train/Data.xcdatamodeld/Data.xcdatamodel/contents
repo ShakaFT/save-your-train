@@ -4,9 +4,17 @@
         <attribute name="exerciseDescription" optional="YES" attributeType="String"/>
         <attribute name="exerciseName" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class"/>
+    <entity name="History" representedClassName="History" syncable="YES" codeGenerationType="class">
+        <attribute name="attribute" optional="YES" attributeType="String"/>
+        <attribute name="dateMs" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="repetition" optional="YES" attributeType="String"/>
+        <attribute name="rest" optional="YES" attributeType="String"/>
+        <attribute name="series" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Exercise" positionX="-45" positionY="0" width="128" height="59"/>
-        <element name="History" positionX="-18" positionY="45" width="128" height="29"/>
+        <element name="History" positionX="-18" positionY="45" width="128" height="134"/>
     </elements>
 </model>
