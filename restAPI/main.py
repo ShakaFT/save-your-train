@@ -143,7 +143,7 @@ def start():
     history = db.collection(constants.COLLECTION_HISTORY).document(email).get().to_dict()
 
     return jsonify({
-        "exercise": exercises["exercises"] if exercises else {},
+        "exercises": exercises["exercises"] if exercises else {},
         "history": history["history"] if history else {}
     })
 

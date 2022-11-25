@@ -62,6 +62,9 @@ struct AddExercise: View {
     }
     
     func addExercise() {
+        let exerciseData: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
+        addRemoteExercise(exercise: exerciseData)
+        
         let exercise = Exercise(context: element)
         exercise.exerciseName = name
         exercise.exerciseDescription = description

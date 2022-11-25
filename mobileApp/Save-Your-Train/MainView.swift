@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MainView: View {
+    
     var body: some View {
         TabView {
-            ExercisesView().background(getBackgroundColor())
+            ExercisesView()
                 .tabItem {
                     Label("Exercices", systemImage: getExerciseIcon())
                 }
