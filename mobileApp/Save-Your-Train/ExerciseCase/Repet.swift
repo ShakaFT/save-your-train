@@ -1,35 +1,31 @@
-//
-//  Repet.swift
-//  Save-Your-Train
-//
-//  Created by Hugo Martin on 24/11/2022.
-//
-
 import SwiftUI
 
 
 struct Repet: View {
-    
     @Environment(\.managedObjectContext) var element
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State var nbSeries: Int = 1
     
     let repetition: String
     let series: String
     let name: String
-    @State var nbSeries: Int = 1
+    
     var body: some View {
         NavigationView {
             ZStack {
                 VStack(spacing: UIScreen.main.bounds.height * 0.25) {
                     VStack {
                         Text("Nombre de répétitions").font(.system(size: 30))
-                        Text(repetition).font(.system(size: 70))
-                        Text(nbSeries == 1 ? "Série restante :" : "Séries restantes :").font(.system(size: 30))
-                        Text(String(nbSeries)).font(.system(size: 40))
+                        Text(self.repetition).font(.system(size: 70))
+                        Text(self.nbSeries == 1 ? "Série restante :" : "Séries restantes :").font(.system(size: 30))
+                        Text(String(self.nbSeries)).font(.system(size: 40))
                     }
                     VStack {
-                        Button(action: {(self.nbSeries == 1 ? self.stopExercise() : self.nextSeries())}) {
-                            Text(nbSeries == 1 ? "Terminer l'exercice" : "Série suivante").padding()
+                        Button(action: {
+                            self.nbSeries == 1 ? self.stopExercise() : self.nextSeries()
+                        }) {
+                            Text(self.nbSeries == 1 ? "Terminer l'exercice" : "Série suivante").padding()
                         }
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.green, lineWidth: 1))
@@ -39,24 +35,24 @@ struct Repet: View {
                 }
                 
             }
-            .onAppear(perform: {nbSeries = Int(series) ?? 1})
-            .navigationTitle(name)
+            .onAppear(perform: { self.nbSeries = Int(self.series) ?? 1 })
+            .navigationTitle(self.name)
             .navigationBarTitleDisplayMode(.inline)
         }
     }
     
     func stopExercise() {
         let history = History(context: element)
-        history.name = name
-        history.series = series.isEmpty ? "1" : series
-        history.repetition = repetition
+        history.name = self.name
+        history.series = self.series.isEmpty ? "1" : self.series
+        history.repetition = self.repetition
         history.dateMs = NSDate().timeIntervalSince1970
-        try? element.save()
+        try? self.element.save()
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func nextSeries() {
-        nbSeries -= 1
+        self.nbSeries -= 1
     }
 }
 

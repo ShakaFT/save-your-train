@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7418CA842930FC0C00A9C468 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7418CA832930FC0C00A9C468 /* DataModels.swift */; };
 		7468C869292F77CF00CB156E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468C868292F77CF00CB156E /* Network.swift */; };
+		74AFF7842934F2B700E43216 /* exerciseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AFF7832934F2B700E43216 /* exerciseCases.swift */; };
+		74AFF7872934F5D500E43216 /* exerciseCases.json in Resources */ = {isa = PBXBuildFile; fileRef = 74AFF7862934F5D500E43216 /* exerciseCases.json */; };
 		7A0022F6292B5D5B00CB80F3 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */; };
 		7A0022F8292B5D8600CB80F3 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F7292B5D8600CB80F3 /* HistoryView.swift */; };
 		7A0022FA292B5DA300CB80F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F9292B5DA300CB80F3 /* ProfileView.swift */; };
@@ -17,7 +19,7 @@
 		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
 		7A73D5ED2927A3270001FA5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */; };
-		7A8DE3F5292B7296005CFB06 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3F4292B7296005CFB06 /* Constant.swift */; };
+		7A8DE3F5292B7296005CFB06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3F4292B7296005CFB06 /* Constants.swift */; };
 		7A8DE3F7292B7AC9005CFB06 /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3F6292B7AC9005CFB06 /* AddExerciseView.swift */; };
 		7A8DE3F9292B7ADD005CFB06 /* ActiveExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3F8292B7ADC005CFB06 /* ActiveExerciseView.swift */; };
 		7A8DE3FF292B9183005CFB06 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DE3FD292B9183005CFB06 /* Data.xcdatamodeld */; };
@@ -36,6 +38,8 @@
 /* Begin PBXFileReference section */
 		7418CA832930FC0C00A9C468 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		7468C868292F77CF00CB156E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		74AFF7832934F2B700E43216 /* exerciseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exerciseCases.swift; sourceTree = "<group>"; };
+		74AFF7862934F5D500E43216 /* exerciseCases.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = exerciseCases.json; path = "Save-Your-Train/Config/exerciseCases.json"; sourceTree = SOURCE_ROOT; };
 		7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		7A0022F7292B5D8600CB80F3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		7A0022F9292B5DA300CB80F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -45,7 +49,7 @@
 		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7A73D5E92927A3270001FA5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A73D5EC2927A3270001FA5F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7A8DE3F4292B7296005CFB06 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		7A8DE3F4292B7296005CFB06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7A8DE3F6292B7AC9005CFB06 /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
 		7A8DE3F8292B7ADC005CFB06 /* ActiveExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveExerciseView.swift; sourceTree = "<group>"; };
 		7A8DE3FE292B9183005CFB06 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +76,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		743F9F132934F1FA001AB55A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7A8DE3F4292B7296005CFB06 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		74AFF7882934FB7D00E43216 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				74AFF7832934F2B700E43216 /* exerciseCases.swift */,
+				74AFF7862934F5D500E43216 /* exerciseCases.json */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		7A4E504529311DB000D9876D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,9 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				7A8DE3FD292B9183005CFB06 /* Data.xcdatamodeld */,
-				7468C868292F77CF00CB156E /* Network.swift */,
 				7A8DE400292B91C7005CFB06 /* DataController.swift */,
 				7418CA832930FC0C00A9C468 /* DataModels.swift */,
+				7468C868292F77CF00CB156E /* Network.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -119,9 +140,10 @@
 			children = (
 				7A4E504629311DF700D9876D /* Data */,
 				7A4E504529311DB000D9876D /* Views */,
+				743F9F132934F1FA001AB55A /* Utils */,
 				7A8E1E9F292F808200302B25 /* ExerciseCase */,
+				74AFF7882934FB7D00E43216 /* Config */,
 				7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */,
-				7A8DE3F4292B7296005CFB06 /* Constant.swift */,
 				7A73D5E92927A3270001FA5F /* Assets.xcassets */,
 				7A73D5EB2927A3270001FA5F /* Preview Content */,
 			);
@@ -211,6 +233,7 @@
 			files = (
 				7A73D5ED2927A3270001FA5F /* Preview Assets.xcassets in Resources */,
 				7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */,
+				74AFF7872934F5D500E43216 /* exerciseCases.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,10 +262,11 @@
 				7A8E1EA5292F820500302B25 /* ExecRest.swift in Sources */,
 				7A8E1EA3292F81EB00302B25 /* WeightRepet.swift in Sources */,
 				7A73D5E82927A3260001FA5F /* MainView.swift in Sources */,
+				74AFF7842934F2B700E43216 /* exerciseCases.swift in Sources */,
 				7418CA842930FC0C00A9C468 /* DataModels.swift in Sources */,
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
 				7A8E1EA7292F821100302B25 /* Exec.swift in Sources */,
-				7A8DE3F5292B7296005CFB06 /* Constant.swift in Sources */,
+				7A8DE3F5292B7296005CFB06 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

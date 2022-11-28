@@ -1,19 +1,14 @@
-//
-//  AddExercise.swift
-//  Save-Your-Train
-//
-//  Created by Hugo Martin on 21/11/2022.
-//
-
 import SwiftUI
 
 struct AddExerciseView: View {
     @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
     @State public var name: String = ""
     @State private var description: String = ""
+    
     @State private var disabled: Bool = true
     @State private var error: String = ""
     
@@ -23,19 +18,19 @@ struct AddExerciseView: View {
                 VStack(alignment: .leading){
                     HStack {
                         Text("Nom")
-                        TextField("Nom de l'exercice...", text: $name)
+                        TextField("Nom de l'exercice...", text: self.$name)
                             .textFieldStyle(.roundedBorder)
-                            .onChange(of: name, perform: {activeButton(name: $0)})
+                            .onChange(of: self.name, perform: { self.activeButton(name: $0) })
                     }.padding()
                     
-                    Text(error)
+                    Text(self.error)
                         .foregroundColor(.red)
                         .padding(.horizontal)
                         .font(.system(size: 14).bold())
                     
                     HStack {
                         Text("Description")
-                        TextField("Description de l'exercice...", text: $description)
+                        TextField("Description de l'exercice...", text: self.$description)
                             .textFieldStyle(.roundedBorder)
                     }.padding()
                     
@@ -49,10 +44,10 @@ struct AddExerciseView: View {
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 
-                Button(action: addExercise) {
+                Button(action: self.addExercise) {
                     Text("Ajouter").padding()
                 }
-                .disabled(disabled)
+                .disabled(self.disabled)
                 .cornerRadius(10)
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
@@ -62,27 +57,23 @@ struct AddExerciseView: View {
     }
     
     func addExercise() {
-        //let exerciseData: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
+        // let exerciseData: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
         // addRemoteExercise(exercise: exerciseData)
         
-        let exercise = Exercise(context: element)
-        exercise.exerciseName = name
-        exercise.exerciseDescription = description
-        try? element.save()
+        let exercise = Exercise(context: self.element)
+        exercise.exerciseName = self.name
+        exercise.exerciseDescription = self.description
+        try? self.element.save()
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func activeButton(name: String) {
-        if (name.isEmpty || checkExerciseExists(name: name)) {
-            self.disabled = true
-        } else {
-            self.disabled = false
-        }
+        self.disabled = (self.name.isEmpty || self.checkExerciseExists(name: self.name)) ? true: false
     }
     
     func checkExerciseExists(name: String) -> Bool {
-        for exercise in exercises {
-            if (exercise.exerciseName == name) {
+        for exercise in self.exercises {
+            if (exercise.exerciseName == self.name) {
                 self.error = "Cet exercice existe déjà"
                 return true
             }

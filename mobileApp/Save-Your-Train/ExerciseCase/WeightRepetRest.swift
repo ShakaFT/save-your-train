@@ -1,10 +1,3 @@
-//
-//  WeightRepetRest.swift
-//  Save-Your-Train
-//
-//  Created by Hugo Martin on 24/11/2022.
-//
-
 import SwiftUI
 
 struct WeightRepetRest: View {

@@ -5,6 +5,8 @@ struct ActiveExerciseView: View {
     let name: String
     let description: String
     
+    @ObservedObject public var exerciseCases = ExerciseCases()
+    
     @State private var execution: String = ""
     @State private var rest: String = ""
     @State private var repetition: String = ""
@@ -94,29 +96,14 @@ struct ActiveExerciseView: View {
     }
     
     func activeButton(arg: String) {
-        if (self.execution.isEmpty && self.rest.isEmpty && self.repetition.isEmpty && self.weight.isEmpty && self.series.isEmpty ) {
-            self.disabled = true
-        } else if (!self.execution.isEmpty && !self.repetition.isEmpty) {
-            self.disabled = true
-        }
-        else if (self.execution.isEmpty && !self.rest.isEmpty && self.repetition.isEmpty && self.weight.isEmpty) {
-            self.disabled = true
-        }
-        else if (self.execution.isEmpty && self.rest.isEmpty && self.repetition.isEmpty && !self.weight.isEmpty) {
-            self.disabled = true
-        }
-        else if (self.execution.isEmpty && self.rest.isEmpty && self.repetition.isEmpty && self.weight.isEmpty && !self.series.isEmpty) {
-            self.disabled = true
-        }
-        else if (self.execution.isEmpty && self.rest.isEmpty && self.repetition.isEmpty && !self.weight.isEmpty) {
-            self.disabled = true
-        }
-        else if (self.execution.isEmpty && !self.rest.isEmpty && self.repetition.isEmpty && !self.weight.isEmpty) {
-            self.disabled = true
-        }
-        else {
-            self.disabled = false
-        }
+        let currentCase: ExercisesCaseModel = ExercisesCaseModel(
+            exec: !self.execution.isEmpty,
+            repet: !self.repetition.isEmpty,
+            rest: !self.rest.isEmpty,
+            weight: !self.weight.isEmpty
+        )
+        
+        self.disabled = !exerciseCases.cases.contains(where: {$0 == currentCase})
     }
 }
 

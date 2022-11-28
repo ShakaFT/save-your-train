@@ -12,6 +12,7 @@ struct HistoryView: View {
                             NavigationLink(destination: ActiveHistoryView()) {
                                 HStack {
                                     Text(history.name!)
+                                    Spacer()
                                     Text(self.getDate(timestamp: history.dateMs))
                                 }
                             }
@@ -52,7 +53,7 @@ struct HistoryView: View {
         
         dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        dateFormatter.dateFormat = "HH:mm dd-MM-yyyy"
         
         return dateFormatter.string(from: date)
     }
