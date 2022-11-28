@@ -1,8 +1,6 @@
 """
 This module contains main endpoints of default service.
 """
-from time import time
-
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -44,7 +42,15 @@ def sign_in():
     if password != user_doc.to_dict()["password"]:
         return jsonify(user_sign_in=False, reason="password incorrect")
 
-    return jsonify(user_sign_in=True)
+    # get data
+    exercises = db.collection(constants.COLLECTION_EXERCISES).document(email).get().to_dict()
+    history = db.collection(constants.COLLECTION_HISTORY).document(email).get().to_dict()
+
+    return jsonify(
+        user_sign_in = True,
+        exercises = exercises["exercises"] if exercises else {},
+        history = history["history"] if history else {}
+    )
 
 
 @app.post("/account/add")
@@ -91,10 +97,9 @@ def add_exercise():
     exercise_ref = db.collection(constants.COLLECTION_EXERCISES).document(email)
     exercises_list = (exercise_ref.get().to_dict()["exercises"] if exercise_ref.get().exists else [])
     exercises_list.append(exercise)
-    exercises_list.sort(key=lambda x: x["name"])
 
     exercise_ref.set({"exercises":exercises_list})
-    return jsonify(exercises=exercises_list)
+    return jsonify()
 
 
 @app.post("/history/add")
@@ -107,10 +112,6 @@ def add_history():
     try:
         email = payload["email"]
         exercise = payload["exercise"]
-        history_data = {
-            "exercise": exercise,
-            "date_ms": time() # pylint: disable=no-member
-        }
     except KeyError as e:
         return jsonify(error=f"missing {str(e)}"), 400
 
@@ -120,11 +121,10 @@ def add_history():
 
     history_ref = db.collection(constants.COLLECTION_HISTORY).document(email)
     history_list = (history_ref.get().to_dict()["history"] if history_ref.get().exists else [])
-    history_list.insert(0, history_data)
-
+    history_list.append(exercise)
 
     history_ref.set({"history": history_list})
-    return jsonify(history=history_list)
+    return jsonify()
 
 
 @app.post("/start")
