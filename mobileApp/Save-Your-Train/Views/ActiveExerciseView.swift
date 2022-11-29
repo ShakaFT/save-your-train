@@ -5,6 +5,12 @@ struct ActiveExerciseView: View {
     let name: String
     let description: String
     
+    @FetchRequest(
+        entity: History.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \History.dateMs, ascending: false)])
+    
+    var histories: FetchedResults<History>
+    
     @ObservedObject public var exerciseCases = ExerciseCases()
     
     @State private var execution: String = ""
@@ -84,15 +90,12 @@ struct ActiveExerciseView: View {
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                 .padding()
                 .sheet(isPresented: self.$sheetAppear) {
-                    if(self.execution.isEmpty && self.rest.isEmpty && !self.repetition.isEmpty && self.weight.isEmpty) {
-                        Repet(repetition: self.repetition, series: self.series, name: self.name)
-                    } else if (self.execution.isEmpty && self.rest.isEmpty && !self.repetition.isEmpty && !self.weight.isEmpty) {
-                        WeightRepet(repetition: self.repetition, series: self.series, name: self.name, weight: self.weight)
-                    }
+                    LaunchedExerciseView(rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
                 }
-                
             }
-        }.navigationTitle(self.name)
+        }
+        .navigationTitle(self.name)
+        .onAppear(perform: initHistory)
     }
     
     func activeButton(arg: String) {
@@ -104,6 +107,19 @@ struct ActiveExerciseView: View {
         )
         
         self.disabled = !exerciseCases.cases.contains(where: {$0 == currentCase})
+    }
+    
+    func initHistory() {
+        for history in self.histories {
+            if (history.exerciseName == self.name) {
+                self.execution = (history.execution) ?? ""
+                self.repetition = (history.repetition) ?? ""
+                self.rest = (history.rest) ?? ""
+                self.weight = (history.weight) ?? ""
+                self.series = (history.series) ?? ""
+                break
+            }
+        }
     }
 }
 

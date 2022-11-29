@@ -11,7 +11,7 @@ struct HistoryView: View {
                         ForEach(self.histories) { (history: History) in
                             NavigationLink(destination: ActiveHistoryView()) {
                                 HStack {
-                                    Text(history.name!)
+                                    Text(history.exerciseName!)
                                     Spacer()
                                     Text(self.getDate(timestamp: history.dateMs))
                                 }
