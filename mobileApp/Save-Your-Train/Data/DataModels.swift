@@ -9,9 +9,7 @@ struct ExerciseModel: Decodable, Encodable {
 
 // Network Models
 
-struct AddExerciseModel: Decodable {
-    let exercises: [ExerciseModel]
-}
+
 
 // Config
 

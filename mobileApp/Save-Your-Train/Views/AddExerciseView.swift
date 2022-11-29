@@ -7,6 +7,7 @@ struct AddExerciseView: View {
     @Environment(\.managedObjectContext) var element
     
     @State public var name: String = ""
+    @State public var networkFailed: Bool = false
     @State private var description: String = ""
     
     @State private var disabled: Bool = true
@@ -44,7 +45,18 @@ struct AddExerciseView: View {
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 
-                Button(action: self.addExercise) {
+                if (self.networkFailed) {
+                    Text("Une erreur est survenue, veuillez réessayer plus tard...")
+                        .bold()
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                }
+                
+                Button(action: {
+                    Task {
+                        await self.addExercise()
+                    }
+                }) {
                     Text("Ajouter").padding()
                 }
                 .disabled(self.disabled)
@@ -56,10 +68,14 @@ struct AddExerciseView: View {
         }
     }
     
-    func addExercise() {
-        // let exerciseData: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
-        // addRemoteExercise(exercise: exerciseData)
+    func addExercise() async {
+        let worked: Bool = try await Network.addRemoteExercise(exercise: ExerciseModel(name: self.name, description: self.description))
+        if (!worked) {
+            self.networkFailed = true
+            return
+        }
         
+        // Add local exercise
         let exercise = Exercise(context: self.element)
         exercise.exerciseName = self.name
         exercise.exerciseDescription = self.description
