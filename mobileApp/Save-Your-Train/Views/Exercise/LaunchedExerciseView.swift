@@ -19,8 +19,9 @@ struct LaunchedExerciseView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                VStack(spacing: UIScreen.main.bounds.height * 0.25) {
-                    VStack {
+                VStack(spacing: 0) {
+                    Spacer()
+                    VStack (spacing: UIScreen.main.bounds.height * 0.05){
                         if(!repetition.isEmpty && !displayRest.toggled) {
                             Text("Nombre de répétitions").font(.system(size: 30))
                             Text(self.repetition).font(.system(size: 50))
@@ -28,7 +29,7 @@ struct LaunchedExerciseView: View {
                         
                         if(!weight.isEmpty && !displayRest.toggled) {
                             Text("Poids").font(.system(size: 30))
-                            Text(self.weight).font(.system(size: 50))
+                            Text("\(self.weight) kg").font(.system(size: 50))
                         }
                         
                         if(!rest.isEmpty && displayRest.toggled) {
@@ -63,6 +64,7 @@ struct LaunchedExerciseView: View {
                         .foregroundColor(.green)
                         .padding()
                     }
+                    Spacer()
                 }
             }
             .onAppear(perform: {self.nbSeries = Int(self.series) ?? 1})

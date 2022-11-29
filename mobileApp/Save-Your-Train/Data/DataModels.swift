@@ -8,13 +8,13 @@ struct ExerciseModel: Decodable, Encodable {
 }
 
 struct HistoryModel: Decodable, Encodable {
-    let dateMs: Double // id
-    let exerciseName: String // exerciseName
-    let execution: String
-    let repetition: String
-    let rest: String
-    let series: String
-    let weight: String
+    var dateMs: Double = 0.0 // id
+    var exerciseName: String = "" // exerciseName
+    var execution: String = ""
+    var repetition: String = ""
+    var rest: String = ""
+    var series: String = ""
+    var weight: String = ""
 }
 
 // Network Models

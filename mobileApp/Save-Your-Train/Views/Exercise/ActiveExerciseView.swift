@@ -77,10 +77,7 @@ struct ActiveExerciseView: View {
                             .onChange(of: self.series , perform: {self.activeButton(arg: $0)})
                     }.padding()
                      
-                }
-                .cornerRadius(20)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
-                .padding()
+                }.padding()
                 
                 Button(action: {self.sheetAppear.toggle()}) {
                     Text("Lancer l'exercice").padding()

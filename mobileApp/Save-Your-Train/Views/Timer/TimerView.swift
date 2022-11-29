@@ -20,7 +20,7 @@ struct TimerView: View {
                             .padding(.horizontal, 90)
                 }
                 .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.green, lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
             }
         }
     }
