@@ -4,6 +4,7 @@ struct LaunchedExerciseView: View {
     @Environment(\.managedObjectContext) var element
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State var disabled: Bool = false
     @State var nbSeries: Int = 1
     
     var rest : String
@@ -57,6 +58,7 @@ struct LaunchedExerciseView: View {
                             Text(self.getButtonName()).padding()
                         }
                         .cornerRadius(10)
+                        .disabled(self.disabled)
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.green, lineWidth: 1))
                         .foregroundColor(.green)
                         .padding()
@@ -71,8 +73,10 @@ struct LaunchedExerciseView: View {
     
     func stopExercise() async {
         let historyRemote: HistoryModel = HistoryModel(dateMs: NSDate().timeIntervalSince1970, exerciseName: self.name, execution: self.execution, repetition: self.repetition, rest: self.rest, series: self.series, weight: self.weight)
+        self.disabled = true
         let worked: Bool = try await Network.addRemoteHistory(history: historyRemote)
         if (!worked) {
+            self.disabled = false
             return
         }
         

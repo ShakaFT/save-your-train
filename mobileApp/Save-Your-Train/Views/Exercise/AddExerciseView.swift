@@ -70,9 +70,13 @@ struct AddExerciseView: View {
     
     func addExercise() async {
         let exerciseRemote: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
+        
+        self.disabled = true
         let worked: Bool = try await Network.addRemoteExercise(exercise: exerciseRemote)
+        
         if (!worked) {
             self.networkFailed = true
+            self.disabled = false
             return
         }
         
