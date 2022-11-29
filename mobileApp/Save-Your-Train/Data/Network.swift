@@ -1,13 +1,13 @@
 import Foundation
 
-let constants: Constants = Constants()
-
 class Network {
+    
+    //private let constants: Constants = Constants()
     
     public static func addRemoteExercise(exercise: ExerciseModel) async -> Bool {
         
         let payload: [String: Any] = [
-            "email": constants.email,
+            "email": Constants.email,
             "exercise": [
                 "exerciseName": exercise.name,
                 "description": exercise.description
@@ -26,7 +26,7 @@ class Network {
     public static func deleteRemoteExercise(exerciseName: String) async -> Bool {
         
         let payload: [String: Any] = [
-            "email": constants.email,
+            "email": Constants.email,
             "exerciseName": exerciseName
         ]
         
@@ -42,7 +42,7 @@ class Network {
     public static func addRemoteHistory(history: HistoryModel) async -> Bool {
         
         let payload: [String: Any] = [
-            "email": constants.email,
+            "email": Constants.email,
             "exercise": [
                 "dateMs": history.dateMs,
                 "exerciseName": history.exerciseName,
@@ -66,7 +66,7 @@ class Network {
     public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
         
         let payload: [String: Any] = [
-            "email": constants.email,
+            "email": Constants.email,
             "dateMs": timestamp
         ]
         
@@ -81,7 +81,7 @@ class Network {
     
     private static func callAPI(endpoint: String, method: String = "GET", payload: [String: Any] = [:]) async throws -> Data {
         // URL
-        let url = URL(string: "\(constants.urlRestApi)\(endpoint)")
+        let url = URL(string: "\(Constants.urlRestApi)\(endpoint)")
         guard let urlRequest = url else { throw NSError(domain: "", code: 0) }
         
         // Request

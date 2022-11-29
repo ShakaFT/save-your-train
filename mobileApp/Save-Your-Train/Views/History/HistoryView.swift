@@ -1,14 +1,19 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @FetchRequest(entity: History.entity(), sortDescriptors: []) var histories: FetchedResults<History>
+    @FetchRequest(entity: History.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \History.dateMs, ascending: false)]) var histories: FetchedResults<History>
     
     @Environment(\.managedObjectContext) var element
+    
+    @State public var historyArray: Array<History> = []
+    @State public var currentPage: Int = 1
+    
     var body: some View {
         NavigationView {
             ZStack {
                     List {
-                        ForEach(self.histories) { (history: History) in
+                        ForEach(self.getHistoriesToDisplay()) { (history: History) in
                             NavigationLink(destination: ActiveHistoryView()) {
                                 HStack {
                                     Text(history.exerciseName!)
@@ -21,23 +26,37 @@ struct HistoryView: View {
                 VStack{
                     Spacer()
                     HStack {
-                        Button(action: self.getPreviousHistories ) {
+                        Button(action: self.previousPage ) {
                             Image(systemName: "arrow.backward.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
-                        }
-                        Button(action: self.getNextHistories ) {
+                        }.disabled(self.currentPage == 1)
+                        
+                        Button(action: self.nextPage ) {
                             Image(systemName: "arrow.right.circle")
                                 .font(.largeTitle)
                                 .frame(width: 70, height: 70)
-                        }
+                        }.disabled(self.currentPage*10>=self.historyArray.count)
                     }
                     .padding()
                 }
             }
             .navigationTitle("Exercices")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear(perform: self.setHistoriesArray)
         }
+    }
+    
+    func getHistoriesToDisplay() -> ArraySlice<FetchedResults<History>.Element> {
+        return self.historyArray[(currentPage-1)*10..<self.getMaxPage()]
+    }
+    
+    func nextPage() {
+        self.currentPage += 1
+    }
+    
+    func previousPage() {
+        self.currentPage -= 1
     }
     
     func removeHistory(at offsets: IndexSet) {
@@ -45,6 +64,19 @@ struct HistoryView: View {
             self.element.delete(self.histories[offset])
         }
         try? self.element.save()
+        self.setHistoriesArray()
+    }
+    
+    public func setHistoriesArray() {
+        self.historyArray = Array(self.histories)
+    }
+    
+    private func getMaxPage() -> Int {
+        let result: Int = currentPage * Constants.nbItems
+        if (result > self.historyArray.count) {
+            return self.historyArray.count
+        }
+        return result
     }
     
     func getDate(timestamp: Double) -> String {
@@ -56,14 +88,6 @@ struct HistoryView: View {
         dateFormatter.dateFormat = "HH:mm dd-MM-yyyy"
         
         return dateFormatter.string(from: date)
-    }
-    
-    func getPreviousHistories() {
-        
-    }
-    
-    func getNextHistories() {
-        
     }
 }
 

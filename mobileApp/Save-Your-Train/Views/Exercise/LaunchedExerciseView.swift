@@ -70,7 +70,6 @@ struct LaunchedExerciseView: View {
     }
     
     func stopExercise() async {
-        print("let's gooo")
         let historyRemote: HistoryModel = HistoryModel(dateMs: NSDate().timeIntervalSince1970, exerciseName: self.name, execution: self.execution, repetition: self.repetition, rest: self.rest, series: self.series, weight: self.weight)
         let worked: Bool = try await Network.addRemoteHistory(history: historyRemote)
         if (!worked) {
@@ -79,7 +78,7 @@ struct LaunchedExerciseView: View {
         
         // Add local history
         let history = History(context: self.element)
-        history.exerciseName = historyRemote.execution
+        history.exerciseName = historyRemote.exerciseName
         history.series = historyRemote.series
         history.repetition = historyRemote.repetition
         history.weight = historyRemote.weight
