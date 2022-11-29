@@ -1,6 +1,7 @@
 """
 This module contains main endpoints of default service.
 """
+from firebase_admin import firestore
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -46,10 +47,19 @@ def sign_in():
     exercises = db.collection(constants.COLLECTION_EXERCISES).document(email).get().to_dict()
     history = db.collection(constants.COLLECTION_HISTORY).document(email).get().to_dict()
 
+    print(exercises)
+    print(history)
+
+    # check if exercises not already registered
+    if not exercises:
+        exercises = {}
+    if not history:
+        history = {}
+
     return jsonify(
         user_sign_in = True,
-        exercises = exercises["exercises"] if exercises else {},
-        history = history["history"] if history else {}
+        exercises = [{"exerciseName": k} | v for k, v in exercises.items()],
+        history = [{"timestamp": k} | v for k, v in history.items()]
     )
 
 
@@ -86,7 +96,7 @@ def add_exercise():
     try:
         email = payload["email"]
         exercise = payload["exercise"]
-        exercise["name"] # pylint: disable=pointless-statement
+        exercise_name = exercise.pop("exerciseName")
     except KeyError as e:
         return jsonify(error=f"missing {str(e)}"), 400
 
@@ -94,11 +104,29 @@ def add_exercise():
     if not db.collection(constants.COLLECTION_USER).document(email).get().exists:
         return jsonify(error="email unknown"), 400
 
-    exercise_ref = db.collection(constants.COLLECTION_EXERCISES).document(email)
-    exercises_list = (exercise_ref.get().to_dict()["exercises"] if exercise_ref.get().exists else [])
-    exercises_list.append(exercise)
+    db.collection(constants.COLLECTION_EXERCISES).document(email).set({exercise_name: exercise}, merge=True)
+    return jsonify()
 
-    exercise_ref.set({"exercises":exercises_list})
+
+@app.post("/exercise/delete")
+def delete_exercise():
+    """
+    This endpoint deletes exercise from database.
+    """
+    payload = request.get_json(force=True)
+
+    try:
+        email = payload["email"]
+        exercise_name = payload["exerciseName"]
+    except KeyError as e:
+        return jsonify(error=f"missing {str(e)}"), 400
+
+    # pylint: disable=no-member
+    if not db.collection(constants.COLLECTION_USER).document(email).get().exists:
+        return jsonify(error="email unknown"), 400
+
+    db.collection(constants.COLLECTION_EXERCISES).document(email).set({
+        exercise_name: firestore.DELETE_FIELD}, merge=True)
     return jsonify()
 
 
@@ -112,6 +140,7 @@ def add_history():
     try:
         email = payload["email"]
         exercise = payload["exercise"]
+        timestamp = str(exercise.pop("dateMs"))
     except KeyError as e:
         return jsonify(error=f"missing {str(e)}"), 400
 
@@ -119,33 +148,30 @@ def add_history():
     if not db.collection(constants.COLLECTION_USER).document(email).get().exists:
         return jsonify(error="email unknown"), 400
 
-    history_ref = db.collection(constants.COLLECTION_HISTORY).document(email)
-    history_list = (history_ref.get().to_dict()["history"] if history_ref.get().exists else [])
-    history_list.append(exercise)
-
-    history_ref.set({"history": history_list})
+    db.collection(constants.COLLECTION_HISTORY).document(email).set({timestamp: exercise}, merge=True)
     return jsonify()
 
 
-@app.post("/start")
-def start():
+@app.post("/history/delete")
+def delete_history():
     """
-    This endpoint returns utils data when app is launched.
+    This endpoint deletes an exercise from history from database.
     """
     payload = request.get_json(force=True)
-    email = payload.get("email")
 
-    if email is None:
-        return jsonify(error="missing email"), 400
+    try:
+        email = payload["email"]
+        timestamp = str(payload["dateMs"])
+    except KeyError as e:
+        return jsonify(error=f"missing {str(e)}"), 400
 
     # pylint: disable=no-member
-    exercises = db.collection(constants.COLLECTION_EXERCISES).document(email).get().to_dict()
-    history = db.collection(constants.COLLECTION_HISTORY).document(email).get().to_dict()
+    if not db.collection(constants.COLLECTION_USER).document(email).get().exists:
+        return jsonify(error="email unknown"), 400
 
-    return jsonify({
-        "exercises": exercises["exercises"] if exercises else {},
-        "history": history["history"] if history else {}
-    })
+    db.collection(constants.COLLECTION_HISTORY).document(email).set({
+        timestamp: firestore.DELETE_FIELD}, merge=True)
+    return jsonify()
 
 
 if __name__ == "__main__":
