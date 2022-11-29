@@ -9,11 +9,11 @@ struct HistoryView: View {
             ZStack {
                     List {
                         ForEach(self.histories) { (history: History) in
-                            NavigationLink(destination: ActiveHistoryView()) {
+                            NavigationLink(destination: ActiveHistoryView(history: HistoryModel(dateMs: history.dateMs, exerciseName: history.exerciseName!, execution: history.execution ?? "", repetition: history.repetition ?? "", rest: history.rest ?? "", series: history.series ?? "1", weight: history.weight ?? "" ))) {
                                 HStack {
                                     Text(history.exerciseName!)
                                     Spacer()
-                                    Text(self.getDate(timestamp: history.dateMs))
+                                    Text(Constants.getDate(timestamp: history.dateMs))
                                 }
                             }
                         }.onDelete(perform: self.removeHistory)
@@ -45,17 +45,6 @@ struct HistoryView: View {
             self.element.delete(self.histories[offset])
         }
         try? self.element.save()
-    }
-    
-    func getDate(timestamp: Double) -> String {
-        let date: Date = Date(timeIntervalSince1970: timestamp)
-        let dateFormatter: DateFormatter = DateFormatter()
-        
-        dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "HH:mm dd-MM-yyyy"
-        
-        return dateFormatter.string(from: date)
     }
     
     func getPreviousHistories() {

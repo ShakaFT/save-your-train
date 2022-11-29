@@ -69,11 +69,11 @@ struct AddExerciseView: View {
     }
     
     func addExercise() async {
-        let worked: Bool = try await Network.addRemoteExercise(exercise: ExerciseModel(name: self.name, description: self.description))
+        /*let worked: Bool = try await Network.addRemoteExercise(exercise: ExerciseModel(name: self.name, description: self.description))
         if (!worked) {
             self.networkFailed = true
             return
-        }
+        }*/
         
         // Add local exercise
         let exercise = Exercise(context: self.element)
