@@ -9,13 +9,69 @@ class Network {
         let payload: [String: Any] = [
             "email": constants.email,
             "exercise": [
-                "name": exercise.name,
+                "exerciseName": exercise.name,
                 "description": exercise.description
             ]
         ]
         
         do {
             _ = try await Network.callAPI(endpoint: "/exercise/add", method: "POST", payload: payload)
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
+    public static func deleteRemoteExercise(exerciseName: String) async -> Bool {
+        
+        let payload: [String: Any] = [
+            "email": constants.email,
+            "exerciseName": exerciseName
+        ]
+        
+        do {
+            _ = try await Network.callAPI(endpoint: "/exercise/delete", method: "POST", payload: payload)
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
+    public static func addRemoteHistory(history: HistoryModel) async -> Bool {
+        
+        let payload: [String: Any] = [
+            "email": constants.email,
+            "exercise": [
+                "dateMs": history.dateMs,
+                "exerciseName": history.exerciseName,
+                "execution": history.execution,
+                "repetition": history.repetition,
+                "rest": history.rest,
+                "series": history.series,
+                "weight": history.weight
+            ]
+        ]
+        
+        do {
+            _ = try await Network.callAPI(endpoint: "/exercise/add", method: "POST", payload: payload)
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
+    public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
+        
+        let payload: [String: Any] = [
+            "email": constants.email,
+            "dateMs": timestamp
+        ]
+        
+        do {
+            _ = try await Network.callAPI(endpoint: "/exercise/delete", method: "POST", payload: payload)
         } catch {
             return false
         }

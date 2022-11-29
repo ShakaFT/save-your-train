@@ -56,6 +56,7 @@ struct ExercisesView: View {
     
     func removeExercise(at offsets: IndexSet) {
         for offset in offsets {
+            // print(self.exercises[offset].exerciseName)
             self.element.delete(self.exercises[offset])
         }
         try? self.element.save()
