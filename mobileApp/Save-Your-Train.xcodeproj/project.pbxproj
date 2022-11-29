@@ -84,17 +84,51 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		74AFF7892936107000E43216 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				7A778AD0293507E1006884BE /* TimerManager.swift */,
+				7AF76FEA293123990058D16A /* TimerView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		74AFF78A2936108700E43216 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */,
+				7A8DE3F6292B7AC9005CFB06 /* AddExerciseView.swift */,
+				7A8DE3F8292B7ADC005CFB06 /* ActiveExerciseView.swift */,
+				7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		74AFF78B2936109200E43216 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				7A0022F7292B5D8600CB80F3 /* HistoryView.swift */,
+				7A4E50422931087600D9876D /* ActiveHistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		74AFF78C293610BE00E43216 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				7A0022F9292B5DA300CB80F3 /* ProfileView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		7A4E504529311DB000D9876D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				74AFF78C293610BE00E43216 /* Account */,
+				74AFF78B2936109200E43216 /* History */,
+				74AFF78A2936108700E43216 /* Exercise */,
+				74AFF7892936107000E43216 /* Timer */,
 				7A73D5E72927A3260001FA5F /* MainView.swift */,
-				7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */,
-				7A0022F7292B5D8600CB80F3 /* HistoryView.swift */,
-				7A0022F9292B5DA300CB80F3 /* ProfileView.swift */,
-				7A4E50422931087600D9876D /* ActiveHistoryView.swift */,
-				7A8DE3F8292B7ADC005CFB06 /* ActiveExerciseView.swift */,
-				7A8DE3F6292B7AC9005CFB06 /* AddExerciseView.swift */,
-				7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,8 +147,6 @@
 		7A73D5D92927A3260001FA5F = {
 			isa = PBXGroup;
 			children = (
-				7A778AD0293507E1006884BE /* TimerManager.swift */,
-				7AF76FEA293123990058D16A /* TimerView.swift */,
 				7A73D5E42927A3260001FA5F /* Save-Your-Train */,
 				7A73D5E32927A3260001FA5F /* Products */,
 			);
