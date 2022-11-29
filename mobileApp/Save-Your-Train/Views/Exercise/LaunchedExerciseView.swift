@@ -46,7 +46,13 @@ struct LaunchedExerciseView: View {
                     
                     VStack {
                         Button(action: {
-                            self.nbSeries == 1 ? self.stopExercise() : self.nextSeries()
+                            if self.nbSeries > 1 {
+                                self.nextSeries()
+                            } else {
+                                Task {
+                                    await self.stopExercise()
+                                }
+                            }
                         }) {
                             Text(self.getButtonName()).padding()
                         }
@@ -63,15 +69,23 @@ struct LaunchedExerciseView: View {
         }
     }
     
-    func stopExercise() {
+    func stopExercise() async {
+        print("let's gooo")
+        let historyRemote: HistoryModel = HistoryModel(dateMs: NSDate().timeIntervalSince1970, exerciseName: self.name, execution: self.execution, repetition: self.repetition, rest: self.rest, series: self.series, weight: self.weight)
+        let worked: Bool = try await Network.addRemoteHistory(history: historyRemote)
+        if (!worked) {
+            return
+        }
+        
+        // Add local history
         let history = History(context: self.element)
-        history.exerciseName = self.name
-        history.series = self.series
-        history.repetition = self.repetition
-        history.weight = self.weight
-        history.rest = self.rest
-        history.execution = self.execution
-        history.dateMs = NSDate().timeIntervalSince1970
+        history.exerciseName = historyRemote.execution
+        history.series = historyRemote.series
+        history.repetition = historyRemote.repetition
+        history.weight = historyRemote.weight
+        history.rest = historyRemote.rest
+        history.execution = historyRemote.execution
+        history.dateMs = historyRemote.dateMs
         try? self.element.save()
         self.presentationMode.wrappedValue.dismiss()
     }

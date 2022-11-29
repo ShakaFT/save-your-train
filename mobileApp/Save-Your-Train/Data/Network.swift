@@ -55,7 +55,7 @@ class Network {
         ]
         
         do {
-            _ = try await Network.callAPI(endpoint: "/exercise/add", method: "POST", payload: payload)
+            _ = try await Network.callAPI(endpoint: "/history/add", method: "POST", payload: payload)
         } catch {
             return false
         }
@@ -71,7 +71,7 @@ class Network {
         ]
         
         do {
-            _ = try await Network.callAPI(endpoint: "/exercise/delete", method: "POST", payload: payload)
+            _ = try await Network.callAPI(endpoint: "/history/delete", method: "POST", payload: payload)
         } catch {
             return false
         }
