@@ -56,7 +56,7 @@ def sign_in():
     return jsonify(
         userSignIn = True,
         exercises = [{"exerciseName": k} | v for k, v in exercises.items()],
-        history = [{"timestamp": k} | v for k, v in history.items()]
+        history = [{"dateMs": float(k)} | v for k, v in history.items()]
     )
 
 
