@@ -66,8 +66,8 @@ struct LaunchedExerciseView: View {
                         }
                         .cornerRadius(10)
                         .disabled(self.disabled)
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.green, lineWidth: 1))
-                        .foregroundColor(.green)
+                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
+                        .foregroundColor(.blue)
                         .padding()
                     }
                     Spacer()

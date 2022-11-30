@@ -16,33 +16,68 @@ struct SignUpView: View {
             VStack(spacing: 0) {
                 Spacer()
                 VStack (spacing: UIScreen.main.bounds.height * 0.025){
-                    TextField("Nom", text: self.$lastName)
-                        .textFieldStyle(.roundedBorder)
-                    
-                    TextField("Prénom", text: self.$firstName)
-                        .textFieldStyle(.roundedBorder)
-                    
-                    TextField("Email", text: self.$email)
-                        .textFieldStyle(.roundedBorder)
-                        .onChange(of: email, perform: {
-                            self.error = ""
-                            let _ = $0
-                        })
-                    
                     if (!self.error.isEmpty) {
+                        Text(self.error)
+                            .font(.system(size: 15))
+                            .bold()
+                            .foregroundColor(.red)
+                    }
+                    VStack {
                         HStack {
-                            Text(self.error)
-                                .font(.system(size: 15))
-                                .bold()
-                                .foregroundColor(.red)
+                            Text("Nom").font(.system(size: 15)).bold()
                             Spacer()
                         }
+                        
+                        TextField("", text: self.$lastName)
+                            .textFieldStyle(.roundedBorder)
                     }
-                    SecureField("Mot de passe", text: self.$password)
-                        .textFieldStyle(.roundedBorder)
                     
-                    SecureField("Confirmer le mot de passe", text: self.$confirmPassword)
-                        .textFieldStyle(.roundedBorder)
+                    VStack {
+                        HStack {
+                            Text("Prénom").font(.system(size: 15)).bold()
+                            Spacer()
+                        }
+                        
+                        TextField("", text: self.$firstName)
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Text("Email").font(.system(size: 15)).bold()
+                            Spacer()
+                        }
+                        
+                        TextField("", text: self.$email)
+                            .textFieldStyle(.roundedBorder)
+                            .keyboardType(.emailAddress)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                            .onChange(of: email, perform: {
+                                self.error = ""
+                                let _ = $0
+                            })
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Text("Mot de passe").font(.system(size: 15)).bold()
+                            Spacer()
+                        }
+                        
+                        SecureField("", text: self.$password)
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Text("Confirmer le mot de passe").font(.system(size: 15)).bold()
+                            Spacer()
+                        }
+                        
+                        SecureField("", text: self.$confirmPassword)
+                            .textFieldStyle(.roundedBorder)
+                    }
                 }.padding()
                 
                 VStack {
@@ -59,7 +94,7 @@ struct SignUpView: View {
                             }
                         }
                     }){
-                        Text("Se connecter").padding()
+                        Text("Inscription").padding()
                     }
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))

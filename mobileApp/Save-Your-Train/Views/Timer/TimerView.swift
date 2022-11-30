@@ -15,12 +15,12 @@ struct TimerView: View {
             if(self.timerManager.mode == .notStarted){
                 Button(action: {self.timerManager.start()}) {
                         Text("Démarrer")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.green)
                             .padding(.vertical, 20)
                             .padding(.horizontal, 90)
                 }
                 .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.green, lineWidth: 1))
             }
         }
     }
