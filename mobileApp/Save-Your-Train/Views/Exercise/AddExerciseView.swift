@@ -17,8 +17,14 @@ struct AddExerciseView: View {
         NavigationView {
             VStack{
                 VStack(alignment: .leading){
-                    HStack {
-                        Text("Nom")
+                    Spacer()
+                    
+                    VStack {
+                        HStack {
+                            Text("Nom")
+                            Spacer()
+                        }
+                        
                         TextField("Nom de l'exercice...", text: self.$name)
                             .textFieldStyle(.roundedBorder)
                             .onChange(of: self.name, perform: { self.activeButton(name: $0) })
@@ -29,19 +35,17 @@ struct AddExerciseView: View {
                         .padding(.horizontal)
                         .font(.system(size: 14).bold())
                     
-                    HStack {
-                        Text("Description")
+                    VStack {
+                        HStack {
+                            Text("Description")
+                            Spacer()
+                        }
+                        
                         TextField("Description de l'exercice...", text: self.$description)
                             .textFieldStyle(.roundedBorder)
                     }.padding()
-                    
-                    HStack(alignment: .firstTextBaseline){
-                        Text("Image")
-                        Text("...")
-                    }.padding()
                 }
                 .cornerRadius(20)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 

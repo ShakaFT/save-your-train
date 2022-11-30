@@ -33,8 +33,7 @@ struct ActiveExerciseView: View {
                         Text((self.description.isEmpty ? "Aucune description" : description))
                     }.padding()
                 }
-                .cornerRadius(20)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.black, lineWidth: 1))
                 .padding()
                 
                 VStack(alignment: .leading, spacing: 0) {
@@ -44,7 +43,7 @@ struct ActiveExerciseView: View {
                         TextField("60 sec (facultatif)", text: self.$execution)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.numberPad)
-                            .onChange(of: self.execution , perform: {self.activeButton(arg: $0)})
+                            .onChange(of: self.execution, perform: {self.activeButton(arg: $0)})
                     }.padding()
                     
                     HStack {

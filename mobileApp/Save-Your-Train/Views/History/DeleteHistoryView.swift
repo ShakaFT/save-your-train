@@ -19,6 +19,7 @@ struct DeleteHistoryView: View {
 
                 VStack(alignment: .center, spacing: 0) {
                     Text("Voulez vous vraiment supprimer cet historique ?")
+                        .bold()
                         .font(Font.system(size: 20))
                         .padding()
                     HStack {
