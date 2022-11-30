@@ -21,6 +21,7 @@
 		7A6A54B92936069E00A5872C /* UtilsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54B82936069E00A5872C /* UtilsView.swift */; };
 		7A6A54BB293645B000A5872C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54BA293645B000A5872C /* LoginView.swift */; };
 		7A71A8F82937B1AA0041AEE9 /* DeleteExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */; };
+		7A71A8FA2937BD5B0041AEE9 /* DeleteHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F92937BD5B0041AEE9 /* DeleteHistoryView.swift */; };
 		7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */; };
 		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		7A6A54B82936069E00A5872C /* UtilsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsView.swift; sourceTree = "<group>"; };
 		7A6A54BA293645B000A5872C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExerciseView.swift; sourceTree = "<group>"; };
+		7A71A8F92937BD5B0041AEE9 /* DeleteHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHistoryView.swift; sourceTree = "<group>"; };
 		7A73D5E22927A3260001FA5F /* Save-Your-Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save-Your-Train.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save_Your_TrainApp.swift; sourceTree = "<group>"; };
 		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				7A0022F7292B5D8600CB80F3 /* HistoryView.swift */,
 				7A4E50422931087600D9876D /* ActiveHistoryView.swift */,
+				7A71A8F92937BD5B0041AEE9 /* DeleteHistoryView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				74AFF7842934F2B700E43216 /* exerciseCases.swift in Sources */,
 				7418CA842930FC0C00A9C468 /* DataModels.swift in Sources */,
 				7A6A54BB293645B000A5872C /* LoginView.swift in Sources */,
+				7A71A8FA2937BD5B0041AEE9 /* DeleteHistoryView.swift in Sources */,
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
 				7A8DE3F5292B7296005CFB06 /* Constants.swift in Sources */,
 				743E63C1293764FC00C33C98 /* UserStateViewModel.swift in Sources */,
