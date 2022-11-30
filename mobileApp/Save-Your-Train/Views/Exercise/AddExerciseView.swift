@@ -69,7 +69,7 @@ struct AddExerciseView: View {
     }
     
     func addExercise() async {
-        let exerciseRemote: ExerciseModel = ExerciseModel(name: self.name, description: self.description)
+        let exerciseRemote: ExerciseModel = ExerciseModel(exerciseName: self.name, description: self.description)
         
         self.disabled = true
         let worked: Bool = try await Network.addRemoteExercise(exercise: exerciseRemote)
@@ -82,7 +82,7 @@ struct AddExerciseView: View {
         
         // Add local exercise
         let exercise = Exercise(context: self.element)
-        exercise.exerciseName = exerciseRemote.name
+        exercise.exerciseName = exerciseRemote.exerciseName
         exercise.exerciseDescription = exerciseRemote.description
         try? self.element.save()
         self.presentationMode.wrappedValue.dismiss()

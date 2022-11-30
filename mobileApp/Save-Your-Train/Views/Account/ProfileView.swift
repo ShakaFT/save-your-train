@@ -7,7 +7,7 @@ struct ProfileView: View {
                 HStack {
                     Text("Nom").bold()
                     Divider()
-                    Text("\(Constants.nom) \(Constants.prenom)")
+                    Text("\(Constants.firstName) \(Constants.lastName)")
                 }
                 
                 HStack {

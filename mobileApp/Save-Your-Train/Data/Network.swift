@@ -1,15 +1,13 @@
 import Foundation
+import CoreData
 
 class Network {
     
-    //private let constants: Constants = Constants()
-    
     public static func addRemoteExercise(exercise: ExerciseModel) async -> Bool {
-        
         let payload: [String: Any] = [
             "email": Constants.email,
             "exercise": [
-                "exerciseName": exercise.name,
+                "exerciseName": exercise.exerciseName,
                 "description": exercise.description
             ]
         ]
@@ -24,7 +22,6 @@ class Network {
     }
     
     public static func deleteRemoteExercise(exerciseName: String) async -> Bool {
-        
         let payload: [String: Any] = [
             "email": Constants.email,
             "exerciseName": exerciseName
@@ -40,7 +37,6 @@ class Network {
     }
     
     public static func addRemoteHistory(history: HistoryModel) async -> Bool {
-        
         let payload: [String: Any] = [
             "email": Constants.email,
             "exercise": [
@@ -63,8 +59,48 @@ class Network {
         return true
     }
     
-    public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
+    public static func signIn(account: AccountModel) async -> Bool {
+        let payload: [String: Any] = [
+            "email": account.email,
+            "password": account.password
+        ]
         
+        do {
+        let data: Data = try await Network.callAPI(endpoint: "/account/add", method: "POST", payload: payload)
+            let signInData = try JSONDecoder().decode(SignInModel.self, from: data)
+            
+            if (!signInData.userSignIn) { return false }
+            
+            for ex in signInData.exercises {
+                let test = Exercise(context: <#T##NSManagedObjectContext#>)
+            }
+            
+            
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
+    public static func signUp(account: AccountModel) async -> Bool {
+        let payload: [String: Any] = [
+            "email": account.email,
+            "password": account.password,
+            "firstName": account.firstName,
+            "lastName": account.lastName
+        ]
+        
+        do {
+            _ = try await Network.callAPI(endpoint: "/account/add", method: "POST", payload: payload)
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
+    public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
         let payload: [String: Any] = [
             "email": Constants.email,
             "dateMs": timestamp

@@ -2,10 +2,9 @@ import Foundation
 import SwiftUI
 
 class Constants {
-
     @AppStorage("email") public static var email: String = ""
-    @AppStorage("nom") public static var nom: String = "Test"
-    @AppStorage("prenom") public static var prenom: String = "Hello"
+    @AppStorage("firstName") public static var firstName: String = "Test"
+    @AppStorage("lastName") public static var lastName: String = "Hello"
     
     public static let nbItems: Int = 10
     public static let urlRestApi: String = "https://save-your-train.ew.r.appspot.com"

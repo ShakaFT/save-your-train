@@ -2,8 +2,15 @@ import Foundation
 
 // Base Models
 
+struct AccountModel: Decodable, Encodable {
+    var email: String = ""
+    var password: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
+}
+
 struct ExerciseModel: Decodable, Encodable {
-    let name: String // id
+    let exerciseName: String // id
     let description: String
 }
 
@@ -19,7 +26,11 @@ struct HistoryModel: Decodable, Encodable {
 
 // Network Models
 
-
+struct SignInModel: Codable {
+    let userSignIn: Bool
+    let exercises: [ExerciseModel]
+    let history: [HistoryModel]
+}
 
 // Config
 

@@ -25,7 +25,7 @@ def default():
 @app.post("/account/sign_in")
 def sign_in():
     """
-    This endpoint check if user is already registered in database.
+    This endpoint checks if user is already registered in database.
     """
     payload = request.get_json(force=True)
 
@@ -47,9 +47,6 @@ def sign_in():
     exercises = db.collection(constants.COLLECTION_EXERCISES).document(email).get().to_dict()
     history = db.collection(constants.COLLECTION_HISTORY).document(email).get().to_dict()
 
-    print(exercises)
-    print(history)
-
     # check if exercises not already registered
     if not exercises:
         exercises = {}
@@ -57,7 +54,7 @@ def sign_in():
         history = {}
 
     return jsonify(
-        user_sign_in = True,
+        userSignIn = True,
         exercises = [{"exerciseName": k} | v for k, v in exercises.items()],
         history = [{"timestamp": k} | v for k, v in history.items()]
     )
@@ -66,13 +63,18 @@ def sign_in():
 @app.post("/account/add")
 def add_account():
     """
-    This endpoint add a new account in database.
+    This endpoint adds a new account in database.
     """
     payload = request.get_json(force=True)
 
     try:
-        email = payload["email"]
-        password = payload["password"]
+        email = payload.pop("email")
+        # pylint: disable=pointless-statement
+        account_data = {
+            "firstName": payload["firstName"],
+            "lastName": payload["lastName"],
+            "password": payload["password"]
+        }
     except KeyError as e:
         return jsonify(error=f"missing {str(e)}"), 400
 
@@ -82,7 +84,7 @@ def add_account():
     if user_ref.get().exists:
         return jsonify(error="user already exists"), 400
 
-    user_ref.set({"password": password})
+    user_ref.set(account_data)
     return jsonify()
 
 
@@ -133,7 +135,7 @@ def delete_exercise():
 @app.post("/history/add")
 def add_history():
     """
-    This endpoint adds exercise to history.
+    This endpoint adds an exercise to history.
     """
     payload = request.get_json(force=True)
 
