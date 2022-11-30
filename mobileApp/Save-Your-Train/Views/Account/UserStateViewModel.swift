@@ -15,6 +15,13 @@ class UserStateViewModel: ObservableObject {
     @AppStorage("lastName") public static var lastName: String = "Hello"
     
     func signIn(email: String, password: String) async -> Bool  {
+        let account: AccountModel = AccountModel(email: email, password: password)
+        let worked: Bool = await Network.signIn(account: account)
+        
+        if (!worked) {
+            return false
+        }
+        
         UserStateViewModel.email = email
         isLoggedIn = true
         return true
