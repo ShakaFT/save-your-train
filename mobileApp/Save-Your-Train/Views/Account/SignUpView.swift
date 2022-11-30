@@ -9,6 +9,7 @@ struct SignUpView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var confirmPassword: String = ""
+    @State var error: String = ""
     
     var body: some View {
         ZStack {
@@ -23,7 +24,20 @@ struct SignUpView: View {
                     
                     TextField("Email", text: self.$email)
                         .textFieldStyle(.roundedBorder)
+                        .onChange(of: email, perform: {
+                            self.error = ""
+                            let _ = $0
+                        })
                     
+                    if (!self.error.isEmpty) {
+                        HStack {
+                            Text(self.error)
+                                .font(.system(size: 15))
+                                .bold()
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }
                     SecureField("Mot de passe", text: self.$password)
                         .textFieldStyle(.roundedBorder)
                     
@@ -34,12 +48,15 @@ struct SignUpView: View {
                 VStack {
                     Button(action: {
                         Task {
-                            await userState.signUp(
+                            let success = await userState.signUp(
                                 firstName: self.firstName,
                                 lastName: self.lastName,
                                 email: self.email,
                                 password: self.password
                             )
+                            if (!success) {
+                                self.error = "Cet email existe déjà"
+                            }
                         }
                     }){
                         Text("Se connecter").padding()

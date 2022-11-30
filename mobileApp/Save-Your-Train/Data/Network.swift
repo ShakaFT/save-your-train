@@ -59,6 +59,21 @@ class Network {
         return true
     }
     
+    public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
+        let payload: [String: Any] = await [
+            "email": UserStateViewModel.email,
+            "dateMs": timestamp
+        ]
+        
+        do {
+            _ = try await Network.callAPI(endpoint: "/history/delete", method: "POST", payload: payload)
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
     public static func signIn(account: AccountModel) async -> Bool {
         let payload: [String: Any] = [
             "email": account.email,
@@ -93,21 +108,6 @@ class Network {
         
         do {
             _ = try await Network.callAPI(endpoint: "/account/add", method: "POST", payload: payload)
-        } catch {
-            return false
-        }
-        
-        return true
-    }
-    
-    public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
-        let payload: [String: Any] = await [
-            "email": UserStateViewModel.email,
-            "dateMs": timestamp
-        ]
-        
-        do {
-            _ = try await Network.callAPI(endpoint: "/history/delete", method: "POST", payload: payload)
         } catch {
             return false
         }
