@@ -5,6 +5,8 @@ struct LoginView: View {
     @EnvironmentObject var userState: UserStateViewModel
     @EnvironmentObject var network: Network
     
+    @Environment(\.managedObjectContext) var element
+    
     @State var email: String = ""
     @State var password: String = ""
     @State var error: String = ""
@@ -91,7 +93,25 @@ struct LoginView: View {
     }
     
     public func fillLoginData() {
-        print(self.network.exercises)
+        
+        for exercise: ExerciseModel in self.network.exercises {
+            let exerciseData = Exercise(context: self.element)
+            exerciseData.exerciseName = exercise.exerciseName
+            exerciseData.exerciseDescription = exercise.description
+        }
+        
+        for history: HistoryModel in self.network.histories {
+            let historyData: History = History(context: self.element)
+            historyData.exerciseName = history.exerciseName
+            historyData.dateMs = history.dateMs
+            historyData.execution = history.execution
+            historyData.repetition = history.repetition
+            historyData.rest = history.rest
+            historyData.series = history.series
+            historyData.weight = history.weight
+        }
+        
+        try? self.element.save()
     }
 }
 

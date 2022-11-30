@@ -29,6 +29,7 @@ struct ApplicationSwitcher: View {
             LoginView()
                 .navigationBarTitle("Se connecter")
                 .navigationBarTitleDisplayMode(.inline)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
         
     }

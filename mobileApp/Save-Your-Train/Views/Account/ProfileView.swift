@@ -3,7 +3,7 @@ import SwiftUI
 struct ProfileView: View {
     
     @FetchRequest(entity: Exercise.entity(), sortDescriptors: []) var exercises: FetchedResults<Exercise>
-    @FetchRequest(entity: Exercise.entity(), sortDescriptors: []) var histories: FetchedResults<Exercise>
+    @FetchRequest(entity: History.entity(), sortDescriptors: []) var histories: FetchedResults<History>
     
     @Environment(\.managedObjectContext) var element
     
@@ -41,12 +41,14 @@ struct ProfileView: View {
     }
     
     func removeAllData() {
-        for exercise in self.exercises {
+        for exercise: Exercise in self.exercises {
             self.element.delete(exercise)
         }
-        for history in self.histories {
+        
+        for history: History in self.histories {
             self.element.delete(history)
         }
+        
         try? self.element.save()
     }
 }
