@@ -30,13 +30,27 @@ struct LoginView: View {
                             }
                         }
                         
-                        TextField("Email", text: self.$email)
-                            .textFieldStyle(.roundedBorder)
+                        VStack {
+                            HStack {
+                                Text("Email").font(.system(size: 15)).bold()
+                                Spacer()
+                            }
                         
-                        SecureField("Mot de passe", text: self.$password)
-                            .textFieldStyle(.roundedBorder)
+                            TextField("", text: self.$email)
+                                .textFieldStyle(.roundedBorder)
+                                .keyboardType(.emailAddress)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                        }
                         
-                        
+                        VStack {
+                            HStack {
+                                Text("Mot de passe").font(.system(size: 15)).bold()
+                                Spacer()
+                            }
+                            SecureField("", text: self.$password)
+                                .textFieldStyle(.roundedBorder)
+                        }
                     }.padding()
                     
                     VStack {
@@ -56,13 +70,20 @@ struct LoginView: View {
                         }
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                        .disabled(self.email.isEmpty || self.password.isEmpty)
+                        .disabled(disableButton())
                         .padding()
                     }
                     Spacer()
                 }
             }
         }
+    }
+    
+    func disableButton() -> Bool {
+        if (self.email.range(of:"^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", options: .regularExpression) == nil || self.email.isEmpty || self.password.isEmpty) {
+            return true
+        }
+        return false
     }
 }
 

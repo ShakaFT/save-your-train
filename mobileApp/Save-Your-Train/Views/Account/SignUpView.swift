@@ -94,7 +94,7 @@ struct SignUpView: View {
                             }
                         }
                     }){
-                        Text("Se connecter").padding()
+                        Text("Inscription").padding()
                     }
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))

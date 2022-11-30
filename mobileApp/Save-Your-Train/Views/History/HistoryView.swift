@@ -41,7 +41,7 @@ struct HistoryView: View {
                     .padding()
                 }
             }
-            .navigationTitle("Exercices")
+            .navigationTitle("Historique")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear(perform: self.setHistoriesArray)
         }
