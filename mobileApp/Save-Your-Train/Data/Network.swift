@@ -81,7 +81,7 @@ class Network {
         ]
         
         do {
-        let data: Data = try await Network.callAPI(endpoint: "/account/add", method: "POST", payload: payload)
+        let data: Data = try await Network.callAPI(endpoint: "/account/sign_in", method: "POST", payload: payload)
             let signInData = try JSONDecoder().decode(SignInModel.self, from: data)
             
             if (!signInData.userSignIn) { return false }
