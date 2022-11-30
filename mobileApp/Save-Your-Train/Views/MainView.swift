@@ -8,13 +8,6 @@ struct MainView: View {
         if (userInfo.email.isEmpty) {
             LoginView(userInfo: userInfo)
         } else {
-            Button(action: {
-                Constants.email = ""
-                userInfo.email = Constants.email
-            }){
-                Text("Log out")
-            }
-            
             TabView {
                 ExercisesView()
                     .tabItem {

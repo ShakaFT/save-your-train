@@ -71,9 +71,9 @@ class Network {
             
             if (!signInData.userSignIn) { return false }
             
-            for ex in signInData.exercises {
+            /*for ex in signInData.exercises {
                 let test = Exercise(context: <#T##NSManagedObjectContext#>)
-            }
+            }*/
             
             
         } catch {

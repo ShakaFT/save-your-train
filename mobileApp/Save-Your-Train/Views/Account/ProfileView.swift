@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    @ObservedObject var userInfo: UserInfo = UserInfo()
+    
     var body: some View {
         NavigationView {
             List {
@@ -18,7 +21,10 @@ struct ProfileView: View {
                 
                 HStack {
                     Spacer()
-                    Button(action: {}) {
+                    Button(action: {
+                        Constants.email = ""
+                        userInfo.email = Constants.email
+                    }) {
                         Text("Se déconnecter").foregroundColor(.red)
                     }
                     Spacer()
