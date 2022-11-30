@@ -23,29 +23,35 @@ struct LaunchedExerciseView: View {
                     Spacer()
                     VStack (spacing: UIScreen.main.bounds.height * 0.05){
                         if(!repetition.isEmpty && !displayRest.toggled) {
-                            Text("Nombre de répétitions").font(.system(size: 30))
-                            Text(self.repetition).font(.system(size: 50))
-                        }
-                        
-                        if(!weight.isEmpty && !displayRest.toggled) {
-                            Text("Poids").font(.system(size: 30))
-                            Text("\(self.weight) kg").font(.system(size: 50))
+                            HStack {
+                                Text(self.repetition).font(.system(size: 30)).bold()
+                                Text(Int(self.repetition) == 1 ? "répétition" : "répétitions").font(.system(size: 25))
+                            }
                         }
                         
                         if(!rest.isEmpty && displayRest.toggled) {
-                            Text("Temps de repos").font(.system(size: 30))
+                            Text("Temps de repos").font(.system(size: 25))
                             TimerView(time: Double(self.rest)!)
                         }
                         
                         if(!execution.isEmpty && !displayRest.toggled) {
-                            Text("Temps d'execution").font(.system(size: 30))
+                            Text("Temps d'execution").font(.system(size: 25))
                             TimerView(time: Double(self.execution)!)
                         }
                         
-                        Text(self.nbSeries == 1 ? "Série restante :" : "Séries restantes :").font(.system(size: 30))
-                        Text(String(self.nbSeries)).font(.system(size: 40))
+                        if(!weight.isEmpty && !displayRest.toggled) {
+                            HStack {
+                                Text(self.weight).font(.system(size: 30)).bold()
+                                Text("kg").font(.system(size: 25))                            }
+                        }
+                        
+                        HStack {
+                            Text(String(self.nbSeries)).font(.system(size: 30)).bold()
+                            Text(self.nbSeries == 1 ? "série restante" : "séries restantes").font(.system(size: 25))
+                        }
+                        
                     }
-                    
+                    Spacer()
                     VStack {
                         Button(action: {
                             if self.nbSeries > 1 {
