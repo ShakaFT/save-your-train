@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var userInfo: UserInfo = UserInfo()
+    @EnvironmentObject var userState: UserStateViewModel
     
     var body: some View {
         NavigationView {
@@ -10,20 +10,19 @@ struct ProfileView: View {
                 HStack {
                     Text("Nom").bold()
                     Divider()
-                    Text("\(Constants.firstName) \(Constants.lastName)")
+                    Text("\(UserStateViewModel.firstName) \(UserStateViewModel.lastName)")
                 }
                 
                 HStack {
                     Text("Email").bold()
                     Divider()
-                    Text(Constants.email)
+                    Text(UserStateViewModel.email)
                 }
                 
                 HStack {
                     Spacer()
                     Button(action: {
-                        Constants.email = ""
-                        userInfo.email = Constants.email
+                        _ = userState.signOut()
                     }) {
                         Text("Se déconnecter").foregroundColor(.red)
                     }

@@ -2,28 +2,22 @@ import SwiftUI
 
 struct MainView: View {
     
-    @ObservedObject var userInfo: UserInfo = UserInfo()
-    
     var body: some View {
-        if (userInfo.email.isEmpty) {
-            LoginView(userInfo: userInfo)
-        } else {
-            TabView {
-                ExercisesView()
-                    .tabItem {
-                        Label("Exercices", systemImage: getExerciseIcon())
-                    }
-                HistoryView()
-                    .tabItem {
-                        Label("Historique", systemImage: "chart.bar.xaxis")
-                    }
-                ProfileView()
-                    .tabItem {
-                        Label("Profil", systemImage: "person.crop.circle.fill")
-                    }
+        TabView {
+            ExercisesView()
+                .tabItem {
+                    Label("Exercices", systemImage: getExerciseIcon())
+                }
+            HistoryView()
+                .tabItem {
+                    Label("Historique", systemImage: "chart.bar.xaxis")
+                }
+            ProfileView()
+                .tabItem {
+                    Label("Profil", systemImage: "person.crop.circle.fill")
+                }
             }
         }
-    }
     
     func getExerciseIcon() -> String {
         if(Double(UIDevice.current.systemVersion)! < 16.0 ){

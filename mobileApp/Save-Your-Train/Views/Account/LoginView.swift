@@ -2,7 +2,8 @@ import SwiftUI
 
 struct LoginView: View {
 
-    var userInfo: UserInfo
+    @EnvironmentObject var userState: UserStateViewModel
+    
     @State var email: String = ""
     @State var password: String = ""
     
@@ -11,17 +12,28 @@ struct LoginView: View {
             ZStack {
                 VStack(spacing: 0) {
                     Spacer()
-                    VStack (spacing: UIScreen.main.bounds.height * 0.05){
+                    VStack (spacing: UIScreen.main.bounds.height * 0.025){
                         TextField("Email", text: self.$email)
                             .textFieldStyle(.roundedBorder)
-                        SecureField("Password", text: self.$password)
+                        SecureField("Mot de passe", text: self.$password)
                             .textFieldStyle(.roundedBorder)
                     }.padding()
                     
                     VStack {
+                        HStack {
+                            NavigationLink(destination: SignUpView()) {
+                                Text("Cliquez ici pour créer un compte")
+                            }.padding(.leading)
+                            Spacer()
+                        }
+                
                         Button(action: {
-                            Constants.email = self.email
-                            userInfo.email = Constants.email
+                            Task {
+                                await userState.signIn(
+                                    email: self.email,
+                                    password: self.password
+                                )
+                            }
                         }){
                             Text("Se connecter").padding()
                         }
@@ -33,14 +45,12 @@ struct LoginView: View {
                     Spacer()
                 }
             }
-            .navigationBarTitle("Connexion")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(userInfo: UserInfo())
+        LoginView()
     }
 }

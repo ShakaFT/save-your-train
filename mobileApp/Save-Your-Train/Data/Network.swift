@@ -4,8 +4,8 @@ import CoreData
 class Network {
     
     public static func addRemoteExercise(exercise: ExerciseModel) async -> Bool {
-        let payload: [String: Any] = [
-            "email": Constants.email,
+        let payload: [String: Any] = await [
+            "email": UserStateViewModel.email,
             "exercise": [
                 "exerciseName": exercise.exerciseName,
                 "description": exercise.description
@@ -22,8 +22,8 @@ class Network {
     }
     
     public static func deleteRemoteExercise(exerciseName: String) async -> Bool {
-        let payload: [String: Any] = [
-            "email": Constants.email,
+        let payload: [String: Any] = await [
+            "email": UserStateViewModel.email,
             "exerciseName": exerciseName
         ]
         
@@ -38,7 +38,7 @@ class Network {
     
     public static func addRemoteHistory(history: HistoryModel) async -> Bool {
         let payload: [String: Any] = [
-            "email": Constants.email,
+            "email": await UserStateViewModel.email,
             "exercise": [
                 "dateMs": history.dateMs,
                 "exerciseName": history.exerciseName,
@@ -101,8 +101,8 @@ class Network {
     }
     
     public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
-        let payload: [String: Any] = [
-            "email": Constants.email,
+        let payload: [String: Any] = await [
+            "email": UserStateViewModel.email,
             "dateMs": timestamp
         ]
         
