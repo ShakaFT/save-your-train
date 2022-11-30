@@ -42,9 +42,8 @@ class UserStateViewModel: ObservableObject {
         return true
     }
     
-    func signOut() -> Bool {
+    func signOut() {
         UserStateViewModel.email = ""
         isLoggedIn = false
-        return true
     }
 }

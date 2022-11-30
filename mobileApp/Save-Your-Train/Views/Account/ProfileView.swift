@@ -2,6 +2,11 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @FetchRequest(entity: Exercise.entity(), sortDescriptors: []) var exercises: FetchedResults<Exercise>
+    @FetchRequest(entity: Exercise.entity(), sortDescriptors: []) var histories: FetchedResults<Exercise>
+    
+    @Environment(\.managedObjectContext) var element
+    
     @EnvironmentObject var userState: UserStateViewModel
     
     var body: some View {
@@ -22,7 +27,8 @@ struct ProfileView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        _ = userState.signOut()
+                        userState.signOut()
+                        self.removeAllData()
                     }) {
                         Text("Se déconnecter").foregroundColor(.red)
                     }
@@ -32,6 +38,16 @@ struct ProfileView: View {
             .navigationTitle("Votre profil")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    func removeAllData() {
+        for exercise in self.exercises {
+            self.element.delete(exercise)
+        }
+        for history in self.histories {
+            self.element.delete(history)
+        }
+        try? self.element.save()
     }
 }
 
