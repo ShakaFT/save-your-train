@@ -58,7 +58,9 @@ struct LaunchedExerciseView: View {
                                 self.nextSeries()
                             } else {
                                 Task {
+                                    self.disabled = true
                                     await self.stopExercise()
+                                    self.disabled = false
                                 }
                             }
                         }) {
@@ -81,10 +83,8 @@ struct LaunchedExerciseView: View {
     
     func stopExercise() async {
         let historyRemote: HistoryModel = HistoryModel(dateMs: NSDate().timeIntervalSince1970, exerciseName: self.name, execution: self.execution, repetition: self.repetition, rest: self.rest, series: self.series, weight: self.weight)
-        self.disabled = true
         let worked: Bool = try await Network.addRemoteHistory(history: historyRemote)
         if (!worked) {
-            self.disabled = false
             return
         }
         

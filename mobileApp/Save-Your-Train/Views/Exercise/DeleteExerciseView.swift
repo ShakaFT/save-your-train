@@ -10,6 +10,8 @@ struct DeleteExerciseView: View {
     
     @Binding var show: Bool
     
+    @State private var disabled: Bool = false
+    
     var body: some View {
         ZStack {
             if show {
@@ -27,10 +29,17 @@ struct DeleteExerciseView: View {
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                         .padding()
                            
-                        Button(action: {removeExercise(name: self.name)}) {
+                        Button(action: {
+                            Task {
+                                self.disabled = true
+                                await removeExercise(name: self.name)
+                                self.disabled = false
+                            }
+                        }) {
                             Text("Supprimer").padding()
                         }
                         .cornerRadius(10)
+                        .disabled(self.disabled)
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.red, lineWidth: 1))
                         .foregroundColor(.red)
                         .padding()
@@ -43,7 +52,12 @@ struct DeleteExerciseView: View {
         }
     }
     
-    func removeExercise(name: String) {
+    func removeExercise(name: String) async {
+        let worked: Bool = await Network.deleteRemoteExercise(exerciseName: name)
+        if (!worked) {
+            return
+        }
+        
         for exercise in exercises {
             if (exercise.exerciseName == name) {
                 self.element.delete(exercise)

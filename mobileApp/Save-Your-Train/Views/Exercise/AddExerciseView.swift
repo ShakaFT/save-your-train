@@ -54,7 +54,9 @@ struct AddExerciseView: View {
                 
                 Button(action: {
                     Task {
+                        self.disabled = true
                         await self.addExercise()
+                        self.disabled = false
                     }
                 }) {
                     Text("Ajouter").padding()
@@ -71,12 +73,10 @@ struct AddExerciseView: View {
     func addExercise() async {
         let exerciseRemote: ExerciseModel = ExerciseModel(exerciseName: self.name, description: self.description)
         
-        self.disabled = true
         let worked: Bool = try await Network.addRemoteExercise(exercise: exerciseRemote)
         
         if (!worked) {
             self.networkFailed = true
-            self.disabled = false
             return
         }
         

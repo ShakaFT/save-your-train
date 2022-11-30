@@ -20,7 +20,7 @@ struct ExercisesView: View {
                                     Text(exercise.exerciseDescription ?? "Aucune description").foregroundColor(.gray)
                                 }
                             }
-                        }.onDelete(perform: self.removeExercise)
+                        }
                     }
                 VStack{
                     Spacer()
@@ -50,7 +50,9 @@ struct ExercisesView: View {
             }
             .navigationTitle("Exercices")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear(perform: self.setExercisesArray)
+            .onAppear(perform: {
+                self.exercisesArray = Array(self.exercises)
+            })
         }
     }
     
@@ -64,19 +66,6 @@ struct ExercisesView: View {
     
     func previousPage() {
         self.currentPage -= 1
-    }
-    
-    func removeExercise(at offsets: IndexSet) {
-        for offset in offsets {
-            // print(self.exercises[offset].exerciseName)
-            self.element.delete(self.exercises[offset])
-        }
-        try? self.element.save()
-        self.setExercisesArray()
-    }
-    
-    public func setExercisesArray() {
-        self.exercisesArray = Array(self.exercises)
     }
     
     private func getMaxPage() -> Int {
