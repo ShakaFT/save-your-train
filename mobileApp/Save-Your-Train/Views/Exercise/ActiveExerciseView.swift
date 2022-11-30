@@ -21,8 +21,10 @@ struct ActiveExerciseView: View {
     
     @State private var disabled: Bool = true
     @State private var sheetAppear: Bool = false
+    @State private var deleteExercise: Bool = false
     
     var body: some View {
+
         ZStack() {
             VStack(spacing: 0) {
                 VStack() {
@@ -78,21 +80,34 @@ struct ActiveExerciseView: View {
                     }.padding()
                      
                 }.padding()
-                
-                Button(action: {self.sheetAppear.toggle()}) {
-                    Text("Lancer l'exercice").padding()
-                }
-                .disabled(self.disabled)
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                .padding()
-                .sheet(isPresented: self.$sheetAppear) {
-                    LaunchedExerciseView(rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
+                HStack {
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Button(action: {self.sheetAppear.toggle()}) {
+                        Text("Lancer l'exercice").padding()
+                    }
+                    .disabled(self.disabled)
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
+                    .padding()
+                    .sheet(isPresented: self.$sheetAppear) {
+                            LaunchedExerciseView(rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
+                    }
+                    Spacer()
+                    Button(action: {self.deleteExercise.toggle()}){
+                        Image(systemName: "trash")
+                            .font(.largeTitle)
+                            .frame(width: 70, height: 70)
+                            .foregroundColor(.red)
+                    }
                 }
             }
+            DeleteExerciseView(name: self.name, show: $deleteExercise)
         }
         .navigationTitle(self.name)
         .onAppear(perform: initHistory)
+        
     }
     
     func activeButton(arg: String) {

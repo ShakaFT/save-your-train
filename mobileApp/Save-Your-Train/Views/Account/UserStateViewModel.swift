@@ -16,7 +16,7 @@ class UserStateViewModel: ObservableObject {
     
     func signIn(email: String, password: String) async -> Bool  {
         let account: AccountModel = AccountModel(email: email, password: password)
-        let worked: Bool = await Network.signIn(account: account)
+        let worked: Bool = true //await Network.signIn(account: account)
         
         if (!worked) {
             return false

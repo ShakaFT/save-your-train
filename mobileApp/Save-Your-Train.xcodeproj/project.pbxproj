@@ -20,6 +20,7 @@
 		7A6A54B72935EB2100A5872C /* LaunchedExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */; };
 		7A6A54B92936069E00A5872C /* UtilsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54B82936069E00A5872C /* UtilsView.swift */; };
 		7A6A54BB293645B000A5872C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54BA293645B000A5872C /* LoginView.swift */; };
+		7A71A8F82937B1AA0041AEE9 /* DeleteExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */; };
 		7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */; };
 		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchedExerciseView.swift; sourceTree = "<group>"; };
 		7A6A54B82936069E00A5872C /* UtilsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsView.swift; sourceTree = "<group>"; };
 		7A6A54BA293645B000A5872C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExerciseView.swift; sourceTree = "<group>"; };
 		7A73D5E22927A3260001FA5F /* Save-Your-Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save-Your-Train.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save_Your_TrainApp.swift; sourceTree = "<group>"; };
 		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				7A8DE3F6292B7AC9005CFB06 /* AddExerciseView.swift */,
 				7A8DE3F8292B7ADC005CFB06 /* ActiveExerciseView.swift */,
 				7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */,
+				7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				7A8DE3F9292B7ADD005CFB06 /* ActiveExerciseView.swift in Sources */,
 				7A778AD1293507E2006884BE /* TimerManager.swift in Sources */,
 				7AF76FEB293123990058D16A /* TimerView.swift in Sources */,
+				7A71A8F82937B1AA0041AEE9 /* DeleteExerciseView.swift in Sources */,
 				7A8DE3FF292B9183005CFB06 /* Data.xcdatamodeld in Sources */,
 				743E63C329376FF600C33C98 /* SignUpView.swift in Sources */,
 				7A8DE401292B91C7005CFB06 /* DataController.swift in Sources */,
