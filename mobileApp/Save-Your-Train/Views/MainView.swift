@@ -1,20 +1,34 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @ObservedObject var userInfo: UserInfo = UserInfo()
+    
     var body: some View {
-        TabView {
-            ExercisesView()
-                .tabItem {
-                    Label("Exercices", systemImage: getExerciseIcon())
-                }
-            HistoryView()
-                .tabItem {
-                    Label("Historique", systemImage: "chart.bar.xaxis")
-                }
-            ProfileView()
-                .tabItem {
-                    Label("Profil", systemImage: "person.crop.circle.fill")
-                }
+        if (userInfo.email.isEmpty) {
+            LoginView(userInfo: userInfo)
+        } else {
+            Button(action: {
+                Constants.email = ""
+                userInfo.email = Constants.email
+            }){
+                Text("Log out")
+            }
+            
+            TabView {
+                ExercisesView()
+                    .tabItem {
+                        Label("Exercices", systemImage: getExerciseIcon())
+                    }
+                HistoryView()
+                    .tabItem {
+                        Label("Historique", systemImage: "chart.bar.xaxis")
+                    }
+                ProfileView()
+                    .tabItem {
+                        Label("Profil", systemImage: "person.crop.circle.fill")
+                    }
+            }
         }
     }
     

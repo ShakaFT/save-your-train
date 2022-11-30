@@ -34,7 +34,7 @@ struct ActiveHistoryView: View {
                             HStack {
                                 Text("Poids").font(.system(size: 20)).bold()
                                 Spacer()
-                                Text("\(history.weight) s").font(.system(size: 20)).foregroundColor(.gray)
+                                Text("\(history.weight) kg").font(.system(size: 20)).foregroundColor(.gray)
                             }
                         }
                         

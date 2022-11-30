@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 class Constants {
-    @AppStorage("email") public static var email: String = "test@gmail.com"
+    @AppStorage("email") public static var email: String = ""
     
     public static let nbItems: Int = 10
     public static let urlRestApi: String = "https://save-your-train.ew.r.appspot.com"
@@ -27,4 +27,8 @@ class Constants {
         
         return dateFormatter.string(from: date)
     }
+}
+
+class UserInfo: ObservableObject {
+    @Published var email: String = Constants.email
 }
