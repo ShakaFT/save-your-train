@@ -4,6 +4,7 @@ import SwiftUI
 struct Save_Your_TrainApp: App {
     
     @StateObject var userState: UserStateViewModel = UserStateViewModel()
+    @StateObject var network: Network = Network()
     
     var body: some Scene {
         WindowGroup {
@@ -11,6 +12,7 @@ struct Save_Your_TrainApp: App {
                 ApplicationSwitcher()
             }
             .environmentObject(userState)
+            .environmentObject(network)
         }
     }
 }

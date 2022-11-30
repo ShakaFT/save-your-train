@@ -1,10 +1,13 @@
 import Foundation
 import CoreData
 
-class Network {
+@MainActor
+class Network: ObservableObject {
+    
+    @Published var exercises: [ExerciseModel] = []
     
     public static func addRemoteExercise(exercise: ExerciseModel) async -> Bool {
-        let payload: [String: Any] = await [
+        let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "exercise": [
                 "exerciseName": exercise.exerciseName,
@@ -22,7 +25,7 @@ class Network {
     }
     
     public static func deleteRemoteExercise(exerciseName: String) async -> Bool {
-        let payload: [String: Any] = await [
+        let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "exerciseName": exerciseName
         ]
@@ -38,7 +41,7 @@ class Network {
     
     public static func addRemoteHistory(history: HistoryModel) async -> Bool {
         let payload: [String: Any] = [
-            "email": await UserStateViewModel.email,
+            "email": UserStateViewModel.email,
             "exercise": [
                 "dateMs": history.dateMs,
                 "exerciseName": history.exerciseName,
@@ -60,7 +63,7 @@ class Network {
     }
     
     public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
-        let payload: [String: Any] = await [
+        let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "dateMs": timestamp
         ]
@@ -74,24 +77,25 @@ class Network {
         return true
     }
     
-    public static func signIn(account: AccountModel) async -> Bool {
+    public func signIn(account: AccountModel) async -> Bool {
         let payload: [String: Any] = [
             "email": account.email,
             "password": account.password
         ]
         
         do {
-        let data: Data = try await Network.callAPI(endpoint: "/account/sign_in", method: "POST", payload: payload)
+            let data: Data = try await Network.callAPI(endpoint: "/account/sign_in", method: "POST", payload: payload)
             let signInData = try JSONDecoder().decode(SignInModel.self, from: data)
+            print("///")
+            print(signInData)
+            print("///")
             
-            if (!signInData.userSignIn) { return false }
+            if (!signInData.userSignIn) { return false } // email or password incorrect
             
-            /*for ex in signInData.exercises {
-                let test = Exercise(context: <#T##NSManagedObjectContext#>)
-            }*/
-            
+            self.exercises = signInData.exercises
             
         } catch {
+            print(error)
             return false
         }
         

@@ -3,6 +3,7 @@ import SwiftUI
 struct LoginView: View {
 
     @EnvironmentObject var userState: UserStateViewModel
+    @EnvironmentObject var network: Network
     
     @State var email: String = ""
     @State var password: String = ""
@@ -43,6 +44,7 @@ struct LoginView: View {
                         Button(action: {
                             Task {
                                 let worked = await userState.signIn(
+                                    network: self.network,
                                     email: self.email,
                                     password: self.password
                                 )
@@ -50,6 +52,8 @@ struct LoginView: View {
                                 if (!worked) {
                                     self.error = "Email ou mot de passe incorrect !"
                                 }
+                                
+                                self.fillLoginData()
                             }
                         }){
                             Text("Connexion").padding()
@@ -63,6 +67,10 @@ struct LoginView: View {
                 }
             }
         }
+    }
+    
+    public func fillLoginData() {
+        print(self.network.exercises)
     }
 }
 

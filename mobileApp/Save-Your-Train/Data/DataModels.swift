@@ -16,7 +16,7 @@ struct ExerciseModel: Decodable, Encodable {
 
 struct HistoryModel: Decodable, Encodable {
     var dateMs: Double = 0.0 // id
-    var exerciseName: String = "" // exerciseName
+    var exerciseName: String = ""
     var execution: String = ""
     var repetition: String = ""
     var rest: String = ""
