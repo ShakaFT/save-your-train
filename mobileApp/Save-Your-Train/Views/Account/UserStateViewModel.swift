@@ -14,16 +14,19 @@ class UserStateViewModel: ObservableObject {
     @AppStorage("firstName") public static var firstName: String = "Test"
     @AppStorage("lastName") public static var lastName: String = "Hello"
     
-    func signIn(email: String, password: String) async -> Bool  {
+    //@EnvironmentObject var network: Network
+    
+    func signIn(network: Network, email: String, password: String) async -> Bool  {
         let account: AccountModel = AccountModel(email: email, password: password)
-        let worked: Bool = true //await Network.signIn(account: account)
+        let worked: Bool = await network.signIn(account: account)
+
         
         if (!worked) {
             return false
         }
         
         UserStateViewModel.email = email
-        isLoggedIn = true
+        self.isLoggedIn = true
         return true
     }
     
@@ -42,9 +45,8 @@ class UserStateViewModel: ObservableObject {
         return true
     }
     
-    func signOut() -> Bool {
+    func signOut() {
         UserStateViewModel.email = ""
         isLoggedIn = false
-        return true
     }
 }

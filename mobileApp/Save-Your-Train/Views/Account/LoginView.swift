@@ -3,6 +3,9 @@ import SwiftUI
 struct LoginView: View {
 
     @EnvironmentObject var userState: UserStateViewModel
+    @EnvironmentObject var network: Network
+    
+    @Environment(\.managedObjectContext) var element
     
     @State var email: String = ""
     @State var password: String = ""
@@ -57,6 +60,7 @@ struct LoginView: View {
                         Button(action: {
                             Task {
                                 let worked = await userState.signIn(
+                                    network: self.network,
                                     email: self.email,
                                     password: self.password
                                 )
@@ -64,6 +68,8 @@ struct LoginView: View {
                                 if (!worked) {
                                     self.error = "Email ou mot de passe incorrect !"
                                 }
+                                
+                                self.fillLoginData()
                             }
                         }){
                             Text("Connexion").padding()
@@ -78,12 +84,34 @@ struct LoginView: View {
             }
         }
     }
-    
-    func disableButton() -> Bool {
+
+    public func disableButton() -> Bool {
         if (self.email.range(of:"^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", options: .regularExpression) == nil || self.email.isEmpty || self.password.isEmpty) {
             return true
         }
         return false
+    }
+    
+    public func fillLoginData() {
+        
+        for exercise: ExerciseModel in self.network.exercises {
+            let exerciseData = Exercise(context: self.element)
+            exerciseData.exerciseName = exercise.exerciseName
+            exerciseData.exerciseDescription = exercise.description
+        }
+        
+        for history: HistoryModel in self.network.histories {
+            let historyData: History = History(context: self.element)
+            historyData.exerciseName = history.exerciseName
+            historyData.dateMs = history.dateMs
+            historyData.execution = history.execution
+            historyData.repetition = history.repetition
+            historyData.rest = history.rest
+            historyData.series = history.series
+            historyData.weight = history.weight
+        }
+        
+        try? self.element.save()
     }
 }
 
