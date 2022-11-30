@@ -103,7 +103,7 @@ struct ActiveExerciseView: View {
                     }
                 }
             }
-            DeleteExerciseView(name: self.name, show: $deleteExercise)
+            DeleteExerciseView(show: $deleteExercise, name: self.name)
         }
         .navigationTitle(self.name)
         .onAppear(perform: initHistory)

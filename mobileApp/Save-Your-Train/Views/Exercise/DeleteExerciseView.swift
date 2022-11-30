@@ -6,11 +6,11 @@ struct DeleteExerciseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
-    var name: String
-    
     @Binding var show: Bool
     
     @State private var disabled: Bool = false
+    
+    var name: String
     
     var body: some View {
         ZStack {

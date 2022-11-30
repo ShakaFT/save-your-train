@@ -6,9 +6,11 @@ struct DeleteHistoryView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
-    var dateMs: Double
-    
     @Binding var show: Bool
+    
+    @State private var disabled: Bool = false
+    
+    var dateMs: Double
     
     var body: some View {
         ZStack {
@@ -27,10 +29,17 @@ struct DeleteHistoryView: View {
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                         .padding()
                            
-                        Button(action: {removeHistory(dateMs: self.dateMs)}) {
+                        Button(action: {
+                            Task {
+                                self.disabled = true
+                                await removeHistory(dateMs: self.dateMs)
+                                self.disabled = false
+                            }
+                        }) {
                             Text("Supprimer").padding()
                         }
                         .cornerRadius(10)
+                        .disabled(self.disabled)
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(.red, lineWidth: 1))
                         .foregroundColor(.red)
                         .padding()
@@ -43,7 +52,12 @@ struct DeleteHistoryView: View {
         }
     }
     
-    func removeHistory(dateMs: Double) {
+    func removeHistory(dateMs: Double) async {
+        let worked: Bool = await Network.deleteRemoteHistory(timestamp: dateMs)
+        if (!worked) {
+            return
+        }
+        
         for history in histories {
             if (history.dateMs == dateMs) {
                 self.element.delete(history)

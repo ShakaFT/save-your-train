@@ -21,7 +21,7 @@ struct HistoryView: View {
                                     Text(Constants.getDate(timestamp: history.dateMs))
                                 }
                             }
-                        }.onDelete(perform: self.removeHistory)
+                        }
                     }
                 VStack{
                     Spacer()
@@ -43,7 +43,9 @@ struct HistoryView: View {
             }
             .navigationTitle("Historique")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear(perform: self.setHistoriesArray)
+            .onAppear(perform: {
+                self.historyArray = Array(self.histories)
+            })
         }
     }
     
@@ -57,18 +59,6 @@ struct HistoryView: View {
     
     func previousPage() {
         self.currentPage -= 1
-    }
-    
-    func removeHistory(at offsets: IndexSet) {
-        for offset in offsets {
-            self.element.delete(self.histories[offset])
-        }
-        try? self.element.save()
-        self.setHistoriesArray()
-    }
-    
-    public func setHistoriesArray() {
-        self.historyArray = Array(self.histories)
     }
     
     private func getMaxPage() -> Int {

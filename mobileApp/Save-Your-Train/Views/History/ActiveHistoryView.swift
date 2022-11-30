@@ -64,7 +64,7 @@ struct ActiveHistoryView: View {
                         .foregroundColor(.red)
                 }
             }
-            DeleteHistoryView(dateMs: self.history.dateMs, show: self.$deleteHistory)
+            DeleteHistoryView(show: self.$deleteHistory, dateMs: self.history.dateMs)
             
         }
         .navigationTitle(history.exerciseName)
