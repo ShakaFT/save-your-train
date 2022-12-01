@@ -6,6 +6,8 @@ struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
+    @EnvironmentObject var network: Network
+    
     @State public var name: String = ""
     @State public var networkFailed: Bool = false
     @State private var description: String = ""
@@ -82,7 +84,7 @@ struct AddExerciseView: View {
     func addExercise() async {
         let exerciseRemote: ExerciseModel = ExerciseModel(exerciseName: self.name, description: self.description)
         
-        let worked: Bool = try await Network.addRemoteExercise(exercise: exerciseRemote)
+        let worked: Bool = try await network.addRemoteExercise(exercise: exerciseRemote)
         
         if (!worked) {
             self.networkFailed = true

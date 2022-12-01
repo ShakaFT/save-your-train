@@ -6,6 +6,8 @@ struct DeleteHistoryView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
+    @EnvironmentObject var network: Network
+    
     @Binding var show: Bool
     
     @State private var disabled: Bool = false
@@ -41,7 +43,7 @@ struct DeleteHistoryView: View {
     }
     
     func removeHistory(dateMs: Double) async {
-        let worked: Bool = await Network.deleteRemoteHistory(timestamp: dateMs)
+        let worked: Bool = await network.deleteRemoteHistory(timestamp: dateMs)
         if (!worked) {
             return
         }

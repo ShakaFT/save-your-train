@@ -18,7 +18,7 @@ struct HistoryView: View {
                                 HStack {
                                     Text(history.exerciseName!)
                                     Spacer()
-                                    Text(Constants.getDate(timestamp: history.dateMs))
+                                    Text(Utils.getDate(timestamp: history.dateMs))
                                 }
                             }
                         }

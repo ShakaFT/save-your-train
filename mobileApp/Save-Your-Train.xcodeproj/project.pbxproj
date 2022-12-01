@@ -11,6 +11,7 @@
 		743E63C1293764FC00C33C98 /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E63C0293764FC00C33C98 /* UserStateViewModel.swift */; };
 		743E63C329376FF600C33C98 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E63C229376FF600C33C98 /* SignUpView.swift */; };
 		743E63C52938971400C33C98 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E63C42938971400C33C98 /* Components.swift */; };
+		743E63C72938A6B700C33C98 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E63C62938A6B700C33C98 /* Utils.swift */; };
 		7468C869292F77CF00CB156E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468C868292F77CF00CB156E /* Network.swift */; };
 		74AFF7842934F2B700E43216 /* exerciseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AFF7832934F2B700E43216 /* exerciseCases.swift */; };
 		74AFF7872934F5D500E43216 /* exerciseCases.json in Resources */ = {isa = PBXBuildFile; fileRef = 74AFF7862934F5D500E43216 /* exerciseCases.json */; };
@@ -40,6 +41,7 @@
 		743E63C0293764FC00C33C98 /* UserStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateViewModel.swift; sourceTree = "<group>"; };
 		743E63C229376FF600C33C98 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		743E63C42938971400C33C98 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		743E63C62938A6B700C33C98 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7468C868292F77CF00CB156E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		74AFF7832934F2B700E43216 /* exerciseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exerciseCases.swift; sourceTree = "<group>"; };
 		74AFF7862934F5D500E43216 /* exerciseCases.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = exerciseCases.json; path = "Save-Your-Train/Config/exerciseCases.json"; sourceTree = SOURCE_ROOT; };
@@ -81,6 +83,7 @@
 			children = (
 				7A8DE3F4292B7296005CFB06 /* Constants.swift */,
 				743E63C42938971400C33C98 /* Components.swift */,
+				743E63C62938A6B700C33C98 /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
 				7A8DE3F5292B7296005CFB06 /* Constants.swift in Sources */,
 				743E63C1293764FC00C33C98 /* UserStateViewModel.swift in Sources */,
+				743E63C72938A6B700C33C98 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,8 @@ struct ActiveHistoryView: View {
         ZStack {
             VStack(spacing: UIScreen.main.bounds.height * 0.05) {
                 VStack {
-                    Text(Constants.getDate(timestamp: history.dateMs, format: .date)).font(.system(size: 30)).bold()
-                    Text(Constants.getDate(timestamp: history.dateMs, format: .hour)).font(.system(size: 30)).bold()
+                    Text(Utils.getDate(timestamp: history.dateMs, format: .date)).font(.system(size: 30)).bold()
+                    Text(Utils.getDate(timestamp: history.dateMs, format: .hour)).font(.system(size: 30)).bold()
                 }
                 
                 VStack (alignment: .leading ,spacing: UIScreen.main.bounds.height * 0.05) {

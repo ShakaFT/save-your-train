@@ -28,6 +28,7 @@ struct HistoryModel: Decodable, Encodable {
 
 struct SignInModel: Codable {
     let userSignIn: Bool
+    let userData: AccountModel
     let exercises: [ExerciseModel]
     let history: [HistoryModel]
 }

@@ -53,8 +53,12 @@ def sign_in():
     if not history:
         history = {}
 
+    user_data = user_doc.to_dict()
+    user_data["email"] = email
+
     return jsonify(
         userSignIn = True,
+        userData = user_data,
         exercises = [{"exerciseName": k} | v for k, v in exercises.items()],
         history = [{"dateMs": float(k)} | v for k, v in history.items()]
     )

@@ -6,6 +6,8 @@ struct DeleteExerciseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
+    @EnvironmentObject var network: Network
+    
     @Binding var show: Bool
     
     @State private var disabled: Bool = false
@@ -41,7 +43,7 @@ struct DeleteExerciseView: View {
     }
     
     func removeExercise(name: String) async {
-        let worked: Bool = await Network.deleteRemoteExercise(exerciseName: name)
+        let worked: Bool = await self.network.deleteRemoteExercise(exerciseName: name)
         if (!worked) {
             return
         }

@@ -6,8 +6,9 @@ class Network: ObservableObject {
     
     @Published var exercises: [ExerciseModel] = []
     @Published var histories: [HistoryModel] = []
+    @Published var userData: AccountModel = AccountModel()
     
-    public static func addRemoteExercise(exercise: ExerciseModel) async -> Bool {
+    public func addRemoteExercise(exercise: ExerciseModel) async -> Bool {
         let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "exercise": [
@@ -25,7 +26,7 @@ class Network: ObservableObject {
         return true
     }
     
-    public static func deleteRemoteExercise(exerciseName: String) async -> Bool {
+    public func deleteRemoteExercise(exerciseName: String) async -> Bool {
         let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "exerciseName": exerciseName
@@ -40,7 +41,7 @@ class Network: ObservableObject {
         return true
     }
     
-    public static func addRemoteHistory(history: HistoryModel) async -> Bool {
+    public func addRemoteHistory(history: HistoryModel) async -> Bool {
         let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "exercise": [
@@ -63,7 +64,7 @@ class Network: ObservableObject {
         return true
     }
     
-    public static func deleteRemoteHistory(timestamp: Double) async -> Bool {
+    public func deleteRemoteHistory(timestamp: Double) async -> Bool {
         let payload: [String: Any] = [
             "email": UserStateViewModel.email,
             "dateMs": timestamp
@@ -90,6 +91,7 @@ class Network: ObservableObject {
             
             if (!signInData.userSignIn) { return false } // email or password incorrect
             
+            self.userData = signInData.userData
             self.exercises = signInData.exercises
             self.histories = signInData.history
             
@@ -101,7 +103,7 @@ class Network: ObservableObject {
         return true
     }
     
-    public static func signUp(account: AccountModel) async -> Bool {
+    public func signUp(account: AccountModel) async -> Bool {
         let payload: [String: Any] = [
             "email": account.email,
             "password": account.password,

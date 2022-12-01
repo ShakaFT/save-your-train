@@ -3,6 +3,7 @@ import SwiftUI
 struct SignUpView: View {
     
     @EnvironmentObject var userState: UserStateViewModel
+    @EnvironmentObject var network: Network
     
     @State var firstName: String = ""
     @State var lastName: String = ""
@@ -100,6 +101,7 @@ struct SignUpView: View {
                     Components.button(name: "Inscription", action: {
                         Task {
                             let success = await userState.signUp(
+                                network: self.network, 
                                 firstName: self.firstName,
                                 lastName: self.lastName,
                                 email: self.email,

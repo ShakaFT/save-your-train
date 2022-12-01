@@ -4,6 +4,8 @@ struct LaunchedExerciseView: View {
     @Environment(\.managedObjectContext) var element
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var network: Network
+    
     @State var disabled: Bool = false
     @State var nbSeries: Int = 1
     
@@ -76,7 +78,7 @@ struct LaunchedExerciseView: View {
     
     func stopExercise() async {
         let historyRemote: HistoryModel = HistoryModel(dateMs: NSDate().timeIntervalSince1970, exerciseName: self.name, execution: self.execution, repetition: self.repetition, rest: self.rest, series: self.series, weight: self.weight)
-        let worked: Bool = try await Network.addRemoteHistory(history: historyRemote)
+        let worked: Bool = try await network.addRemoteHistory(history: historyRemote)
         if (!worked) {
             return
         }
