@@ -31,9 +31,10 @@ struct AddExerciseView: View {
                     }.padding()
                     
                     Text(self.error)
+                        .bold()
                         .foregroundColor(.red)
                         .padding(.horizontal)
-                        .font(.system(size: 14).bold())
+                        .font(.system(size: 15))
                     
                     VStack {
                         HStack {
@@ -43,7 +44,15 @@ struct AddExerciseView: View {
                         
                         TextField("Description de l'exercice...", text: self.$description)
                             .textFieldStyle(.roundedBorder)
-                    }.padding()
+                        }.padding()
+                    
+                    if (self.description.count > 100) {
+                        Text("100 caractères maximum")
+                            .font(.system(size: 15))
+                            .bold()
+                            .padding(.horizontal)
+                            .foregroundColor(.red)
+                    }
                 }
                 .cornerRadius(20)
                 .padding()
@@ -54,6 +63,7 @@ struct AddExerciseView: View {
                         .bold()
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
+                        .padding(.leading)
                 }
                 
                 Button(action: {
@@ -65,7 +75,7 @@ struct AddExerciseView: View {
                 }) {
                     Text("Ajouter").padding()
                 }
-                .disabled(self.disabled)
+                .disabled(self.disabled || self.description.count > 100)
                 .cornerRadius(10)
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)

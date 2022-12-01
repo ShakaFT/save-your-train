@@ -86,10 +86,7 @@ struct LoginView: View {
     }
 
     public func disableButton() -> Bool {
-        if (self.email.range(of:"^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", options: .regularExpression) == nil || self.email.isEmpty || self.password.isEmpty) {
-            return true
-        }
-        return false
+        return self.email.range(of: Constants.regexEmail, options: .regularExpression) == nil || self.password.isEmpty
     }
     
     public func fillLoginData() {

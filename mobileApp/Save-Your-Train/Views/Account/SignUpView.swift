@@ -44,7 +44,9 @@ struct SignUpView: View {
                     
                     VStack {
                         HStack {
-                            Text("Email").font(.system(size: 15)).bold()
+                            Text("Email")
+                                .font(.system(size: 15))
+                                .bold()
                             Spacer()
                         }
                         
@@ -67,6 +69,13 @@ struct SignUpView: View {
                         
                         SecureField("", text: self.$password)
                             .textFieldStyle(.roundedBorder)
+                        
+                        if (1...7 ~= self.password.count) {
+                            Text("Le mot de passe doit contenir 8 caractères minimum")
+                                .font(.system(size: 15))
+                                .foregroundColor(.red)
+                                .bold()
+                        }
                     }
                     
                     VStack {
@@ -77,6 +86,13 @@ struct SignUpView: View {
                         
                         SecureField("", text: self.$confirmPassword)
                             .textFieldStyle(.roundedBorder)
+                        
+                        if (self.password != self.confirmPassword && !self.confirmPassword.isEmpty) {
+                            Text("Les 2 mots de passe doivent être identiques")
+                                .font(.system(size: 15))
+                                .foregroundColor(.red)
+                                .bold()
+                        }
                     }
                 }.padding()
                 
@@ -98,7 +114,7 @@ struct SignUpView: View {
                     }
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                    .disabled(self.email.isEmpty || self.password.isEmpty || self.lastName.isEmpty || self.firstName.isEmpty || self.confirmPassword.isEmpty)
+                    .disabled(disableButton())
                     .padding()
                 }
                 Spacer()
@@ -106,6 +122,14 @@ struct SignUpView: View {
         }
         .navigationBarTitle("Créer un compte")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    public func disableButton() -> Bool {
+        return self.email.range(of: Constants.regexEmail, options: .regularExpression) == nil
+            || 0...7 ~= self.password.count
+            || self.lastName.isEmpty
+            || self.firstName.isEmpty
+            || self.confirmPassword != self.password
     }
 }
 
