@@ -57,7 +57,7 @@ struct LoginView: View {
                     }.padding()
                     
                     VStack {
-                        Button(action: {
+                        Components.button(name: "Connexion", action: {
                             Task {
                                 let worked = await userState.signIn(
                                     network: self.network,
@@ -71,13 +71,7 @@ struct LoginView: View {
                                 
                                 self.fillLoginData()
                             }
-                        }){
-                            Text("Connexion").padding()
-                        }
-                        .cornerRadius(10)
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                        .disabled(disableButton())
-                        .padding()
+                        }).disabled(disableButton())
                     }
                     Spacer()
                 }

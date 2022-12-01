@@ -83,16 +83,11 @@ struct ActiveExerciseView: View {
                     Spacer()
                     Spacer()
                     Spacer()
-                    Button(action: {self.sheetAppear.toggle()}) {
-                        Text("Lancer l'exercice").padding()
-                    }
-                    .disabled(self.disabled)
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                    .padding()
-                    .sheet(isPresented: self.$sheetAppear) {
-                            LaunchedExerciseView(rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
-                    }
+                    Components.button(name: "Lancer l'exercice", action: {self.sheetAppear.toggle()})
+                        .disabled(self.disabled)
+                        .sheet(isPresented: self.$sheetAppear) {
+                                LaunchedExerciseView(rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
+                        }
                     Spacer()
                     Button(action: {self.deleteExercise.toggle()}){
                         Image(systemName: "trash")

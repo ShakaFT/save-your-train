@@ -23,27 +23,14 @@ struct DeleteExerciseView: View {
                         .font(Font.system(size: 20))
                         .padding()
                     HStack {
-                        Button(action: {show = false}) {
-                            Text("Annuler").padding()
-                        }
-                        .cornerRadius(10)
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                        .padding()
-                           
-                        Button(action: {
+                        Components.button(name: "Annuler", action: {show = false})
+                        Components.button(name: "Supprimer", color: .red, action: {
                             Task {
                                 self.disabled = true
                                 await removeExercise(name: self.name)
                                 self.disabled = false
                             }
-                        }) {
-                            Text("Supprimer").padding()
-                        }
-                        .cornerRadius(10)
-                        .disabled(self.disabled)
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.red, lineWidth: 1))
-                        .foregroundColor(.red)
-                        .padding()
+                        }).disabled(self.disabled)
                     }
                 }
                 .frame(maxWidth: 300)

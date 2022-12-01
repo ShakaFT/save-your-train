@@ -97,7 +97,7 @@ struct SignUpView: View {
                 }.padding()
                 
                 VStack {
-                    Button(action: {
+                    Components.button(name: "Inscription", action: {
                         Task {
                             let success = await userState.signUp(
                                 firstName: self.firstName,
@@ -109,15 +109,9 @@ struct SignUpView: View {
                                 self.error = "Cet email existe déjà"
                             }
                         }
-                    }){
-                        Text("Inscription").padding()
-                    }
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                    .disabled(disableButton())
-                    .padding()
+                    }).disabled(disableButton())
+                    Spacer()
                 }
-                Spacer()
             }
         }
         .navigationBarTitle("Créer un compte")

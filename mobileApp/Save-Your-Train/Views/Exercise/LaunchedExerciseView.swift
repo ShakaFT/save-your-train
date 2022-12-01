@@ -53,7 +53,7 @@ struct LaunchedExerciseView: View {
                     }
                     Spacer()
                     VStack {
-                        Button(action: {
+                        Components.button(name: self.getButtonName(), action: {
                             if self.nbSeries > 1 {
                                 self.nextSeries()
                             } else {
@@ -63,14 +63,7 @@ struct LaunchedExerciseView: View {
                                     self.disabled = false
                                 }
                             }
-                        }) {
-                            Text(self.getButtonName()).padding()
-                        }
-                        .cornerRadius(10)
-                        .disabled(self.disabled)
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
-                        .foregroundColor(.blue)
-                        .padding()
+                        }).disabled(self.disabled)
                     }
                     Spacer()
                 }

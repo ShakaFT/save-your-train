@@ -66,20 +66,15 @@ struct AddExerciseView: View {
                         .padding(.leading)
                 }
                 
-                Button(action: {
+                Components.button(name: "Ajouter", action:  {
                     Task {
                         self.disabled = true
                         await self.addExercise()
                         self.disabled = false
                     }
-                }) {
-                    Text("Ajouter").padding()
-                }
+                })
                 .disabled(self.disabled || self.description.count > 100)
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(.blue, lineWidth: 1))
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
-                .padding()
             }
         }
     }
