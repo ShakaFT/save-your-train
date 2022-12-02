@@ -17,7 +17,7 @@ struct ActiveExerciseView: View {
     
     @State private var deleteExercise: Bool = false
     @State private var disabled: Bool = true
-    @State private var sheetAppear: Bool = false
+    @State private var show: Bool = false
     
     let name: String
     let description: String
@@ -78,11 +78,8 @@ struct ActiveExerciseView: View {
                     Spacer()
                     Spacer()
                     
-                    Components.button(name: "Lancer l'exercice", action: {self.sheetAppear.toggle()})
+                    Components.button(name: "Lancer l'exercice", action: {self.show.toggle()})
                         .disabled(self.disabled)
-                        .sheet(isPresented: self.$sheetAppear) {
-                                LaunchedExerciseView(rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
-                        }
                     
                     Spacer()
                     
@@ -90,7 +87,8 @@ struct ActiveExerciseView: View {
                         .foregroundColor(.red)
                 }
             }
-            DeleteExerciseView(show: self.$deleteExercise, name: self.name)
+            LaunchedExercisePopup(show: self.$show, rest: self.rest, execution: self.execution, repetition: self.repetition, weight: self.weight, series: self.series, name: self.name)
+            DeleteExercisePopup(show: self.$deleteExercise, name: self.name)
         }
         .navigationTitle(self.name)
         .onAppear(perform: self.initHistory)
@@ -120,11 +118,5 @@ struct ActiveExerciseView: View {
                 break
             }
         }
-    }
-}
-
-struct ActiveExerciseView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActiveExerciseView(name: "", description: "")
     }
 }

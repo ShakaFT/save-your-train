@@ -97,15 +97,9 @@ struct ActiveHistoryView: View {
                     .foregroundColor(.red)
             }
             
-            DeleteHistoryView(show: self.$deleteHistory, dateMs: self.history.dateMs)
+            DeleteHistoryPopup(show: self.$deleteHistory, dateMs: self.history.dateMs)
         }
         .navigationTitle(history.exerciseName)
         .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-struct ActiveHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActiveHistoryView(history: HistoryModel())
     }
 }

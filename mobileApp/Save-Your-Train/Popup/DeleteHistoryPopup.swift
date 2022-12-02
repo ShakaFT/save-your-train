@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct DeleteExerciseView: View {
+struct DeleteHistoryPopup: View {
     
-    @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
+    @FetchRequest(sortDescriptors: []) var histories: FetchedResults<History>
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var element
     
@@ -12,25 +12,26 @@ struct DeleteExerciseView: View {
     
     @State private var disabled: Bool = false
     
-    var name: String
+    
+    var dateMs: Double
     
     var body: some View {
         ZStack {
-            if self.show {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+            if show {
+                Color.black.opacity(show ? 0.3 : 0).edgesIgnoringSafeArea(.all)
 
                 VStack(alignment: .center, spacing: 0) {
-                    Text("Voulez vous vraiment supprimer cet exercice ?")
+                    Text("Voulez vous vraiment supprimer cet historique ?")
                         .bold()
                         .font(Font.system(size: 20))
                         .padding()
                     
                     HStack {
-                        Components.button(name: "Annuler", action: {self.show = false})
+                        Components.button(name: "Annuler", action: {show = false})
                         Components.button(name: "Supprimer", color: .red, action: {
                             Task {
                                 self.disabled = true
-                                await removeExercise(name: self.name)
+                                await removeHistory(dateMs: self.dateMs)
                                 self.disabled = false
                             }
                         }).disabled(self.disabled)
@@ -43,16 +44,17 @@ struct DeleteExerciseView: View {
         }
     }
     
-    func removeExercise(name: String) async {
-        let worked: Bool = await self.network.deleteRemoteExercise(exerciseName: name)
+    public func removeHistory(dateMs: Double) async {
+        let worked: Bool = await network.deleteRemoteHistory(timestamp: dateMs)
         if (!worked) {
             return
         }
         
-        for exercise in exercises {
-            if (exercise.exerciseName == name) {
-                self.element.delete(exercise)
+        for history in histories {
+            if (history.dateMs == dateMs) {
+                self.element.delete(history)
                 self.presentationMode.wrappedValue.dismiss()
+                break
             }
         }
         try? self.element.save()

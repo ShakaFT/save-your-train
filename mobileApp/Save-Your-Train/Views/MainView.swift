@@ -27,9 +27,3 @@ struct MainView: View {
         return "dumbbell.fill"
     }
 }
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}

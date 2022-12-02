@@ -92,9 +92,3 @@ struct SignUpView: View {
             || self.confirmPassword != self.password
     }
 }
-
-struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpView()
-    }
-}

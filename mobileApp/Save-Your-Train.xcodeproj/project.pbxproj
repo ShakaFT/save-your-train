@@ -19,10 +19,10 @@
 		7A0022F8292B5D8600CB80F3 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F7292B5D8600CB80F3 /* HistoryView.swift */; };
 		7A0022FA292B5DA300CB80F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0022F9292B5DA300CB80F3 /* ProfileView.swift */; };
 		7A4E50432931087600D9876D /* ActiveHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E50422931087600D9876D /* ActiveHistoryView.swift */; };
-		7A6A54B72935EB2100A5872C /* LaunchedExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */; };
+		7A6A54B72935EB2100A5872C /* LaunchedExercisePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54B62935EB2100A5872C /* LaunchedExercisePopup.swift */; };
 		7A6A54BB293645B000A5872C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A54BA293645B000A5872C /* LoginView.swift */; };
-		7A71A8F82937B1AA0041AEE9 /* DeleteExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */; };
-		7A71A8FA2937BD5B0041AEE9 /* DeleteHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F92937BD5B0041AEE9 /* DeleteHistoryView.swift */; };
+		7A71A8F82937B1AA0041AEE9 /* DeleteExercisePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F72937B1AA0041AEE9 /* DeleteExercisePopup.swift */; };
+		7A71A8FA2937BD5B0041AEE9 /* DeleteHistoryPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71A8F92937BD5B0041AEE9 /* DeleteHistoryPopup.swift */; };
 		7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */; };
 		7A73D5E82927A3260001FA5F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A73D5E72927A3260001FA5F /* MainView.swift */; };
 		7A73D5EA2927A3270001FA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A73D5E92927A3270001FA5F /* Assets.xcassets */; };
@@ -49,10 +49,10 @@
 		7A0022F7292B5D8600CB80F3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		7A0022F9292B5DA300CB80F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7A4E50422931087600D9876D /* ActiveHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveHistoryView.swift; sourceTree = "<group>"; };
-		7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchedExerciseView.swift; sourceTree = "<group>"; };
+		7A6A54B62935EB2100A5872C /* LaunchedExercisePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchedExercisePopup.swift; sourceTree = "<group>"; };
 		7A6A54BA293645B000A5872C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExerciseView.swift; sourceTree = "<group>"; };
-		7A71A8F92937BD5B0041AEE9 /* DeleteHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHistoryView.swift; sourceTree = "<group>"; };
+		7A71A8F72937B1AA0041AEE9 /* DeleteExercisePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExercisePopup.swift; sourceTree = "<group>"; };
+		7A71A8F92937BD5B0041AEE9 /* DeleteHistoryPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHistoryPopup.swift; sourceTree = "<group>"; };
 		7A73D5E22927A3260001FA5F /* Save-Your-Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save-Your-Train.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save_Your_TrainApp.swift; sourceTree = "<group>"; };
 		7A73D5E72927A3260001FA5F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -78,6 +78,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74007B1C293A05C90083A2DC /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				7A6A54B62935EB2100A5872C /* LaunchedExercisePopup.swift */,
+				7A71A8F72937B1AA0041AEE9 /* DeleteExercisePopup.swift */,
+				7A71A8F92937BD5B0041AEE9 /* DeleteHistoryPopup.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
 		743F9F132934F1FA001AB55A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,8 +122,7 @@
 				7A0022F5292B5D5B00CB80F3 /* ExercisesView.swift */,
 				7A8DE3F6292B7AC9005CFB06 /* AddExerciseView.swift */,
 				7A8DE3F8292B7ADC005CFB06 /* ActiveExerciseView.swift */,
-				7A6A54B62935EB2100A5872C /* LaunchedExerciseView.swift */,
-				7A71A8F72937B1AA0041AEE9 /* DeleteExerciseView.swift */,
+				74AFF7892936107000E43216 /* Timer */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -123,7 +132,6 @@
 			children = (
 				7A0022F7292B5D8600CB80F3 /* HistoryView.swift */,
 				7A4E50422931087600D9876D /* ActiveHistoryView.swift */,
-				7A71A8F92937BD5B0041AEE9 /* DeleteHistoryView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -142,10 +150,9 @@
 		7A4E504529311DB000D9876D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				74AFF78C293610BE00E43216 /* Account */,
-				74AFF78B2936109200E43216 /* History */,
 				74AFF78A2936108700E43216 /* Exercise */,
-				74AFF7892936107000E43216 /* Timer */,
+				74AFF78B2936109200E43216 /* History */,
+				74AFF78C293610BE00E43216 /* Account */,
 				7A73D5E72927A3260001FA5F /* MainView.swift */,
 				7A73D5E52927A3260001FA5F /* Save_Your_TrainApp.swift */,
 			);
@@ -184,6 +191,7 @@
 			children = (
 				7A4E504629311DF700D9876D /* Data */,
 				7A4E504529311DB000D9876D /* Views */,
+				74007B1C293A05C90083A2DC /* Popup */,
 				743F9F132934F1FA001AB55A /* Utils */,
 				74AFF7882934FB7D00E43216 /* Config */,
 				7A73D5E92927A3270001FA5F /* Assets.xcassets */,
@@ -274,13 +282,13 @@
 				7468C869292F77CF00CB156E /* Network.swift in Sources */,
 				7A0022F6292B5D5B00CB80F3 /* ExercisesView.swift in Sources */,
 				7A8DE3F7292B7AC9005CFB06 /* AddExerciseView.swift in Sources */,
-				7A6A54B72935EB2100A5872C /* LaunchedExerciseView.swift in Sources */,
+				7A6A54B72935EB2100A5872C /* LaunchedExercisePopup.swift in Sources */,
 				7A4E50432931087600D9876D /* ActiveHistoryView.swift in Sources */,
 				7A0022F8292B5D8600CB80F3 /* HistoryView.swift in Sources */,
 				7A8DE3F9292B7ADD005CFB06 /* ActiveExerciseView.swift in Sources */,
 				7A778AD1293507E2006884BE /* TimerManager.swift in Sources */,
 				7AF76FEB293123990058D16A /* TimerView.swift in Sources */,
-				7A71A8F82937B1AA0041AEE9 /* DeleteExerciseView.swift in Sources */,
+				7A71A8F82937B1AA0041AEE9 /* DeleteExercisePopup.swift in Sources */,
 				743E63C52938971400C33C98 /* Components.swift in Sources */,
 				7A8DE3FF292B9183005CFB06 /* Data.xcdatamodeld in Sources */,
 				743E63C329376FF600C33C98 /* SignUpView.swift in Sources */,
@@ -290,7 +298,7 @@
 				74AFF7842934F2B700E43216 /* exerciseCases.swift in Sources */,
 				7418CA842930FC0C00A9C468 /* DataModels.swift in Sources */,
 				7A6A54BB293645B000A5872C /* LoginView.swift in Sources */,
-				7A71A8FA2937BD5B0041AEE9 /* DeleteHistoryView.swift in Sources */,
+				7A71A8FA2937BD5B0041AEE9 /* DeleteHistoryPopup.swift in Sources */,
 				7A73D5E62927A3260001FA5F /* Save_Your_TrainApp.swift in Sources */,
 				7A8DE3F5292B7296005CFB06 /* Constants.swift in Sources */,
 				743E63C1293764FC00C33C98 /* UserStateViewModel.swift in Sources */,

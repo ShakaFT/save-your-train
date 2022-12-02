@@ -90,9 +90,3 @@ struct LoginView: View {
         try? self.element.save()
     }
 }
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}

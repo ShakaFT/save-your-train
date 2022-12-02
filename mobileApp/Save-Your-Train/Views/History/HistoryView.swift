@@ -67,9 +67,3 @@ struct HistoryView: View {
         return result > self.historyArray.count ? self.historyArray.count : result
     }
 }
-
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryView()
-    }
-}

@@ -55,9 +55,3 @@ struct ProfileView: View {
         try? self.element.save()
     }
 }
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}

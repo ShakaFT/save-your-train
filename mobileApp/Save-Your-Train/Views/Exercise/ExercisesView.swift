@@ -67,9 +67,3 @@ struct ExercisesView: View {
         return result > self.exercisesArray.count ? self.exercisesArray.count : result
     }
 }
-
-struct ExercisesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExercisesView()
-    }
-}
