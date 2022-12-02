@@ -16,16 +16,17 @@ struct DeleteExerciseView: View {
     
     var body: some View {
         ZStack {
-            if show {
-                Color.black.opacity(show ? 0.3 : 0).edgesIgnoringSafeArea(.all)
+            if self.show {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
 
                 VStack(alignment: .center, spacing: 0) {
                     Text("Voulez vous vraiment supprimer cet exercice ?")
                         .bold()
                         .font(Font.system(size: 20))
                         .padding()
+                    
                     HStack {
-                        Components.button(name: "Annuler", action: {show = false})
+                        Components.button(name: "Annuler", action: {self.show = false})
                         Components.button(name: "Supprimer", color: .red, action: {
                             Task {
                                 self.disabled = true

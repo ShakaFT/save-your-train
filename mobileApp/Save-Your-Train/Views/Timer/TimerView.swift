@@ -4,7 +4,7 @@ struct TimerView: View {
     @ObservedObject var timerManager : TimerManager
     var time: Double
     
-    init(time: Double){
+    init(time: Double) {
         self.time = time
         self.timerManager = TimerManager(time: self.time)
     }
@@ -12,7 +12,7 @@ struct TimerView: View {
     var body: some View {
         VStack {
             Text(String(format: "%.1f", self.timerManager.timeLeft)).font(.system(size: 50))
-            if(self.timerManager.mode == .notStarted){
+            if (self.timerManager.mode == .notStarted) {
                 Button(action: self.timerManager.start) {
                         Text("Démarrer")
                             .padding(.vertical, 20)

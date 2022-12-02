@@ -2,8 +2,8 @@ import SwiftUI
 
 struct SignUpView: View {
     
-    @EnvironmentObject var userState: UserStateViewModel
     @EnvironmentObject var network: Network
+    @EnvironmentObject var userState: UserStateViewModel
     
     @State var firstName: String = ""
     @State var lastName: String = ""
@@ -18,41 +18,21 @@ struct SignUpView: View {
                 Spacer()
                 VStack (spacing: UIScreen.main.bounds.height * 0.025){
                     if (!self.error.isEmpty) {
-                        Text(self.error)
-                            .font(.system(size: 15))
-                            .bold()
-                            .foregroundColor(.red)
+                        Components.error(text: self.error)
                     }
                     VStack {
-                        HStack {
-                            Text("Nom").font(.system(size: 15)).bold()
-                            Spacer()
-                        }
-                        
-                        TextField("", text: self.$lastName)
-                            .textFieldStyle(.roundedBorder)
+                        Components.label(text: "Nom")
+                        Components.textField(text: self.$lastName)
                     }
                     
                     VStack {
-                        HStack {
-                            Text("Prénom").font(.system(size: 15)).bold()
-                            Spacer()
-                        }
-                        
-                        TextField("", text: self.$firstName)
-                            .textFieldStyle(.roundedBorder)
+                        Components.label(text: "Prénom")
+                        Components.textField(text: self.$firstName)
                     }
                     
                     VStack {
-                        HStack {
-                            Text("Email")
-                                .font(.system(size: 15))
-                                .bold()
-                            Spacer()
-                        }
-                        
-                        TextField("", text: self.$email)
-                            .textFieldStyle(.roundedBorder)
+                        Components.label(text: "Email")
+                        Components.textField(text: self.$email)
                             .keyboardType(.emailAddress)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -63,36 +43,20 @@ struct SignUpView: View {
                     }
                     
                     VStack {
-                        HStack {
-                            Text("Mot de passe").font(.system(size: 15)).bold()
-                            Spacer()
-                        }
-                        
-                        SecureField("", text: self.$password)
-                            .textFieldStyle(.roundedBorder)
+                        Components.label(text: "Mot de passe")
+                        Components.textField(text: self.$password, password: true)
                         
                         if (1...7 ~= self.password.count) {
-                            Text("Le mot de passe doit contenir 8 caractères minimum")
-                                .font(.system(size: 15))
-                                .foregroundColor(.red)
-                                .bold()
+                            Components.error(text: "Le mot de passe doit contenir 8 caractères minimum")
                         }
                     }
                     
                     VStack {
-                        HStack {
-                            Text("Confirmer le mot de passe").font(.system(size: 15)).bold()
-                            Spacer()
-                        }
-                        
-                        SecureField("", text: self.$confirmPassword)
-                            .textFieldStyle(.roundedBorder)
+                        Components.label(text: "Confirmer le mot de passe")
+                        Components.textField(text: self.$confirmPassword, password: true)
                         
                         if (self.password != self.confirmPassword && !self.confirmPassword.isEmpty) {
-                            Text("Les 2 mots de passe doivent être identiques")
-                                .font(.system(size: 15))
-                                .foregroundColor(.red)
-                                .bold()
+                            Components.error(text: "Les 2 mots de passe doivent être identiques")
                         }
                     }
                 }.padding()

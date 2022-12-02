@@ -20,9 +20,10 @@ struct MainView: View {
         }
     
     func getExerciseIcon() -> String {
-        if(Double(UIDevice.current.systemVersion)! < 16.0 ){
+        if (Double(UIDevice.current.systemVersion)! < 16.0 ) {
             return "square.and.pencil"
         }
+        // icon not available if systemVersion < 16.0
         return "dumbbell.fill"
     }
 }

@@ -14,7 +14,8 @@ class Utils {
         
         dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         dateFormatter.locale = NSLocale.current
-        if(format == .date) {
+        
+        if (format == .date) {
             dateFormatter.dateStyle = .long
         } else {
             dateFormatter.dateFormat = format.rawValue

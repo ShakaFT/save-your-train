@@ -23,6 +23,7 @@ struct ApplicationSwitcher: View {
     @StateObject private var dataController = DataController()
     
     var body: some View {
+        // If user is not logged, display LoginView
         if (userState.isLoggedIn) {
             MainView().environment(\.managedObjectContext, dataController.container.viewContext)
         } else {

@@ -20,39 +20,24 @@ struct LoginView: View {
                         
                         NavigationLink(destination: SignUpView()) {
                             Text("Pas de compte ? Inscrivez-vous !")
+                                .foregroundColor(.green)
                         }
-                        .padding(.leading)
-                        .foregroundColor(.green)
                         
                         if (!self.error.isEmpty) {
-                            HStack {
-                                Text(self.error)
-                                    .font(.system(size: 15))
-                                    .bold()
-                                    .foregroundColor(.red)
-                            }
+                            Components.error(text: self.error)
                         }
                         
                         VStack {
-                            HStack {
-                                Text("Email").font(.system(size: 15)).bold()
-                                Spacer()
-                            }
-                        
-                            TextField("", text: self.$email)
-                                .textFieldStyle(.roundedBorder)
+                            Components.label(text: "Email")
+                            Components.textField(text: self.$email)
                                 .keyboardType(.emailAddress)
                                 .disableAutocorrection(true)
                                 .autocapitalization(.none)
                         }
                         
                         VStack {
-                            HStack {
-                                Text("Mot de passe").font(.system(size: 15)).bold()
-                                Spacer()
-                            }
-                            SecureField("", text: self.$password)
-                                .textFieldStyle(.roundedBorder)
+                            Components.label(text: "Mot de passe")
+                            Components.textField(text: self.$password, password: true)
                         }
                     }.padding()
                     

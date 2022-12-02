@@ -2,70 +2,102 @@ import SwiftUI
 
 struct ActiveHistoryView: View {
     
+    @State var deleteHistory: Bool = false
+    
     let history: HistoryModel
     
-    @State var deleteHistory: Bool = false
     
     var body: some View {
         ZStack {
             VStack(spacing: UIScreen.main.bounds.height * 0.05) {
                 VStack {
-                    Text(Utils.getDate(timestamp: history.dateMs, format: .date)).font(.system(size: 30)).bold()
-                    Text(Utils.getDate(timestamp: history.dateMs, format: .hour)).font(.system(size: 30)).bold()
+                    Text(Utils.getDate(timestamp: self.history.dateMs, format: .date))
+                        .bold()
+                        .font(.system(size: 30))
+                    
+                    Text(Utils.getDate(timestamp: self.history.dateMs, format: .hour))
+                        .bold()
+                        .font(.system(size: 30))
                 }
                 
                 VStack (alignment: .leading ,spacing: UIScreen.main.bounds.height * 0.05) {
-                    if (!history.repetition.isEmpty){
+                    if (!self.history.repetition.isEmpty) {
                         HStack {
-                            Text("Nombre de répetitions").font(.system(size: 20)).bold()
+                            Text("Nombre de répetitions")
+                                .bold()
+                                .font(.system(size: 20))
+                            
                             Spacer()
-                            Text(history.repetition).font(.system(size: 20)).foregroundColor(.gray)
+                            
+                            Text(self.history.repetition)
+                                .font(.system(size: 20))
+                                .foregroundColor(.gray)
                         }
                     }
                     
-                    if (!history.execution.isEmpty){
+                    if (!self.history.execution.isEmpty) {
                         HStack {
-                            Text("Temps d'exécution").font(.system(size: 20)).bold()
+                            Text("Temps d'exécution")
+                                .bold()
+                                .font(.system(size: 20))
+                            
                             Spacer()
-                            Text("\(history.execution) s").font(.system(size: 20)).foregroundColor(.gray)
+                            
+                            Text("\(self.history.execution) s")
+                                .font(.system(size: 20))
+                                .foregroundColor(.gray)
                         }
                     }
                     
-                    if (!history.weight.isEmpty){
+                    if (!self.history.weight.isEmpty) {
                         HStack {
-                            Text("Poids").font(.system(size: 20)).bold()
+                            Text("Poids")
+                                .bold()
+                                .font(.system(size: 20))
+                            
                             Spacer()
-                            Text("\(history.weight) kg").font(.system(size: 20)).foregroundColor(.gray)
+                            
+                            Text("\(self.history.weight) kg")
+                                .font(.system(size: 20))
+                                .foregroundColor(.gray)
                         }
                     }
                     
-                    if (!history.rest.isEmpty){
+                    if (!self.history.rest.isEmpty) {
                         HStack {
-                            Text("Temps de repos").font(.system(size: 20)).bold()
+                            Text("Temps de repos")
+                                .bold()
+                                .font(.system(size: 20))
+                            
                             Spacer()
-                            Text("\(history.rest) s").font(.system(size: 20)).foregroundColor(.gray)
+                            
+                            Text("\(self.history.rest) s")
+                                .font(.system(size: 20))
+                                .foregroundColor(.gray)
                         }
                     }
                     
-                    if (!history.series.isEmpty){
+                    if (!self.history.series.isEmpty) {
                         HStack {
-                            Text("Nombre de séries").font(.system(size: 20)).bold()
+                            Text("Nombre de séries")
+                                .bold()
+                                .font(.system(size: 20))
+                            
                             Spacer()
-                            Text(history.series).font(.system(size: 20)).foregroundColor(.gray)
+                            
+                            Text(self.history.series)
+                                .font(.system(size: 20))
+                                .foregroundColor(.gray)
                         }
                     }
                 }
                 .padding()
                 
-                Button(action: {self.deleteHistory.toggle()}){
-                    Image(systemName: "trash")
-                        .font(.largeTitle)
-                        .frame(width: 70, height: 70)
-                        .foregroundColor(.red)
-                }
+                Components.buttonImage(image: "trash", action: {self.deleteHistory.toggle()})
+                    .foregroundColor(.red)
             }
-            DeleteHistoryView(show: self.$deleteHistory, dateMs: self.history.dateMs)
             
+            DeleteHistoryView(show: self.$deleteHistory, dateMs: self.history.dateMs)
         }
         .navigationTitle(history.exerciseName)
         .navigationBarTitleDisplayMode(.inline)

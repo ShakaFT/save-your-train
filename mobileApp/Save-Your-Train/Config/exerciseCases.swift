@@ -1,6 +1,7 @@
 import Foundation
 
 class ExerciseCases: ObservableObject  {
+    
     @Published var cases: [ExercisesCaseModel] = []
         
     init() {
@@ -8,9 +9,9 @@ class ExerciseCases: ObservableObject  {
     }
     
     func loadJson()  {
-        guard let url = Bundle.main.url(forResource: "exerciseCases.json", withExtension: nil)
+        guard let url = Bundle.main.url(forResource: "exerciseCases", withExtension: "json")
             else {
-                print("Json file not found")
+                // Json file not found
                 return
             }
         

@@ -15,6 +15,7 @@ struct AddExerciseView: View {
     @State private var disabled: Bool = true
     @State private var error: String = ""
     
+    
     var body: some View {
         NavigationView {
             VStack{
@@ -22,48 +23,30 @@ struct AddExerciseView: View {
                     Spacer()
                     
                     VStack {
-                        HStack {
-                            Text("Nom")
-                            Spacer()
-                        }
-                        
-                        TextField("Nom de l'exercice...", text: self.$name)
-                            .textFieldStyle(.roundedBorder)
+                        Components.label(text: "Nom")
+                        Components.textField(text: self.$name, placeholder: "Nom de l'exercice...")
                             .onChange(of: self.name, perform: { self.activeButton(name: $0) })
                     }.padding()
                     
-                    Text(self.error)
-                        .bold()
-                        .foregroundColor(.red)
+                    Components.error(text: self.error).foregroundColor(.red)
                         .padding(.horizontal)
-                        .font(.system(size: 15))
                     
                     VStack {
-                        HStack {
-                            Text("Description")
-                            Spacer()
-                        }
-                        
-                        TextField("Description de l'exercice...", text: self.$description)
-                            .textFieldStyle(.roundedBorder)
-                        }.padding()
+                        Components.label(text: "Description")
+                        Components.textField(text: self.$description, placeholder: "Description de l'exercice...")
+                    }.padding()
                     
                     if (self.description.count > 100) {
-                        Text("100 caractères maximum")
-                            .font(.system(size: 15))
-                            .bold()
+                        Components.error(text: "100 caractères maximum")
                             .padding(.horizontal)
-                            .foregroundColor(.red)
                     }
                 }
                 .cornerRadius(20)
-                .padding()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                .padding()
                 
                 if (self.networkFailed) {
-                    Text("Une erreur est survenue, veuillez réessayer plus tard...")
-                        .bold()
-                        .foregroundColor(.red)
+                    Components.error(text: "Une erreur est survenue, veuillez réessayer plus tard...")
                         .multilineTextAlignment(.center)
                         .padding(.leading)
                 }
@@ -84,7 +67,7 @@ struct AddExerciseView: View {
     func addExercise() async {
         let exerciseRemote: ExerciseModel = ExerciseModel(exerciseName: self.name, description: self.description)
         
-        let worked: Bool = try await network.addRemoteExercise(exercise: exerciseRemote)
+        let worked: Bool = await self.network.addRemoteExercise(exercise: exerciseRemote)
         
         if (!worked) {
             self.networkFailed = true

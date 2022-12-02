@@ -96,7 +96,6 @@ class Network: ObservableObject {
             self.histories = signInData.history
             
         } catch {
-            print(error)
             return false
         }
         
@@ -119,6 +118,7 @@ class Network: ObservableObject {
         
         return true
     }
+    
     
     private static func callAPI(endpoint: String, method: String = "GET", payload: [String: Any] = [:]) async throws -> Data {
         // URL

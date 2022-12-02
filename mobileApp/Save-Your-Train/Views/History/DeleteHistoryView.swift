@@ -12,6 +12,7 @@ struct DeleteHistoryView: View {
     
     @State private var disabled: Bool = false
     
+    
     var dateMs: Double
     
     var body: some View {
@@ -24,6 +25,7 @@ struct DeleteHistoryView: View {
                         .bold()
                         .font(Font.system(size: 20))
                         .padding()
+                    
                     HStack {
                         Components.button(name: "Annuler", action: {show = false})
                         Components.button(name: "Supprimer", color: .red, action: {
@@ -42,7 +44,7 @@ struct DeleteHistoryView: View {
         }
     }
     
-    func removeHistory(dateMs: Double) async {
+    public func removeHistory(dateMs: Double) async {
         let worked: Bool = await network.deleteRemoteHistory(timestamp: dateMs)
         if (!worked) {
             return
@@ -52,6 +54,7 @@ struct DeleteHistoryView: View {
             if (history.dateMs == dateMs) {
                 self.element.delete(history)
                 self.presentationMode.wrappedValue.dismiss()
+                break
             }
         }
         try? self.element.save()

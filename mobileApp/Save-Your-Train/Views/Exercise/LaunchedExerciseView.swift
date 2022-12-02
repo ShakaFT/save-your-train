@@ -6,6 +6,8 @@ struct LaunchedExerciseView: View {
     
     @EnvironmentObject var network: Network
     
+    @ObservedObject var displayRest : DisplayRest = DisplayRest()
+    
     @State var disabled: Bool = false
     @State var nbSeries: Int = 1
     
@@ -16,54 +18,60 @@ struct LaunchedExerciseView: View {
     var series : String
     let name: String
     
-    @ObservedObject var displayRest : DisplayRest = DisplayRest()
     
     var body: some View {
         NavigationView {
             ZStack {
                 VStack(spacing: 0) {
                     Spacer()
+                    
                     VStack (spacing: UIScreen.main.bounds.height * 0.05){
-                        if(!repetition.isEmpty && !displayRest.toggled) {
+                        if (!self.repetition.isEmpty && !self.displayRest.toggled) {
                             HStack {
-                                Text(self.repetition).font(.system(size: 30)).bold()
+                                Text(self.repetition)
+                                    .bold()
+                                    .font(.system(size: 30))
                                 Text(Int(self.repetition) == 1 ? "répétition" : "répétitions").font(.system(size: 25))
                             }
                         }
                         
-                        if(!rest.isEmpty && displayRest.toggled) {
+                        if (!self.rest.isEmpty && self.displayRest.toggled) {
                             Text("Temps de repos").font(.system(size: 25))
                             TimerView(time: Double(self.rest)!)
                         }
                         
-                        if(!execution.isEmpty && !displayRest.toggled) {
+                        if (!self.execution.isEmpty && !self.displayRest.toggled) {
                             Text("Temps d'execution").font(.system(size: 25))
                             TimerView(time: Double(self.execution)!)
                         }
                         
-                        if(!weight.isEmpty && !displayRest.toggled) {
+                        if (!self.weight.isEmpty && !self.displayRest.toggled) {
                             HStack {
-                                Text(self.weight).font(.system(size: 30)).bold()
+                                Text(self.weight)
+                                    .bold()
+                                    .font(.system(size: 30))
                                 Text("kg").font(.system(size: 25))                            }
                         }
                         
                         HStack {
-                            Text(String(self.nbSeries)).font(.system(size: 30)).bold()
+                            Text(String(self.nbSeries))
+                                .bold()
+                                .font(.system(size: 30))
                             Text(self.nbSeries == 1 ? "série restante" : "séries restantes").font(.system(size: 25))
                         }
-                        
                     }
                     Spacer()
+                    
                     VStack {
                         Components.button(name: self.getButtonName(), action: {
-                            if self.nbSeries > 1 {
+                            if (self.nbSeries > 1) {
                                 self.nextSeries()
-                            } else {
-                                Task {
-                                    self.disabled = true
-                                    await self.stopExercise()
-                                    self.disabled = false
-                                }
+                                return
+                            }
+                            Task {
+                                self.disabled = true
+                                await self.stopExercise()
+                                self.disabled = false
                             }
                         }).disabled(self.disabled)
                     }
@@ -76,9 +84,10 @@ struct LaunchedExerciseView: View {
         }
     }
     
-    func stopExercise() async {
+    public func stopExercise() async {
         let historyRemote: HistoryModel = HistoryModel(dateMs: NSDate().timeIntervalSince1970, exerciseName: self.name, execution: self.execution, repetition: self.repetition, rest: self.rest, series: self.series, weight: self.weight)
-        let worked: Bool = try await network.addRemoteHistory(history: historyRemote)
+        let worked: Bool = await self.network.addRemoteHistory(history: historyRemote)
+        
         if (!worked) {
             return
         }
@@ -93,34 +102,31 @@ struct LaunchedExerciseView: View {
         history.execution = historyRemote.execution
         history.dateMs = historyRemote.dateMs
         try? self.element.save()
+        
         self.presentationMode.wrappedValue.dismiss()
     }
     
-    func nextSeries() {
+    public func nextSeries() {
         if (!rest.isEmpty && !displayRest.toggled) {
-            displayRest.toggled = true
+            self.displayRest.toggled = true
         } else {
-            displayRest.toggled = false
+            self.displayRest.toggled = false
             self.nbSeries -= 1
         }
     }
     
-    func getButtonName() -> String {
-    
-        if(!displayRest.toggled && !rest.isEmpty && self.nbSeries != 1 ) {
+    public func getButtonName() -> String {
+        if(!self.displayRest.toggled && !self.rest.isEmpty && self.nbSeries != 1 ) {
             return "Repos"
         } else if (!displayRest.toggled && self.nbSeries == 1) {
             return "Terminer l'exercice"
-        } else {
-            return "Série suivante"
         }
+        return "Série suivante"
     }
 }
 
 class DisplayRest: ObservableObject {
-    
     @Published var toggled : Bool = false
-    
 }
 
 

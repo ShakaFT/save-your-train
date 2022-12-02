@@ -9,6 +9,7 @@ struct ProfileView: View {
     
     @EnvironmentObject var userState: UserStateViewModel
     
+    
     var body: some View {
         NavigationView {
             List {
@@ -41,10 +42,12 @@ struct ProfileView: View {
     }
     
     func removeAllData() {
+        // remove all exercises
         for exercise: Exercise in self.exercises {
             self.element.delete(exercise)
         }
         
+        // remove all history
         for history: History in self.histories {
             self.element.delete(history)
         }
