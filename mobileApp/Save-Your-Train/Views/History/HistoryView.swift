@@ -59,7 +59,15 @@ struct HistoryView: View {
     }
     
     public func getHistory(history: History) -> HistoryModel {
-        return HistoryModel(dateMs: history.dateMs, exerciseName: history.exerciseName!, execution: history.execution!, repetition: history.repetition!, rest: history.rest!, series: history.series!, weight: history.weight!)
+        return HistoryModel(
+            dateMs: history.dateMs,
+            exerciseName: history.exerciseName!,
+            execution: history.execution!,
+            repetition: history.repetition!,
+            rest: history.rest!,
+            series: history.series!,
+            weight: history.weight!
+        )
     }
     
     private func getMaxPage() -> Int {

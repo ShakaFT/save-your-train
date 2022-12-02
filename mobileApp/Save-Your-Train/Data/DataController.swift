@@ -4,7 +4,7 @@ import CoreData
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "Data")
     
-    init(){
+    init() {
         self.container.loadPersistentStores {
             _, error in
             if let error = error {
