@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_exercises, R.id.navigation_history, R.id.navigation_profile
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 }
