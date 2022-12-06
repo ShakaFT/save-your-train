@@ -1,13 +1,13 @@
-package com.example.save_your_train.ui.notifications
+package com.example.save_your_train.ui.exercises
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class ExercisesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is exercises Fragment"
     }
     val text: LiveData<String> = _text
 }
