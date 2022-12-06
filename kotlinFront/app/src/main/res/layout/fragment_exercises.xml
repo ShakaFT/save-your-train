@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/exercisesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/previousExerciseButton"
         app:layout_constraintTop_toTopOf="parent">
     </ListView>
