@@ -9,5 +9,8 @@ class ExercisesViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is exercises Fragment"
     }
-    val text: LiveData<String> = _text
+
+    private val _exercises = arrayListOf("test", "bonjour", "test2")
+        val text: LiveData<String> = _text
+        val exercises: MutableList<String> = _exercises
 }

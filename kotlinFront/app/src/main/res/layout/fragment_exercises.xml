@@ -6,26 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.exercises.ExercisesFragment">
 
-    <TextView
-        android:id="@+id/text_exercises"
+    <ListView
+        android:id="@+id/exercisesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/previousExerciseButton"
+        app:layout_constraintTop_toTopOf="parent">
+    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/previousExerciseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
-        android:src="@drawable/ic_add"
+        android:contentDescription="previousExerciseButton"
+        android:src="@drawable/ic_previous"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,19 +29,21 @@
         android:id="@+id/nextExerciseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|bottom"
-        android:src="@drawable/ic_add"
+        android:layout_gravity="center_horizontal|bottom"
         android:layout_margin="16dp"
+        android:contentDescription="nextExerciseButton"
+        android:src="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="previousExerciseButton" />
+        app:layout_constraintStart_toEndOf="@id/previousExerciseButton" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addExerciseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_add"
         android:layout_margin="16dp"
+        android:contentDescription="addExerciseButton"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
