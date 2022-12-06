@@ -13,7 +13,7 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
 
     fun fillExercises(exercises: MutableList<Exercise>) {
         listExercises = exercises
-        notifyItemInserted(listExercises.size - 1)
+        notifyDataSetChanged()
     }
 
     class ExerciseItemViewHolder(private val binding: ExerciseItemLayoutBinding):RecyclerView.ViewHolder(binding.root){

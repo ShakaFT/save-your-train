@@ -39,7 +39,9 @@ class ExercisesFragment : Fragment() {
         binding.exercisesList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
         binding.exercisesList.adapter = adapter
 
-        adapter.fillExercises(exercisesViewModel.displayExercises)
+        binding.previousExerciseButton.isClickable = false
+        binding.nextExerciseButton.isClickable = exercisesViewModel.getMaxPage() != 1
+        adapter.fillExercises(exercisesViewModel.exercises.slice(0..if (exercisesViewModel.exercises.size < 10) exercisesViewModel.exercises.size-1 else 9 ) as MutableList<Exercise>)
 
         return root
     }
@@ -55,10 +57,10 @@ class ExercisesFragment : Fragment() {
     }
 
     private fun previousPage() {
-        exercisesViewModel.previousPage(adapter)
+        exercisesViewModel.previousPage(adapter, binding)
     }
 
     private fun nextPage() {
-        exercisesViewModel.nextPage(adapter)
+        exercisesViewModel.nextPage(adapter, binding)
     }
 }
