@@ -3,7 +3,7 @@
     <string name="title_exercises">Exercices</string>
     <string name="title_history">Historique</string>
     <string name="title_profile">Profil</string>
-    <string name="title_activity_add_exercise">AddExerciseActivity</string>
+    <string name="title_activity_add_exercise">Ajouter un exercise</string>
     <string name="add_your_exercise">Ajoutez un exercice</string>
     <string name="exercise_name">Nom de l\'exercice</string>
     <string name="exercise_description">Description de l\'exercice</string>

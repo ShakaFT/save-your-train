@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Dao
 interface ExerciseDao {
-    @Query("SELECT * FROM exercise")
+    @Query("SELECT * FROM exercise ORDER BY name")
     fun getAll(): MutableList<Exercise>
 
     @Query("SELECT * FROM exercise WHERE name == :name")
