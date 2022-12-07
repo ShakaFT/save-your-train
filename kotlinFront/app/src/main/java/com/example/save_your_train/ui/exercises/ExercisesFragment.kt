@@ -1,24 +1,25 @@
 package com.example.save_your_train.ui.exercises
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.save_your_train.databinding.FragmentExercisesBinding
+import com.example.save_your_train.ui.exercises.addExercises.AddExerciseActivity
 
 class ExercisesFragment : Fragment() {
 
     private var _binding: FragmentExercisesBinding? = null
-    private lateinit var exercisesViewModel:ExercisesViewModel
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private val adapter = ExerciseListAdapter()
+
+    private lateinit var exercisesViewModel:ExercisesViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,36 +32,34 @@ class ExercisesFragment : Fragment() {
         exercisesViewModel = ViewModelProvider(this)[ExercisesViewModel::class.java]
 
         // Set Listener
-        binding.previousExerciseButton.setOnClickListener { previousPage() }
-        binding.nextExerciseButton.setOnClickListener { nextPage() }
-        binding.addExerciseButton.setOnClickListener { addExercise() }
+        binding.previousExerciseButton.setOnClickListener {
+            exercisesViewModel.previousPage(adapter, binding)
+        }
+        binding.nextExerciseButton.setOnClickListener {
+            exercisesViewModel.nextPage(adapter, binding)
+        }
+        binding.addExerciseButton.setOnClickListener {
+            startActivity(Intent(activity,AddExerciseActivity::class.java))
+        }
 
-        //RECYCLER
+        // Recycler
         binding.exercisesList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
         binding.exercisesList.adapter = adapter
 
-        binding.previousExerciseButton.isClickable = false
-        binding.nextExerciseButton.isClickable = exercisesViewModel.getMaxPage() != 1
-        adapter.fillExercises(exercisesViewModel.exercises.slice(0..if (exercisesViewModel.exercises.size < 10) exercisesViewModel.exercises.size-1 else 9 ) as MutableList<Exercise>)
+        // Pagination
+        exercisesViewModel.setClickable(binding)
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        exercisesViewModel.setData(requireContext(), adapter, binding)
+        adapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun addExercise() {
-        exercisesViewModel.addExercise(Exercise("coucou", "salut"))
-        adapter.fillExercises(exercisesViewModel.exercises)
-    }
-
-    private fun previousPage() {
-        exercisesViewModel.previousPage(adapter, binding)
-    }
-
-    private fun nextPage() {
-        exercisesViewModel.nextPage(adapter, binding)
     }
 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.ExerciseItemLayoutBinding
 
 
@@ -13,7 +14,6 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
 
     fun fillExercises(exercises: MutableList<Exercise>) {
         listExercises = exercises
-        notifyDataSetChanged()
     }
 
     class ExerciseItemViewHolder(private val binding: ExerciseItemLayoutBinding):RecyclerView.ViewHolder(binding.root){

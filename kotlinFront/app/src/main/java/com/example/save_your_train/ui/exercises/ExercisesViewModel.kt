@@ -1,61 +1,64 @@
 package com.example.save_your_train.ui.exercises
 
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.save_your_train.data.AppDatabase
+import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.FragmentExercisesBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ExercisesViewModel : ViewModel() {
 
-    private var page: Int = 1
+    var page: Int = 1
+    var exercises: MutableList<Exercise> = mutableListOf()
 
-    var exercises: MutableList<Exercise> = mutableListOf(
-        Exercise("test", "ok"),
-        Exercise("test2", "ok2"),
-        Exercise("test3", "ok3"),
-        Exercise("test", "ok"),
-        Exercise("test2", "ok2"),
-        Exercise("test", "ok"),
-        Exercise("test2", "ok2"),
-        Exercise("test", "ok"),
-        Exercise("test2", "ok2"),
-        Exercise("test", "ok"),
-        Exercise("test2", "ok2"),
-        Exercise("test", "ok4"),
-        Exercise("test2", "ok3")
-    )
-
-    var displayExercises: MutableList<Exercise> = mutableListOf()
-
-    fun addExercise(exercise: Exercise) {
-        exercises.add(exercise)
+    fun previousPage(adapter: ExerciseListAdapter, binding: FragmentExercisesBinding) {
+        this.page--
+        this.setClickable(binding)
+        this.updateDisplayedExercises(adapter)
     }
 
     fun nextPage(adapter: ExerciseListAdapter, binding: FragmentExercisesBinding) {
         this.page++
-        this.setDisplayExercises()
-        adapter.fillExercises((this.displayExercises))
-        binding.nextExerciseButton.isClickable = this.page != this.getMaxPage()
+        this.setClickable(binding)
+        updateDisplayedExercises(adapter)
     }
 
-    fun previousPage(adapter: ExerciseListAdapter, binding: FragmentExercisesBinding) {
-        this.page--
-        this.setDisplayExercises()
-        adapter.fillExercises((this.displayExercises))
+    fun setClickable(binding: FragmentExercisesBinding) {
         binding.previousExerciseButton.isClickable = this.page != 1
+        binding.nextExerciseButton.isClickable = !this.isLastPage()
     }
 
-    fun getMaxPage(): Int {
-        return this.exercises.size/10
-    }
+    fun setData(context: Context, adapter: ExerciseListAdapter, binding: FragmentExercisesBinding) {
+        // get all exercises in db
+        CoroutineScope(Dispatchers.IO).launch {
+            val db = AppDatabase.getDatabase(context)
+            val exerciseDao = db.exerciseDao()
+            exercises = exerciseDao.getAll()
 
-    private fun setDisplayExercises() {
-        val start: Int = (this.page - 1) * 10
-        var end: Int =  (this.page * 10 - 1)
-        if(this.exercises.size-(this.page * 10 - 1) < 10 && this.exercises.size-((this.page - 1) * 10) >= 10) {
-            end = this.exercises.size-1
+            // Pagination
+            page = 1
+            updateDisplayedExercises(adapter)
+            setClickable(binding)
         }
-        this.displayExercises = exercises.slice(start..end) as MutableList<Exercise>
+    }
+
+    private fun isLastPage(): Boolean {
+        return this.page*10 >= this.exercises.size
+    }
+
+    private fun updateDisplayedExercises(adapter: ExerciseListAdapter) {
+        // Calculate 10 exercises that must displayed
+        // and displayed theses exercises
+        val start: Int = (this.page - 1) * 10
+        val end: Int =  if (!this.isLastPage()) {
+                            (this.page * 10 - 1)
+                        } else {
+                            this.exercises.size-1
+                        }
+        adapter.fillExercises(exercises.slice(start..end).toMutableList())
+        adapter.notifyDataSetChanged()
     }
 }
