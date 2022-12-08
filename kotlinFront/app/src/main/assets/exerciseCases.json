@@ -1,0 +1,50 @@
+[
+    {
+        "exec": false,
+        "repet": true,
+        "rest": false,
+        "weight": false
+    },
+    {
+        "exec": true,
+        "repet": false,
+        "rest": false,
+        "weight": false
+    },
+    {
+        "exec": false,
+        "repet": true,
+        "rest": true,
+        "weight": false
+    },
+    {
+        "exec": true,
+        "repet": false,
+        "rest": true,
+        "weight": false
+    },
+    {
+        "exec": true,
+        "repet": false,
+        "rest": false,
+        "weight": true
+    },
+    {
+        "exec": true,
+        "repet": false,
+        "rest": true,
+        "weight": true
+    },
+    {
+        "exec": false,
+        "repet": true,
+        "rest": false,
+        "weight": true
+    },
+    {
+        "exec": false,
+        "repet": true,
+        "rest": true,
+        "weight": true
+    }
+]

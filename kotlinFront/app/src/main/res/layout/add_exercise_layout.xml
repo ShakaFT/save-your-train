@@ -20,14 +20,15 @@
                     android:layout_height="wrap_content">
 
                         <EditText
-                            android:layout_width="300dp"
+                            android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:id="@+id/exerciseNameField"
                             android:singleLine="true"
                             android:maxLength="30"
                             android:inputType="text"
                             android:hint="@string/exercise_name"
-                            android:autofillHints="" />
+                            android:autofillHints=""
+                            android:padding="10dp"/>
                 </TableRow>
 
                 <TableRow
@@ -35,13 +36,14 @@
                     android:layout_height="wrap_content">
 
                         <EditText
-                            android:layout_width="300dp"
+                            android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:id="@+id/exerciseDescriptionField"
                             android:maxLength="100"
                             android:inputType="text"
                             android:hint="@string/exercise_description"
-                            android:autofillHints="" />
+                            android:autofillHints=""
+                            android:padding="10dp"/>
                 </TableRow>
 
         </TableLayout>
