@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.data.AppDatabase
 import com.example.save_your_train.data.Exercise
+import com.example.save_your_train.data.addRemoteExercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
 import com.example.save_your_train.disableButton
+import io.ktor.utils.io.errors.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,10 +35,7 @@ class AddExerciseActivity : AppCompatActivity() {
 
         // Set Listener
         binding.exerciseAddButton.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                insertExerciseDb()
-                finish() // This function returns the user on the previous page/activity
-            }
+            CoroutineScope(Dispatchers.IO).launch { addExercise() }
         }
         setListener(binding.exerciseNameField)
         disableButton(binding.exerciseAddButton, true)
@@ -45,6 +44,23 @@ class AddExerciseActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    private suspend fun addExercise() {
+        val exercise = Exercise(
+            binding.exerciseNameField.text.toString(),
+            binding.exerciseDescriptionField.text.toString()
+        )
+        try {
+            addRemoteExercise(exercise)
+            println("ça marche")
+        } catch (e: IOException) {
+            println("error")
+            // TODO Add error message to user
+        }
+
+        insertExerciseDb(exercise)
+        finish() // This function returns the user on the previous page/activity
     }
 
     private fun setListener(textField: EditText) {
@@ -59,14 +75,9 @@ class AddExerciseActivity : AppCompatActivity() {
         })
     }
 
-    private fun insertExerciseDb() {
+    private fun insertExerciseDb(exercise: Exercise) {
         val db = AppDatabase.getDatabase(this)
         val exerciseDao = db.exerciseDao()
-        exerciseDao.insertAll(
-            Exercise(
-                binding.exerciseNameField.text.toString(),
-                binding.exerciseDescriptionField.text.toString()
-            )
-        )
+        exerciseDao.insertAll(exercise)
     }
 }

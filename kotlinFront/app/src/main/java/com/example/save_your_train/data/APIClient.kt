@@ -2,6 +2,7 @@ package com.example.save_your_train.data
 
 import com.example.save_your_train.baseUrlApi
 import com.example.save_your_train.email
+import com.google.gson.Gson
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -15,15 +16,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-/*
-lifecycleScope.launch {
-    testAPI()
-}
-suspend fun testAPI() {
-    val data: Map<String, *> = callAPI("/", "GET")
-}
-*/
-
 // Public functions
 
 suspend fun addRemoteExercise(exercise: Exercise) {
@@ -31,11 +23,7 @@ suspend fun addRemoteExercise(exercise: Exercise) {
         "email" to email,
         "exercise" to exercise.toMap()
     )
-    try {
-        callAPI("/exercise/add", "POST", payload)
-    } catch (e: IOException) {
-        // TODO Add error message to user
-    }
+    callAPI("/exercise/add", "POST", payload)
 }
 
 // Private utils functions
@@ -49,9 +37,9 @@ private suspend fun callAPI(endpoint: String, methodRequest: String, payload: Ma
     }
     val response: HttpResponse = client.request("${baseUrlApi}${endpoint}") {
         method = getHttpMethod(methodRequest)
-        contentType(ContentType.Application.Json)
         if (payload != null) {
-            body = payload
+            contentType(ContentType.Application.Json)
+            body = Gson().toJson(payload)
         }
     }
 
