@@ -7,6 +7,11 @@ import androidx.room.PrimaryKey
 @Entity
 data class Exercise(
     @PrimaryKey val name: String,
-    val description: String?
+    val description: String
+)
+
+fun Exercise.toMap() = mapOf(
+    "exerciseName" to name,
+    "description" to description
 )
 

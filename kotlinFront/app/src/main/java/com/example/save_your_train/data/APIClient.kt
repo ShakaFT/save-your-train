@@ -1,6 +1,7 @@
 package com.example.save_your_train.data
 
 import com.example.save_your_train.baseUrlApi
+import com.example.save_your_train.email
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -8,12 +9,11 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.util.*
 import io.ktor.utils.io.errors.*
 import org.json.JSONArray
 import org.json.JSONObject
 
-
-// Public functions
 
 /*
 lifecycleScope.launch {
@@ -24,9 +24,24 @@ suspend fun testAPI() {
 }
 */
 
+// Public functions
+
+suspend fun addRemoteExercise(exercise: Exercise) {
+    val payload: Map<String, Any> = mapOf(
+        "email" to email,
+        "exercise" to exercise.toMap()
+    )
+    try {
+        callAPI("/exercise/add", "POST", payload)
+    } catch (e: IOException) {
+        // TODO Add error message to user
+    }
+}
+
 // Private utils functions
 
-private suspend fun callAPI(endpoint: String, methodRequest: String): Map<String, *> {
+@OptIn(InternalAPI::class)
+private suspend fun callAPI(endpoint: String, methodRequest: String, payload: Map<String, Any>? = null): Map<String, *> {
     val client = HttpClient(CIO) {
         install(ContentNegotiation){
             json()
@@ -34,6 +49,10 @@ private suspend fun callAPI(endpoint: String, methodRequest: String): Map<String
     }
     val response: HttpResponse = client.request("${baseUrlApi}${endpoint}") {
         method = getHttpMethod(methodRequest)
+        contentType(ContentType.Application.Json)
+        if (payload != null) {
+            body = payload
+        }
     }
 
     if (response.status.value !in 200..299) {
