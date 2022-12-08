@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "137176145379",
+    "project_id": "save-your-train",
+    "storage_bucket": "save-your-train.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137176145379:android:13ae87a43346efd504d4d6",
+        "android_client_info": {
+          "package_name": "com.example.save_your_train"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137176145379-7p3bj8t0fiof565kfmbfc9ajn1die43r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw2SxbIAPhG2n40TIUbCPr8eJLCbkbEmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137176145379-7p3bj8t0fiof565kfmbfc9ajn1die43r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
