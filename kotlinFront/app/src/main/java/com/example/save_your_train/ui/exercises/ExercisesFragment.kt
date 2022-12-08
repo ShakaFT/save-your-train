@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.save_your_train.databinding.ExerciseItemLayoutBinding
 import com.example.save_your_train.databinding.FragmentExercisesBinding
-import com.example.save_your_train.ui.exercises.activeExercises.ActiveExerciseActivity
 import com.example.save_your_train.ui.exercises.addExercises.AddExerciseActivity
 
 
