@@ -52,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/exerciseAddButton"
+            android:clickable="false"
+            android:alpha="0.3"
             android:text="@string/add_your_exercise"
             app:layout_constraintTop_toBottomOf="@id/addExerciseForm"
             app:layout_constraintBottom_toBottomOf="parent"

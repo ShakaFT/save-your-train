@@ -30,7 +30,6 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
                 binding.root.context.startActivity(intent)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseItemViewHolder {

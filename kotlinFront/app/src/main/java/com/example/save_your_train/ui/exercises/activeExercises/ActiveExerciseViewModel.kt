@@ -3,6 +3,7 @@ package com.example.save_your_train.ui.exercises.activeExercises
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.databinding.ActiveExerciseBinding
+import com.example.save_your_train.disableButton
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -11,7 +12,7 @@ class ActiveExerciseViewModel : ViewModel() {
 
     private var cases: List<ExercisesCaseModel> = listOf()
 
-    fun activeButton(binding: ActiveExerciseBinding): Boolean {
+    fun activeButton(binding: ActiveExerciseBinding) {
 
         val currentCase = ExercisesCaseModel(
             binding.executionField.text.toString().isNotEmpty(),
@@ -19,10 +20,7 @@ class ActiveExerciseViewModel : ViewModel() {
             binding.restField.text.toString().isNotEmpty(),
             binding.weightField.text.toString().isNotEmpty()
         )
-
-        val activated: Boolean = this.cases.contains(currentCase)
-        binding.exerciseLaunchButton.alpha = if (activated) 1F else 0.3F
-        return activated
+        disableButton(binding.exerciseLaunchButton, !cases.contains(currentCase))
     }
 
     fun loadJson(context: Context) {
