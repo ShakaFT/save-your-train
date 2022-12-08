@@ -27,7 +27,7 @@
         android:padding="30dp">
 
             <TextView
-                android:text="@string/description"
+                android:text="@string/description_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="parent"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/execution"
+                android:text="@string/execution_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
                 android:singleLine="true"
                 android:maxLength="30"
                 android:inputType="number"
-                android:hint="@string/executionField"
+                android:hint="@string/execution_field"
                 android:autofillHints=""
                 android:padding="10dp"/>
 
@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rest"
+                android:text="@string/rest_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                 android:singleLine="true"
                 android:maxLength="30"
                 android:inputType="number"
-                android:hint="@string/restField"
+                android:hint="@string/rest_field"
                 android:autofillHints=""
                 android:padding="10dp"/>
 
@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/repetition"
+                android:text="@string/repetition_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
                 android:singleLine="true"
                 android:maxLength="30"
                 android:inputType="number"
-                android:hint="@string/repetitionField"
+                android:hint="@string/repetition_field"
                 android:autofillHints=""
                 android:padding="10dp"/>
 
@@ -141,7 +141,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/weight"
+                android:text="@string/weight_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +154,7 @@
                 android:singleLine="true"
                 android:maxLength="30"
                 android:inputType="number"
-                android:hint="@string/weightField"
+                android:hint="@string/weight_field"
                 android:autofillHints=""
                 android:padding="10dp"/>
 
@@ -167,7 +167,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/series"
+                android:text="@string/series_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +180,7 @@
                 android:singleLine="true"
                 android:maxLength="30"
                 android:inputType="number"
-                android:hint="@string/seriesField"
+                android:hint="@string/series_field"
                 android:autofillHints=""
                 android:padding="10dp"/>
 
@@ -193,7 +193,7 @@
         android:id="@+id/exerciseLaunchButton"
         android:clickable="false"
         android:alpha="0.3"
-        android:text="@string/launch_the_exercise"
+        android:text="@string/launch_exercise_button"
         app:layout_constraintTop_toBottomOf="@id/activeExerciseForm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

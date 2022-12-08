@@ -16,13 +16,14 @@ import com.example.save_your_train.databinding.FragmentExercisesBinding
 import com.example.save_your_train.ui.exercises.activeExercises.ActiveExerciseActivity
 import com.example.save_your_train.ui.exercises.addExercises.AddExerciseActivity
 
+
 class ExercisesFragment : Fragment() {
 
     private var _binding: FragmentExercisesBinding? = null
-    private val binding get() = _binding!!
-    private val adapter = ExerciseListAdapter()
+    private val binding: FragmentExercisesBinding get() = _binding!!
+    private val adapter: ExerciseListAdapter = ExerciseListAdapter()
 
-    private lateinit var exercisesViewModel:ExercisesViewModel
+    private lateinit var exercisesViewModel: ExercisesViewModel
 
 
     override fun onCreateView(
@@ -31,7 +32,6 @@ class ExercisesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentExercisesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         exercisesViewModel = ViewModelProvider(this)[ExercisesViewModel::class.java]
 
@@ -53,7 +53,7 @@ class ExercisesFragment : Fragment() {
         // Pagination
         exercisesViewModel.setClickable(binding)
 
-        return root
+        return binding.root
     }
 
     override fun onResume() {

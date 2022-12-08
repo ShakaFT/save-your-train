@@ -1,6 +1,5 @@
 package com.example.save_your_train.ui.exercises.addExercises
 
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.save_your_train.data.AppDatabase
@@ -10,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class AddExerciseActivity : AppCompatActivity() {
 
     private lateinit var binding: AddExerciseLayoutBinding
@@ -18,17 +18,18 @@ class AddExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = AddExerciseLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        // Set Listener
         binding.exerciseAddButton.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                callDb()
-                finish()
+                insertExerciseDb()
+                finish() // This function returns the user on the previous page/activity
             }
         }
-        setContentView(binding.root)
     }
 
-    private fun callDb() {
+    private fun insertExerciseDb() {
         val db = AppDatabase.getDatabase(this)
         val exerciseDao = db.exerciseDao()
         exerciseDao.insertAll(

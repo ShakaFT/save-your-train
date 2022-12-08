@@ -12,6 +12,7 @@ import io.ktor.utils.io.errors.*
 import org.json.JSONArray
 import org.json.JSONObject
 
+
 // Public functions
 
 /*
@@ -36,7 +37,7 @@ private suspend fun callAPI(endpoint: String, methodRequest: String): Map<String
     }
 
     if (response.status.value !in 200..299) {
-        throw IOException("An error occured during call to the API with endpoint : $endpoint")
+        throw IOException("An error occurred during call to the API with endpoint : $endpoint")
     }
     var dataString: String = "" +  response.bodyAsText()
 
@@ -58,6 +59,7 @@ private fun getHttpMethod(method: String): HttpMethod {
     }
 }
 
+// This function add toMap() method for JSONObject
 private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
     when (val value = this[it])
     {
