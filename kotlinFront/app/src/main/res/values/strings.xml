@@ -7,4 +7,17 @@
     <string name="add_your_exercise">Ajoutez un exercice</string>
     <string name="exercise_name">Nom de l\'exercice</string>
     <string name="exercise_description">Description de l\'exercice</string>
+    <string name="title_activity_active_exercise">Lancer un exercice</string>
+    <string name="execution">Execution</string>
+    <string name="executionField">60 sec (facultatif)</string>
+    <string name="restField">60 sec (facultatif)</string>
+    <string name="rest">Repos</string>
+    <string name="repetition">Répétitions</string>
+    <string name="repetitionField">10 (facultatif)</string>
+    <string name="weight">Poids</string>
+    <string name="weightField">20 kg (facultatif)</string>
+    <string name="seriesField">4 (facultatif)</string>
+    <string name="series">Séries</string>
+    <string name="description">Description :</string>
+    <string name="launch_the_exercise">Lancer l\'exercice</string>
 </resources>

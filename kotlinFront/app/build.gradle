@@ -38,6 +38,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.save_your_train'
 }
 
 dependencies {
@@ -53,7 +54,7 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
-
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
