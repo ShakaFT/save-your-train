@@ -6,46 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".ui.exercises.activeExercise.ActiveExerciseActivity">
 
-
-    <TextView
-        android:id="@+id/exerciseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/descriptionTable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TableLayout
-        android:id="@+id/descriptionTable"
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/activeExerciseForm"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="30dp">
+        app:layout_constraintEnd_toEndOf="parent" >
 
-            <TextView
-                android:text="@string/description_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/descriptionTitle"
+            android:text="@string/description_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/descriptionContent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
-                android:id="@+id/exerciseDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="false"
-                app:layout_constraintTop_toBottomOf="@id/exerciseName"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/descriptionContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    </TableLayout>
+    </LinearLayout>
+
 
     <TableLayout
         android:id="@+id/activeExerciseForm"
@@ -54,7 +48,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent" >
 
         <TableRow
             android:layout_width="match_parent"
@@ -73,11 +67,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/executionField"
-                android:singleLine="true"
-                android:maxLength="30"
+                android:maxLength="3"
                 android:inputType="number"
                 android:hint="@string/execution_field"
-                android:autofillHints=""
                 android:padding="10dp"/>
 
         </TableRow>
@@ -99,11 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/restField"
-                android:singleLine="true"
-                android:maxLength="30"
+                android:maxLength="3"
                 android:inputType="number"
                 android:hint="@string/rest_field"
-                android:autofillHints=""
                 android:padding="10dp"/>
 
         </TableRow>
@@ -125,11 +115,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/repetitionField"
-                android:singleLine="true"
-                android:maxLength="30"
+                android:maxLength="2"
                 android:inputType="number"
                 android:hint="@string/repetition_field"
-                android:autofillHints=""
                 android:padding="10dp"/>
 
         </TableRow>
@@ -151,11 +139,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/weightField"
-                android:singleLine="true"
-                android:maxLength="30"
+                android:maxLength="3"
                 android:inputType="number"
                 android:hint="@string/weight_field"
-                android:autofillHints=""
                 android:padding="10dp"/>
 
         </TableRow>
@@ -177,11 +163,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/seriesField"
-                android:singleLine="true"
-                android:maxLength="30"
+                android:maxLength="2"
                 android:inputType="number"
                 android:hint="@string/series_field"
-                android:autofillHints=""
                 android:padding="10dp"/>
 
         </TableRow>

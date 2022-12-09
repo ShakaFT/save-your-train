@@ -23,34 +23,27 @@ class ActiveExerciseActivity: AppCompatActivity() {
         binding = ActiveExerciseLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // showing the back button in action bar
+        // Showing the back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // Get parameters
-        binding.exerciseName.text = intent.getStringExtra("name")
-        binding.exerciseDescription.text = intent.getStringExtra("description")
-
+        // Get view model
         activeExerciseViewModel = ViewModelProvider(this)[ActiveExerciseViewModel::class.java]
-        activeExerciseViewModel.loadJson(binding.root.context)
+        activeExerciseViewModel.loadJson(binding.root.context) // Load exercises cases
 
+        // Get parameters
+        supportActionBar?.title = intent.getStringExtra("name")
+        binding.descriptionContent.text = intent.getStringExtra("description")!!.ifEmpty { "Aucune description" }
 
+        // Set Listeners
+        setTextChangedListener(binding.executionField)
+        setTextChangedListener(binding.repetitionField)
+        setTextChangedListener(binding.restField)
+        setTextChangedListener(binding.weightField)
+        setTextChangedListener(binding.seriesField)
+        binding.exerciseLaunchButton.setOnClickListener { activeExerciseViewModel.onClickLaunchButton() }
 
-        setListener(binding.executionField)
-        setListener(binding.repetitionField)
-        setListener(binding.restField)
-        setListener(binding.weightField)
-        binding.exerciseLaunchButton.setOnClickListener {
-            val intent = Intent(binding.root.context, LaunchedExerciseActivity::class.java)
-            intent.putExtra("name", this.binding.exerciseName.text.toString())
-            intent.putExtra("execution", this.binding.executionField.text.toString())
-            intent.putExtra("repetition", this.binding.repetitionField.text.toString())
-            intent.putExtra("rest", this.binding.restField.text.toString())
-            intent.putExtra("weight", this.binding.weightField.text.toString())
-            intent.putExtra("series", this.binding.seriesField.text.toString())
-            binding.root.context.startActivity(intent)
-        }
+        setObserve()
 
-        //disableButton(binding.exerciseLaunchButton, true)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -58,19 +51,51 @@ class ActiveExerciseActivity: AppCompatActivity() {
         return true
     }
 
-    private fun setListener(textField: EditText) {
+    // Private functions
+
+    private fun setObserve() {
+        activeExerciseViewModel.isLaunched.observe(this) {
+            if (it) startLaunchedExerciseActivity()
+        }
+
+        // Launch Button
+        activeExerciseViewModel.launchButtonClickable.observe(this) {
+            binding.exerciseLaunchButton.isClickable = it
+        }
+        activeExerciseViewModel.launchButtonAlpha.observe(this) {
+            binding.exerciseLaunchButton.alpha = it
+        }
+    }
+
+    private fun startLaunchedExerciseActivity() {
+        val intent = Intent(binding.root.context, LaunchedExerciseActivity::class.java)
+        intent.putExtra("name", title)
+        intent.putExtra("execution", this.binding.executionField.text.toString())
+        intent.putExtra("repetition", this.binding.repetitionField.text.toString())
+        intent.putExtra("rest", this.binding.restField.text.toString())
+        intent.putExtra("weight", this.binding.weightField.text.toString())
+        intent.putExtra("series", this.binding.seriesField.text.toString().ifEmpty { "1" })
+        binding.root.context.startActivity(intent)
+    }
+
+    private fun setTextChangedListener(textField: EditText) {
         textField.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if(binding.repetitionField.text.toString() == "0") {
-                    binding.repetitionField.setText("")
+                if (textField.text.toString() == "0") {
+                    // User can't write 0
+                    textField.setText("")
                     return
                 }
-                activeExerciseViewModel.activeButton(binding)
-
+                activeExerciseViewModel.onChangeText(
+                    binding.executionField.text.toString(),
+                    binding.repetitionField.text.toString(),
+                    binding.restField.text.toString(),
+                    binding.weightField.text.toString()
+                )
             }
         })
     }

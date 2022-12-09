@@ -11,16 +11,15 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var data: AppDatabase? = null
+        var data: AppDatabase? = null
 
-        fun getDatabase(context: Context): AppDatabase {
-            return data ?: synchronized(this) {
+        fun setDatabase(context: Context) {
+            data = synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase ::class.java,
                     "save_your_train"
                 ).build()
-                this.data = instance
                 instance
             }
         }

@@ -36,8 +36,8 @@ class ExercisesViewModel : ViewModel() {
     fun setData(context: Context, adapter: ExerciseListAdapter, binding: FragmentExercisesBinding) {
         // get all exercises in db
         CoroutineScope(Dispatchers.IO).launch {
-            val db: AppDatabase = AppDatabase.getDatabase(context)
-            val exerciseDao: ExerciseDao = db.exerciseDao()
+            // val db: AppDatabase = AppDatabase.getDatabase(context)
+            val exerciseDao: ExerciseDao = AppDatabase.data!!.exerciseDao()
             exercises = exerciseDao.getAll()
 
             // Pagination

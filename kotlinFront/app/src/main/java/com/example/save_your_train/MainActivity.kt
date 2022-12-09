@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.save_your_train.data.AppDatabase
 import com.example.save_your_train.databinding.ActivityMainBinding
 
 
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Set Database when app is launched
+        AppDatabase.setDatabase(baseContext)
 
         // Get binding
         binding = ActivityMainBinding.inflate(layoutInflater)

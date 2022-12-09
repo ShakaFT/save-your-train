@@ -39,7 +39,7 @@ class ExercisesFragment : Fragment() {
             exercisesViewModel.nextPage(adapter, binding)
         }
         binding.addExerciseButton.setOnClickListener {
-            startActivity(Intent(activity,AddExerciseActivity::class.java))
+            startActivity(Intent(activity, AddExerciseActivity::class.java))
         }
 
         // Recycler

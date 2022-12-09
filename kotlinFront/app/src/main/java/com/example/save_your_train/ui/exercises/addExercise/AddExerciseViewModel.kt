@@ -1,9 +1,9 @@
 package com.example.save_your_train.ui.exercises.addExercise
 
-import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
 import com.example.save_your_train.data.AppDatabase
@@ -11,10 +11,11 @@ import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.data.ExerciseDao
 import com.example.save_your_train.data.addRemoteExercise
 import kotlinx.coroutines.*
-import java.io.IOException
 
 
 class AddExerciseViewModel: ViewModel() {
+
+    val isFinished = MutableLiveData<Boolean>(false)
 
     val addButtonClickable = MutableLiveData<Boolean>(false)
     val addButtonAlpha = MutableLiveData<Float>(alphaDisable)
@@ -23,12 +24,20 @@ class AddExerciseViewModel: ViewModel() {
 
     // Public functions
 
+    fun onClickAddButton(exercise: Exercise) {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (addExercise(exercise)) {
+                isFinished.postValue(true)
+            }
+        }
+    }
+
     @OptIn(DelicateCoroutinesApi::class)
-    suspend fun addExercise(context: Context, exercise: Exercise): Boolean {
+    private suspend fun addExercise(exercise: Exercise): Boolean {
         val worked = GlobalScope.async {
             try {
                 addRemoteExercise(exercise)
-                insertExerciseDb(context, exercise)
+                insertExerciseDb(exercise)
                 true
             } catch (e: java.nio.channels.UnresolvedAddressException) {
                 displayError(true, "Une erreur est surevenue, veuillez réessayer plus tard...")
@@ -38,14 +47,18 @@ class AddExerciseViewModel: ViewModel() {
         return worked.await()
     }
 
-    fun onChangeTextName(context: Context, name: String) {
+    fun onChangeTextName(name: String) {
+        viewModelScope.launch {
+
+        }
+
         if (name.isEmpty()) {
             disableAddButton(true)
             displayError(false)
             return
         }
         CoroutineScope(Dispatchers.IO).launch {
-            val nameExists: Boolean = isInDatabase(context, name)
+            val nameExists: Boolean = isInDatabase(name)
             disableAddButton(nameExists)
             displayError(nameExists, "Ce nom d'exercise est déjà utilisé")
         }
@@ -63,17 +76,15 @@ class AddExerciseViewModel: ViewModel() {
         addButtonAlpha.postValue(if (disabled) alphaDisable else alphaAble)
     }
 
-    private fun insertExerciseDb(context: Context, exercise: Exercise) {
-        val db = AppDatabase.getDatabase(context)
-        val exerciseDao = db.exerciseDao()
+    private fun insertExerciseDb(exercise: Exercise) {
+        val exerciseDao = AppDatabase.data!!.exerciseDao()
         exerciseDao.insertAll(exercise)
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private suspend fun isInDatabase(context: Context, name: String): Boolean {
+    private suspend fun isInDatabase(name: String): Boolean {
         val exercise: Deferred<Exercise?> = GlobalScope.async {
-            val db: AppDatabase = AppDatabase.getDatabase(context)
-            val exerciseDao: ExerciseDao = db.exerciseDao()
+            val exerciseDao: ExerciseDao = AppDatabase.data!!.exerciseDao()
             exerciseDao.findByName(name)
         }
         return exercise.await() != null

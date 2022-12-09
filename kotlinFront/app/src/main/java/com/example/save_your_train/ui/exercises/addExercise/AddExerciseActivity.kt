@@ -8,9 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class AddExerciseActivity : AppCompatActivity() {
@@ -21,6 +18,7 @@ class AddExerciseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Get binding
         binding = AddExerciseLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -30,15 +28,13 @@ class AddExerciseActivity : AppCompatActivity() {
         // Get view model
         addExerciseViewModel = ViewModelProvider(this)[AddExerciseViewModel::class.java]
 
-        // Set Listener
+        // Set Listeners
         binding.exerciseAddButton.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val exercise = Exercise(binding.exerciseNameField.text.toString(),
-                    binding.exerciseDescriptionField.text.toString())
-                if (addExerciseViewModel.addExercise(binding.root.context, exercise)) {
-                    finish()
-                }
-            }
+            val exercise = Exercise(
+                binding.exerciseNameField.text.toString(),
+                binding.exerciseNameField.text.toString()
+            )
+            addExerciseViewModel.onClickAddButton(exercise)
         }
         setTextChangedListener(binding.exerciseNameField)
 
@@ -54,6 +50,10 @@ class AddExerciseActivity : AppCompatActivity() {
     // Set private functions
 
     private fun setObserve() {
+        addExerciseViewModel.isFinished.observe(this) {
+            if (it) finish()
+        }
+
         // Add Button
         addExerciseViewModel.addButtonClickable.observe(this) {
             binding.exerciseAddButton.isClickable = it
@@ -78,8 +78,7 @@ class AddExerciseActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                addExerciseViewModel.onChangeTextName(
-                    binding.root.context, binding.exerciseNameField.text.toString())
+                addExerciseViewModel.onChangeTextName(binding.exerciseNameField.text.toString())
             }
         })
     }
