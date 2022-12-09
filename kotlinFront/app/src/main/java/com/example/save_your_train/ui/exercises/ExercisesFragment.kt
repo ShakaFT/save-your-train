@@ -54,6 +54,7 @@ class ExercisesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
         exercisesViewModel.setData(requireContext(), adapter, binding)
         adapter.notifyDataSetChanged()
     }

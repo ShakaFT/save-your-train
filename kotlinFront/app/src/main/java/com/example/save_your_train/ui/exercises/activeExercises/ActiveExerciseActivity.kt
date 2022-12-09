@@ -1,25 +1,27 @@
 package com.example.save_your_train.ui.exercises.activeExercises
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.save_your_train.databinding.ActiveExerciseBinding
+import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
 import com.example.save_your_train.disableButton
+import com.example.save_your_train.ui.exercises.launchExercise.LaunchExerciseActivity
 
 
 class ActiveExerciseActivity: AppCompatActivity() {
 
-    private lateinit var binding: ActiveExerciseBinding
+    private lateinit var binding: ActiveExerciseLayoutBinding
     private lateinit var activeExerciseViewModel:  ActiveExerciseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Get binding
-        binding = ActiveExerciseBinding.inflate(layoutInflater)
+        binding = ActiveExerciseLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // showing the back button in action bar
@@ -32,10 +34,22 @@ class ActiveExerciseActivity: AppCompatActivity() {
         activeExerciseViewModel = ViewModelProvider(this)[ActiveExerciseViewModel::class.java]
         activeExerciseViewModel.loadJson(binding.root.context)
 
+
+
         setListener(binding.executionField)
         setListener(binding.repetitionField)
         setListener(binding.restField)
         setListener(binding.weightField)
+        binding.exerciseLaunchButton.setOnClickListener {
+            val intent = Intent(binding.root.context, LaunchExerciseActivity::class.java)
+            intent.putExtra("name", this.binding.exerciseName.text.toString())
+            intent.putExtra("execution", this.binding.executionField.text.toString())
+            intent.putExtra("repetition", this.binding.repetitionField.text.toString())
+            intent.putExtra("rest", this.binding.restField.text.toString())
+            intent.putExtra("weight", this.binding.weightField.text.toString())
+            intent.putExtra("series", this.binding.seriesField.text.toString())
+            binding.root.context.startActivity(intent)
+        }
 
         disableButton(binding.exerciseLaunchButton, true)
     }
@@ -57,6 +71,7 @@ class ActiveExerciseActivity: AppCompatActivity() {
                     return
                 }
                 activeExerciseViewModel.activeButton(binding)
+
             }
         })
     }

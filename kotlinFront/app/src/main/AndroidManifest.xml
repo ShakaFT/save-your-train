@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Saveyourtrain"
         tools:targetApi="33">
         <activity
+            android:name=".ui.exercises.launchExercise.LaunchExerciseActivity"
+            android:exported="false"
+            android:label="@string/title_activity_launch_exercise" />
+        <activity
             android:name=".ui.exercises.activeExercises.ActiveExerciseActivity"
             android:exported="false"
             android:label="@string/title_activity_active_exercise" />

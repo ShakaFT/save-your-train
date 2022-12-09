@@ -11,10 +11,10 @@ import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.data.addRemoteExercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
 import com.example.save_your_train.disableButton
-import io.ktor.utils.io.errors.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 
 class AddExerciseActivity : AppCompatActivity() {
