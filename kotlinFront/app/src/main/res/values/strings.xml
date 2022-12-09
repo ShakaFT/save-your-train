@@ -38,5 +38,10 @@
     <!-- Launched Exercise Activity -->
     <string name="launch_exercise_button">Lancer l\'exercice</string>
     <string name="title_activity_launched_exercise">Entrainement</string>
+    <string name="weight_label">kg</string>
+    <string name="series_label">séries restantes</string>
+    <string name="execution_label">Temps d\'exécution</string>
+    <string name="rest_label">Temps de repos</string>
+    <string name="repetitions">répétitions</string>
 
 </resources>

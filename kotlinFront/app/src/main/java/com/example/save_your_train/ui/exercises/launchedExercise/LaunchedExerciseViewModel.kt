@@ -4,4 +4,9 @@ import androidx.lifecycle.ViewModel
 
 class LaunchedExerciseViewModel: ViewModel() {
 
+
+
+    fun displayTextView() {
+
+    }
 }
