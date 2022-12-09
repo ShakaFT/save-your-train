@@ -7,13 +7,10 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.data.Exercise
-import com.example.save_your_train.data.addRemoteExercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
-import com.example.save_your_train.displayTextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 
 class AddExerciseActivity : AppCompatActivity() {
@@ -27,45 +24,62 @@ class AddExerciseActivity : AppCompatActivity() {
         binding = AddExerciseLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // showing the back button in action bar
+        // Showing the back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // Get view model
         addExerciseViewModel = ViewModelProvider(this)[AddExerciseViewModel::class.java]
 
         // Set Listener
         binding.exerciseAddButton.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch { addExercise() }
+            CoroutineScope(Dispatchers.IO).launch {
+                val exercise = Exercise(binding.exerciseNameField.text.toString(),
+                    binding.exerciseDescriptionField.text.toString())
+                if (addExerciseViewModel.addExercise(binding.root.context, exercise)) {
+                    finish()
+                }
+            }
         }
-        setListener(binding.exerciseNameField)
+        setTextChangedListener(binding.exerciseNameField)
+
+        setObserve()
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        // Function called when we click on back button
         finish()
         return true
     }
 
-    private suspend fun addExercise() {
-        val exercise = Exercise(
-            binding.exerciseNameField.text.toString(),
-            binding.exerciseDescriptionField.text.toString()
-        )
-        try {
-            addRemoteExercise(exercise)
-            addExerciseViewModel.insertExerciseDb(exercise, binding.root.context)
-            finish() // This function returns the user on the previous page/activity
-        } catch (e: IOException) {
-            displayTextView(binding.addExerciseError, false)
+    // Set private functions
+
+    private fun setObserve() {
+        // Add Button
+        addExerciseViewModel.addButtonClickable.observe(this) {
+            binding.exerciseAddButton.isClickable = it
+        }
+        addExerciseViewModel.addButtonAlpha.observe(this) {
+            binding.exerciseAddButton.alpha = it
+        }
+
+        // Error Text View
+        addExerciseViewModel.textError.observe(this) {
+            binding.addExerciseError.text = it
+        }
+        addExerciseViewModel.visibilityError.observe(this) {
+            binding.addExerciseError.visibility = it
         }
     }
 
-    private fun setListener(textField: EditText) {
+    private fun setTextChangedListener(textField: EditText) {
         textField.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                addExerciseViewModel.activeButton(binding)
+                addExerciseViewModel.onChangeTextName(
+                    binding.root.context, binding.exerciseNameField.text.toString())
             }
         })
     }

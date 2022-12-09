@@ -8,7 +8,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
-import com.example.save_your_train.disableButton
 import com.example.save_your_train.ui.exercises.launchedExercise.LaunchedExerciseActivity
 
 
@@ -51,7 +50,7 @@ class ActiveExerciseActivity: AppCompatActivity() {
             binding.root.context.startActivity(intent)
         }
 
-        disableButton(binding.exerciseLaunchButton, true)
+        //disableButton(binding.exerciseLaunchButton, true)
     }
 
     override fun onSupportNavigateUp(): Boolean {
