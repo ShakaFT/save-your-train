@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.exercises.addExercises.AddExerciseActivity">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/addExerciseError"
+            android:hint="@string/add_exercise_error"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColorHint="#FF0000"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/addExerciseForm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TableLayout
             android:id="@+id/addExerciseForm"
             android:layout_width="wrap_content"
@@ -13,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent" >
 
                 <TableRow
                     android:layout_width="fill_parent"

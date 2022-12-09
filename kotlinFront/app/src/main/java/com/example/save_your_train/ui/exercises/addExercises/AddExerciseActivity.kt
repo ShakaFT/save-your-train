@@ -6,11 +6,12 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.save_your_train.data.AppDatabase
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.data.addRemoteExercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
 import com.example.save_your_train.disableButton
+import com.example.save_your_train.displayTextView
+import io.ktor.utils.io.errors.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +39,6 @@ class AddExerciseActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch { addExercise() }
         }
         setListener(binding.exerciseNameField)
-        disableButton(binding.exerciseAddButton, true)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -53,14 +53,11 @@ class AddExerciseActivity : AppCompatActivity() {
         )
         try {
             addRemoteExercise(exercise)
-            println("ça marche")
+            addExerciseViewModel.insertExerciseDb(exercise, binding.root.context)
+            finish() // This function returns the user on the previous page/activity
         } catch (e: IOException) {
-            println("error")
-            // TODO Add error message to user
+            displayTextView(binding.addExerciseError, false)
         }
-
-        insertExerciseDb(exercise)
-        finish() // This function returns the user on the previous page/activity
     }
 
     private fun setListener(textField: EditText) {
@@ -73,11 +70,5 @@ class AddExerciseActivity : AppCompatActivity() {
                 addExerciseViewModel.activeButton(binding)
             }
         })
-    }
-
-    private fun insertExerciseDb(exercise: Exercise) {
-        val db = AppDatabase.getDatabase(this)
-        val exerciseDao = db.exerciseDao()
-        exerciseDao.insertAll(exercise)
     }
 }
