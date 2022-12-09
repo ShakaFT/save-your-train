@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
+import com.example.save_your_train.data.JsonData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -15,21 +16,7 @@ class ActiveExerciseViewModel : ViewModel() {
     val launchButtonClickable = MutableLiveData<Boolean>(false)
     val launchButtonAlpha = MutableLiveData<Float>(alphaDisable)
 
-    private var cases: List<ExercisesCaseModel> = listOf()
-
-
     // Public methods
-
-    fun loadJson(context: Context) {
-        val jsonString: String = context.assets.open("exerciseCases.json").bufferedReader().use {
-            it.readText()
-        }
-
-
-        val listExercisesCaseType = object : TypeToken<List<ExercisesCaseModel>>() {}.type
-
-        this.cases = Gson().fromJson(jsonString, listExercisesCaseType)
-    }
 
     fun onChangeText(exec: String, repet: String, rest: String, weight: String) {
         val currentCase = ExercisesCaseModel(
@@ -38,7 +25,7 @@ class ActiveExerciseViewModel : ViewModel() {
             rest.isNotEmpty(),
             weight.isNotEmpty()
         )
-        disableLaunchButton(!cases.contains(currentCase))
+        disableLaunchButton(!JsonData.exerciseCases.contains(currentCase))
     }
 
     fun onClickLaunchButton() {

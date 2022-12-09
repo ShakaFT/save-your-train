@@ -28,7 +28,6 @@ class ActiveExerciseActivity: AppCompatActivity() {
 
         // Get view model
         activeExerciseViewModel = ViewModelProvider(this)[ActiveExerciseViewModel::class.java]
-        activeExerciseViewModel.loadJson(binding.root.context) // Load exercises cases
 
         // Get parameters
         supportActionBar?.title = intent.getStringExtra("name")
