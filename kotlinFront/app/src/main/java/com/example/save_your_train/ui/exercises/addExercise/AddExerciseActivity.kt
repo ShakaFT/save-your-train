@@ -1,4 +1,4 @@
-package com.example.save_your_train.ui.exercises.addExercises
+package com.example.save_your_train.ui.exercises.addExercise
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.data.addRemoteExercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
-import com.example.save_your_train.disableButton
 import com.example.save_your_train.displayTextView
-import io.ktor.utils.io.errors.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

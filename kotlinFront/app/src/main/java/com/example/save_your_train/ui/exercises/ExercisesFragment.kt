@@ -10,8 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.save_your_train.databinding.FragmentExercisesBinding
-import com.example.save_your_train.displayTextView
-import com.example.save_your_train.ui.exercises.addExercises.AddExerciseActivity
+import com.example.save_your_train.ui.exercises.addExercise.AddExerciseActivity
 
 
 class ExercisesFragment : Fragment() {

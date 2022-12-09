@@ -35,7 +35,8 @@
     <string name="series_text">Séries</string>
     <string name="series_field">4 (facultatif)</string>
 
+    <!-- Launched Exercise Activity -->
     <string name="launch_exercise_button">Lancer l\'exercice</string>
-    <string name="title_activity_launch_exercise">Entrainement</string>
+    <string name="title_activity_launched_exercise">Entrainement</string>
 
 </resources>

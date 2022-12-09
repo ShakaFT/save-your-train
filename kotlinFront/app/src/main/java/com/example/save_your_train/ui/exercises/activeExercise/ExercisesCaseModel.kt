@@ -1,4 +1,4 @@
-package com.example.save_your_train.ui.exercises.activeExercises
+package com.example.save_your_train.ui.exercises.activeExercise
 
 // Class used to decode JSON file
 data class ExercisesCaseModel(

@@ -13,15 +13,15 @@
         android:theme="@style/Theme.Saveyourtrain"
         tools:targetApi="33">
         <activity
-            android:name=".ui.exercises.launchExercise.LaunchExerciseActivity"
+            android:name=".ui.exercises.launchedExercise.LaunchedExerciseActivity"
             android:exported="false"
-            android:label="@string/title_activity_launch_exercise" />
+            android:label="@string/title_activity_launched_exercise" />
         <activity
-            android:name=".ui.exercises.activeExercises.ActiveExerciseActivity"
+            android:name=".ui.exercises.activeExercise.ActiveExerciseActivity"
             android:exported="false"
             android:label="@string/title_activity_active_exercise" />
         <activity
-            android:name=".ui.exercises.addExercises.AddExerciseActivity"
+            android:name=".ui.exercises.addExercise.AddExerciseActivity"
             android:exported="false"
             android:label="@string/title_activity_add_exercise" />
         <activity

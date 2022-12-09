@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.ExerciseItemLayoutBinding
-import com.example.save_your_train.ui.exercises.activeExercises.ActiveExerciseActivity
+import com.example.save_your_train.ui.exercises.activeExercise.ActiveExerciseActivity
 
 
 class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItemViewHolder>() {

@@ -1,4 +1,4 @@
-package com.example.save_your_train.ui.exercises.addExercises
+package com.example.save_your_train.ui.exercises.addExercise
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,6 @@ import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.data.ExerciseDao
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
 import com.example.save_your_train.disableButton
-import com.example.save_your_train.displayTextView
 import kotlinx.coroutines.*
 
 

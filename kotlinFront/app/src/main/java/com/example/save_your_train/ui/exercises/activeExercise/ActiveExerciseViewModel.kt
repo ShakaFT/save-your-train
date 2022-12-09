@@ -1,8 +1,6 @@
-package com.example.save_your_train.ui.exercises.activeExercises
+package com.example.save_your_train.ui.exercises.activeExercise
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
 import com.example.save_your_train.disableButton

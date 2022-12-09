@@ -1,4 +1,4 @@
-package com.example.save_your_train.ui.exercises.activeExercises
+package com.example.save_your_train.ui.exercises.activeExercise
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
 import com.example.save_your_train.disableButton
-import com.example.save_your_train.ui.exercises.launchExercise.LaunchExerciseActivity
+import com.example.save_your_train.ui.exercises.launchedExercise.LaunchedExerciseActivity
 
 
 class ActiveExerciseActivity: AppCompatActivity() {
@@ -41,7 +41,7 @@ class ActiveExerciseActivity: AppCompatActivity() {
         setListener(binding.restField)
         setListener(binding.weightField)
         binding.exerciseLaunchButton.setOnClickListener {
-            val intent = Intent(binding.root.context, LaunchExerciseActivity::class.java)
+            val intent = Intent(binding.root.context, LaunchedExerciseActivity::class.java)
             intent.putExtra("name", this.binding.exerciseName.text.toString())
             intent.putExtra("execution", this.binding.executionField.text.toString())
             intent.putExtra("repetition", this.binding.repetitionField.text.toString())
