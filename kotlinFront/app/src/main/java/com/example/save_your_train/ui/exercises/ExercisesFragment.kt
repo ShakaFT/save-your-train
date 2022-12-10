@@ -29,14 +29,15 @@ class ExercisesFragment : Fragment() {
     ): View {
         _binding = FragmentExercisesBinding.inflate(inflater, container, false)
 
-        exercisesViewModel = ViewModelProvider(this)[ExercisesViewModel::class.java]
+        // Get view model
+        exercisesViewModel = ViewModelProvider(requireActivity())[ExercisesViewModel::class.java]
 
         // Set Listener
         binding.previousExerciseButton.setOnClickListener {
-            exercisesViewModel.previousPage(adapter, binding)
+            exercisesViewModel.previousPage()
         }
         binding.nextExerciseButton.setOnClickListener {
-            exercisesViewModel.nextPage(adapter, binding)
+            exercisesViewModel.nextPage()
         }
         binding.addExerciseButton.setOnClickListener {
             startActivity(Intent(activity, AddExerciseActivity::class.java))
@@ -46,21 +47,38 @@ class ExercisesFragment : Fragment() {
         binding.exercisesList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,false)
         binding.exercisesList.adapter = adapter
 
-        // Pagination
-        exercisesViewModel.setClickable(binding)
+        setObserve()
 
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-
-        exercisesViewModel.setData(requireContext(), adapter, binding)
-        adapter.notifyDataSetChanged()
+        exercisesViewModel.refreshRecycler()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    // Private functions
+
+    private fun setObserve() {
+        // previous page button
+        exercisesViewModel.previousButtonClickable.observe(requireActivity()) {
+            binding.previousExerciseButton.isClickable = it
+        }
+        exercisesViewModel.previousButtonAlpha.observe(requireActivity()) {
+            binding.previousExerciseButton.alpha = it
+        }
+
+        // next page button
+        exercisesViewModel.nextButtonClickable.observe(requireActivity()) {
+            binding.nextExerciseButton.isClickable = it
+        }
+        exercisesViewModel.nextButtonAlpha.observe(requireActivity()) {
+            binding.nextExerciseButton.alpha = it
+        }
+
+        // Recycler
+        exercisesViewModel.exercisesList.observe(requireActivity()) {
+            adapter.fillExercises(it)
+        }
     }
 }

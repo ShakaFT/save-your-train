@@ -36,7 +36,7 @@ class AddExerciseViewModel: ViewModel() {
     private suspend fun addExercise(exercise: Exercise): Boolean {
         val worked = GlobalScope.async {
             try {
-                addRemoteExercise(exercise)
+                //addRemoteExercise(exercise)
                 insertExerciseDb(exercise)
                 true
             } catch (e: java.nio.channels.UnresolvedAddressException) {
