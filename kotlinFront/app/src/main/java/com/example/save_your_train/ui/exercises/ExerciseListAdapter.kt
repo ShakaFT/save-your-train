@@ -15,6 +15,9 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
 
     fun fillExercises(exercises: MutableList<Exercise>) {
         listExercises = exercises
+        notifyDataSetChanged()
+        //notifyItemRangeChanged(0, listExercises.size)
+        //notifyItemInserted(1)
     }
 
     class ExerciseItemViewHolder(private val binding: ExerciseItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -33,7 +36,9 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseItemViewHolder {
-        return ExerciseItemViewHolder(ExerciseItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ExerciseItemViewHolder(
+            ExerciseItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
