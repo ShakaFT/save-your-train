@@ -26,6 +26,14 @@ suspend fun addRemoteExercise(exercise: Exercise) {
     callAPI("/exercise/add", "POST", payload)
 }
 
+suspend fun removeRemoteExercise(exercise: Exercise) {
+    val payload: Map<String, Any> = mapOf(
+        "email" to email,
+        "exerciseName" to exercise.name
+    )
+    callAPI("/exercise/delete", "POST", payload)
+}
+
 // Private utils functions
 
 @OptIn(InternalAPI::class)
@@ -44,6 +52,7 @@ private suspend fun callAPI(endpoint: String, methodRequest: String, payload: Ma
     }
 
     if (response.status.value !in 200..299) {
+        println(response.bodyAsText()) // Display error in console to debug
         throw IOException("An error occurred during call to the API with endpoint : $endpoint")
     }
     var dataString: String = "" +  response.bodyAsText()

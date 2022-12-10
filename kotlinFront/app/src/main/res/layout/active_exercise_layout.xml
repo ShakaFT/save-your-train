@@ -179,8 +179,33 @@
         android:alpha="0.3"
         android:text="@string/launch_exercise_button"
         app:layout_constraintTop_toBottomOf="@id/activeExerciseForm"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/removeExerciseButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/activeExerciseError"
+        android:hint=""
+        android:padding="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#FF0000"
+        android:text="Une erreur est survenue, veuillez réessayer plus tard..."
+        app:layout_constraintTop_toBottomOf="@id/exerciseLaunchButton"
+        app:layout_constraintBottom_toTopOf="@id/removeExerciseButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/removeExerciseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_delete"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

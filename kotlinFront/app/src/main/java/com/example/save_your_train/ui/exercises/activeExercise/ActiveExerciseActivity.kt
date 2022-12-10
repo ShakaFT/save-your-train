@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
 import com.example.save_your_train.ui.exercises.launchedExercise.LaunchedExerciseActivity
 
@@ -39,6 +40,10 @@ class ActiveExerciseActivity: AppCompatActivity() {
         setTextChangedListener(binding.restField)
         setTextChangedListener(binding.weightField)
         setTextChangedListener(binding.seriesField)
+
+        binding.removeExerciseButton.setOnClickListener { activeExerciseViewModel.onClickRemoveExercise(
+            Exercise(supportActionBar?.title.toString(), binding.descriptionContent.text.toString())
+        ) }
         binding.exerciseLaunchButton.setOnClickListener { activeExerciseViewModel.onClickLaunchButton() }
 
         setObserve()
@@ -53,8 +58,19 @@ class ActiveExerciseActivity: AppCompatActivity() {
     // Private functions
 
     private fun setObserve() {
+        activeExerciseViewModel.isFinished.observe(this) {
+            if (it) finish()
+        }
         activeExerciseViewModel.isLaunched.observe(this) {
             if (it) startLaunchedExerciseActivity()
+        }
+
+        // Error Text View
+        activeExerciseViewModel.textError.observe(this) {
+            binding.activeExerciseError.text = it
+        }
+        activeExerciseViewModel.visibilityError.observe(this) {
+            binding.activeExerciseError.visibility = it
         }
 
         // Launch Button

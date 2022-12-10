@@ -32,21 +32,6 @@ class AddExerciseViewModel: ViewModel() {
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    private suspend fun addExercise(exercise: Exercise): Boolean {
-        val worked = GlobalScope.async {
-            try {
-                //addRemoteExercise(exercise)
-                insertExerciseDb(exercise)
-                true
-            } catch (e: java.nio.channels.UnresolvedAddressException) {
-                displayError(true, "Une erreur est surevenue, veuillez réessayer plus tard...")
-                false
-            }
-        }
-        return worked.await()
-    }
-
     fun onChangeTextName(name: String) {
         viewModelScope.launch {
 
@@ -60,11 +45,26 @@ class AddExerciseViewModel: ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             val nameExists: Boolean = isInDatabase(name)
             disableAddButton(nameExists)
-            displayError(nameExists, "Ce nom d'exercise est déjà utilisé")
+            displayError(nameExists, "Ce nom d'exercice est déjà utilisé")
         }
     }
 
     // Private functions
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private suspend fun addExercise(exercise: Exercise): Boolean {
+        val worked = GlobalScope.async {
+            try {
+                addRemoteExercise(exercise)
+                insertExerciseDb(exercise)
+                true
+            } catch (e: Exception) {
+                displayError(true, "Une erreur est surevenue, veuillez réessayer plus tard...")
+                false
+            }
+        }
+        return worked.await()
+    }
 
     private fun displayError(display: Boolean, text: String = "") {
         textError.postValue(text)
