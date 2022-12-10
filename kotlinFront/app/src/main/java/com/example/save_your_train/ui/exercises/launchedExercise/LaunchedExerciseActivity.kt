@@ -2,8 +2,10 @@ package com.example.save_your_train.ui.exercises.launchedExercise
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.databinding.LaunchedExerciseLayoutBinding
 
 class LaunchedExerciseActivity: AppCompatActivity() {
@@ -20,7 +22,10 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         // showing the back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //GetParameters
+        //Get ViewModel
+        launchedExerciseViewModel = ViewModelProvider(this)[LaunchedExerciseViewModel::class.java]
+
+        //Get Parameters
         supportActionBar?.title = intent.getStringExtra("name")
         binding.timerForExecution.text = intent.getStringExtra("execution")
         binding.numberOfRepetition.text = intent.getStringExtra("repetition")
@@ -29,22 +34,49 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         binding.numberOfSeries.text = intent.getStringExtra("series")
 
         //Set Display
-        displayTextView(binding.timerForExecution, binding.executionLabel)
-        displayTextView(binding.numberOfRepetition, binding.repetitionLabel)
-        displayTextView(binding.timerForRest, binding.restLabel)
-        displayTextView(binding.numberOfWeight, binding.weightLabel)
-        displayTextView(binding.numberOfSeries, binding.seriesLabel)
+        launchedExerciseViewModel.initDisplay(
+            binding.timerForExecution.text.toString(),
+            binding.numberOfRepetition.text.toString(),
+            binding.timerForRest.text.toString(),
+            binding.numberOfWeight.text.toString(),
+            binding.numberOfSeries.text.toString(),
+        )
+        binding.repetitionLabel.text = if(this.binding.numberOfRepetition.text.toString().toInt() == 1) "répétition" else "répétitions"
+
+        //Set Observe
+        setObserve()
 
     }
 
-    private fun displayTextView(valueTextView: TextView, labelTextView: TextView) {
-        if(valueTextView.text.toString().isEmpty()) {
-            valueTextView.visibility = View.GONE
-            labelTextView.visibility = View.GONE
-            return
+    private fun setObserve() {
+
+        launchedExerciseViewModel.nbSeries.observe(this) {
+            onChangeSeriesLabel(it)
         }
-        valueTextView.visibility = View.VISIBLE
-        labelTextView.visibility = View.VISIBLE
+
+        launchedExerciseViewModel.displayExecution.observe(this) {
+            displayTextView(it, binding.executionColumn)
+        }
+
+        launchedExerciseViewModel.displayRepetition.observe(this) {
+            displayTextView(it, binding.repetitionLine)
+        }
+
+        launchedExerciseViewModel.displayRest.observe(this) {
+            displayTextView(it, binding.restColumn)
+        }
+
+        launchedExerciseViewModel.displayWeight.observe(this) {
+            displayTextView(it, binding.weightLine)
+        }
+    }
+
+    private fun displayTextView(displayed: Boolean, linearLayout: LinearLayout) {
+        linearLayout.visibility = if(displayed) View.VISIBLE else View.GONE
+    }
+
+    private fun onChangeSeriesLabel(nbSeries: String) {
+        binding.seriesLabel.text = if(nbSeries.toInt() == 1) "série restante" else "séries restantes"
     }
 
     override fun onSupportNavigateUp(): Boolean {

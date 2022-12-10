@@ -7,6 +7,7 @@
     tools:context=".ui.exercises.launchedExercise.LaunchedExerciseActivity">
 
     <LinearLayout
+        android:id="@+id/informationLayout"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +56,8 @@
             android:id="@+id/restColumn"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
-            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@id/repetitionLine"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/executionColumn"
@@ -90,6 +92,7 @@
             android:id="@+id/executionColumn"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
+            android:layout_gravity="center"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/restColumn"
             app:layout_constraintStart_toStartOf="parent"
@@ -185,5 +188,17 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextSeriesButton"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@id/informationLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

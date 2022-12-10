@@ -69,7 +69,7 @@ class ActiveExerciseActivity: AppCompatActivity() {
 
     private fun startLaunchedExerciseActivity() {
         val intent = Intent(binding.root.context, LaunchedExerciseActivity::class.java)
-        intent.putExtra("name", title)
+        intent.putExtra("name", supportActionBar?.title)
         intent.putExtra("execution", this.binding.executionField.text.toString())
         intent.putExtra("repetition", this.binding.repetitionField.text.toString())
         intent.putExtra("rest", this.binding.restField.text.toString())
