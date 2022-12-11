@@ -41,17 +41,36 @@ class LaunchedExerciseActivity: AppCompatActivity() {
             binding.numberOfWeight.text.toString(),
             binding.numberOfSeries.text.toString(),
         )
-        binding.repetitionLabel.text = if(this.binding.numberOfRepetition.text.toString().toInt() == 1) "répétition" else "répétitions"
+
+        if(binding.numberOfRepetition.text != "") {
+            binding.repetitionLabel.text = if(this.binding.numberOfRepetition.text.toString().toInt() == 1) "répétition" else "répétitions"
+        }
 
         //Set Observe
         setObserve()
 
+        //Set Listener
+        binding.nextSeriesButton.setOnClickListener {
+            if(launchedExerciseViewModel.hasRest) launchedExerciseViewModel.updateDisplay()
+            launchedExerciseViewModel.setButtonName()
+            launchedExerciseViewModel.nextSeries()
+        }
     }
 
     private fun setObserve() {
 
+        launchedExerciseViewModel.isFinished.observe(this) {
+            if (it) finish()
+        }
+
+        launchedExerciseViewModel.displayRest.observe(this) {
+            displayTextView(it, binding.restColumn)
+        }
+
         launchedExerciseViewModel.nbSeries.observe(this) {
+            launchedExerciseViewModel.setButtonName()
             onChangeSeriesLabel(it)
+            binding.numberOfSeries.text = it
         }
 
         launchedExerciseViewModel.displayExecution.observe(this) {
@@ -62,12 +81,12 @@ class LaunchedExerciseActivity: AppCompatActivity() {
             displayTextView(it, binding.repetitionLine)
         }
 
-        launchedExerciseViewModel.displayRest.observe(this) {
-            displayTextView(it, binding.restColumn)
-        }
-
         launchedExerciseViewModel.displayWeight.observe(this) {
             displayTextView(it, binding.weightLine)
+        }
+
+        launchedExerciseViewModel.buttonName.observe(this) {
+            binding.nextSeriesButton.text = it
         }
     }
 
