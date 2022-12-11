@@ -32,7 +32,7 @@ class AddExerciseActivity : AppCompatActivity() {
         binding.exerciseAddButton.setOnClickListener {
             val exercise = Exercise(
                 binding.exerciseNameField.text.toString(),
-                binding.exerciseNameField.text.toString()
+                binding.exerciseDescriptionField.text.toString()
             )
             addExerciseViewModel.onClickAddButton(exercise)
         }
