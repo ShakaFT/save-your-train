@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
+import com.example.save_your_train.getPopup
 import com.example.save_your_train.ui.exercises.launchedExercise.LaunchedExerciseActivity
 
 
@@ -41,9 +44,7 @@ class ActiveExerciseActivity: AppCompatActivity() {
         setTextChangedListener(binding.weightField)
         setTextChangedListener(binding.seriesField)
 
-        binding.removeExerciseButton.setOnClickListener { activeExerciseViewModel.onClickRemoveExercise(
-            Exercise(supportActionBar?.title.toString(), binding.descriptionContent.text.toString())
-        ) }
+        binding.removeExerciseButton.setOnClickListener { getAlertPopup().show() }
         binding.exerciseLaunchButton.setOnClickListener { activeExerciseViewModel.onClickLaunchButton() }
 
         setObserve()
@@ -56,6 +57,19 @@ class ActiveExerciseActivity: AppCompatActivity() {
     }
 
     // Private functions
+
+    private fun getAlertPopup(): AlertDialog.Builder {
+        return getPopup(
+            this,
+            "Supprimer l'exercise ${supportActionBar?.title} ?",
+            "Cette action est irréversible.",
+            positiveFunction = {
+                activeExerciseViewModel.onClickRemoveExercise(
+                    Exercise(supportActionBar?.title.toString(), binding.descriptionContent.text.toString())
+                )
+            },
+        )
+    }
 
     private fun setObserve() {
         activeExerciseViewModel.isFinished.observe(this) {
