@@ -2,9 +2,16 @@ package com.example.save_your_train.ui.exercises.launchedExercise
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.save_your_train.data.AppDatabase
+import com.example.save_your_train.data.History
+import io.ktor.util.date.*
+import kotlinx.coroutines.*
+import java.time.Instant
 
 class LaunchedExerciseViewModel: ViewModel() {
-    
+
+    private var name = ""
+    private var series = ""
     private var execution = ""
     private var repetition = ""
     private var rest = ""
@@ -26,8 +33,10 @@ class LaunchedExerciseViewModel: ViewModel() {
         REST("Lancer le repos")
     }
 
-    fun initDisplay(execution: String, repetition: String, rest: String, weight: String, series: String) {
+    fun initDisplay(name: String, execution: String, repetition: String, rest: String, weight: String, series: String) {
         this.nbSeries.value = series
+        this.name = name
+        this.series = series
         this.execution = execution
         this.repetition = repetition
         this.rest = rest
@@ -67,7 +76,39 @@ class LaunchedExerciseViewModel: ViewModel() {
         this.displayExecution.value = false
         this.displayRest.value = false
         this.displayRepetition.value = false
-        this.isFinished.value = true
+
+        val history = History(System.currentTimeMillis().toDouble(), name, execution, repetition, rest, series, weight)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            if (saveHistory(history)) {
+                isFinished.postValue(true)
+            }
+        }
+    }
+
+    private fun displayError(display: Boolean, text: String = "") {
+        //textError.postValue(text)
+        //visibilityError.postValue(if (display) View.VISIBLE else View.GONE)
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private suspend fun saveHistory(history: History): Boolean {
+        val worked = GlobalScope.async {
+            try {
+                //addRemoteHistory(history)
+                insertHistoryDb(history)
+                true
+            } catch (e: Exception) {
+                //displayError(true, "Une erreur est survenue, veuillez réessayer plus tard...")
+                false
+            }
+        }
+        return worked.await()
+    }
+
+    private fun insertHistoryDb(history: History) {
+        val historyDao = AppDatabase.data!!.historyDao()
+        historyDao.insertAll(history)
     }
 
 }

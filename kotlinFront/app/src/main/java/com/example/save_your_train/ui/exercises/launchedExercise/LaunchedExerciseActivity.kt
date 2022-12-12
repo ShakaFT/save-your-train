@@ -35,6 +35,7 @@ class LaunchedExerciseActivity: AppCompatActivity() {
 
         //Set Display
         launchedExerciseViewModel.initDisplay(
+            intent.getStringExtra("name")!!,
             binding.timerForExecution.text.toString(),
             binding.numberOfRepetition.text.toString(),
             binding.timerForRest.text.toString(),

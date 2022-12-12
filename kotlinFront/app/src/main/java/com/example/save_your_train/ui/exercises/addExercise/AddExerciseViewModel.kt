@@ -59,7 +59,7 @@ class AddExerciseViewModel: ViewModel() {
                 insertExerciseDb(exercise)
                 true
             } catch (e: Exception) {
-                displayError(true, "Une erreur est surevenue, veuillez réessayer plus tard...")
+                displayError(true, "Une erreur est survenue, veuillez réessayer plus tard...")
                 false
             }
         }

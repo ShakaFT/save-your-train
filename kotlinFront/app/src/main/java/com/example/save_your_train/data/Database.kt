@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.*
 
 
-@Database(entities = [Exercise::class], version = 1)
+@Database(entities = [Exercise::class, History::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
+    abstract fun historyDao(): HistoryDao
 
     companion object {
         @Volatile
