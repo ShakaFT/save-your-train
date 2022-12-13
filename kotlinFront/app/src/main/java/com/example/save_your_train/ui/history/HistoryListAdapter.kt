@@ -18,8 +18,6 @@ class HistoryListAdapter: RecyclerView.Adapter<HistoryListAdapter.HistoryItemVie
     fun fillHistories(histories: MutableList<History>) {
         listHistories = histories
         notifyDataSetChanged()
-        //notifyItemRangeChanged(0, listExercises.size)
-        //notifyItemInserted(1)
     }
 
     class HistoryItemViewHolder(private val binding: HistoryItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -28,10 +26,10 @@ class HistoryListAdapter: RecyclerView.Adapter<HistoryListAdapter.HistoryItemVie
             val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
             val date = dateFormat.format(Date(history.dateMs.toLong()))
 
-            binding.exerciseName.text = history.name
+            binding.historyName.text = history.name
             binding.date.text = date
             binding.historyItem.setOnClickListener{
-                // Go to Active Exercise Activity
+                // Go to Active History Activity
                 /*val intent = Intent(binding.root.context, ActiveExerciseActivity::class.java)
                 intent.putExtra("name", this.binding.exerciseName.text.toString())
                 intent.putExtra("description", this.binding.exerciseDescription.text.toString())

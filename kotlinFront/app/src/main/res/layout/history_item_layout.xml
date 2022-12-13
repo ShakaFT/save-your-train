@@ -11,7 +11,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center_vertical"
-        android:id="@+id/exerciseName"
+        android:id="@+id/historyName"
         android:layout_margin="15dp"
         android:text=""
         android:textSize="20sp"/>
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/exerciseName"
+        app:layout_constraintStart_toEndOf="@id/historyName"
         android:id="@+id/date"
         android:layout_margin="15dp"
         android:text=""

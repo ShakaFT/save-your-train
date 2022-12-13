@@ -1,6 +1,5 @@
 package com.example.save_your_train.ui.history
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.alphaAble
@@ -38,7 +37,7 @@ class HistoryViewModel : ViewModel() {
     }
 
     fun refreshRecycler() {
-        // Get all exercises in db
+        // Get all histories in db
         CoroutineScope(Dispatchers.IO).launch {
             val historyDao: HistoryDao = AppDatabase.data!!.historyDao()
             histories = historyDao.getAll()

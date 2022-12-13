@@ -16,8 +16,6 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
     fun fillExercises(exercises: MutableList<Exercise>) {
         listExercises = exercises
         notifyDataSetChanged()
-        //notifyItemRangeChanged(0, listExercises.size)
-        //notifyItemInserted(1)
     }
 
     class ExerciseItemViewHolder(private val binding: ExerciseItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -28,8 +26,8 @@ class ExerciseListAdapter: RecyclerView.Adapter<ExerciseListAdapter.ExerciseItem
             binding.exerciseItem.setOnClickListener{
                 // Go to Active Exercise Activity
                 val intent = Intent(binding.root.context, ActiveExerciseActivity::class.java)
-                intent.putExtra("name", this.binding.exerciseName.text.toString())
-                intent.putExtra("description", this.binding.exerciseDescription.text.toString())
+                intent.putExtra("name", exercise.name)
+                intent.putExtra("description", exercise.description)
                 binding.root.context.startActivity(intent)
             }
         }
