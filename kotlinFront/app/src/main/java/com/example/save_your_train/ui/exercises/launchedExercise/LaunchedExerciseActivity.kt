@@ -3,10 +3,10 @@ package com.example.save_your_train.ui.exercises.launchedExercise
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.save_your_train.databinding.LaunchedExerciseLayoutBinding
+
 
 class LaunchedExerciseActivity: AppCompatActivity() {
     private lateinit var binding: LaunchedExerciseLayoutBinding
@@ -22,10 +22,10 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         // showing the back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //Get ViewModel
+        // Get ViewModel
         launchedExerciseViewModel = ViewModelProvider(this)[LaunchedExerciseViewModel::class.java]
 
-        //Get Parameters
+        // Get Parameters
         supportActionBar?.title = intent.getStringExtra("name")
         binding.timerForExecution.text = intent.getStringExtra("execution")
         binding.numberOfRepetition.text = intent.getStringExtra("repetition")
@@ -33,7 +33,7 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         binding.numberOfWeight.text = intent.getStringExtra("weight")
         binding.numberOfSeries.text = intent.getStringExtra("series")
 
-        //Set Display
+        // Set Display
         launchedExerciseViewModel.initDisplay(
             intent.getStringExtra("name")!!,
             binding.timerForExecution.text.toString(),
@@ -43,20 +43,20 @@ class LaunchedExerciseActivity: AppCompatActivity() {
             binding.numberOfSeries.text.toString(),
         )
 
-        if(binding.numberOfRepetition.text != "") {
-            binding.repetitionLabel.text = if(this.binding.numberOfRepetition.text.toString().toInt() == 1) "répétition" else "répétitions"
+        if (binding.numberOfRepetition.text.isNotEmpty()) {
+            binding.repetitionLabel.text = if (this.binding.numberOfRepetition.text.toString() == "1") "répétition" else "répétitions"
         }
 
-        //Set Observe
+        // Set Observe
         setObserve()
 
-        //Set Listener
+        // Set Listener
         binding.nextSeriesButton.setOnClickListener {
-            if(launchedExerciseViewModel.hasRest) launchedExerciseViewModel.updateDisplay()
-            launchedExerciseViewModel.setButtonName()
-            launchedExerciseViewModel.nextSeries()
+            launchedExerciseViewModel.onClickNextSeriesButton()
         }
     }
+
+    // Private functions
 
     private fun setObserve() {
 
@@ -89,14 +89,30 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         launchedExerciseViewModel.buttonName.observe(this) {
             binding.nextSeriesButton.text = it
         }
+
+        // Button
+        launchedExerciseViewModel.nextSeriesButtonClickable.observe(this) {
+            binding.nextSeriesButton.isClickable = it
+        }
+        launchedExerciseViewModel.nextSeriesButtonAlpha.observe(this) {
+            binding.nextSeriesButton.alpha = it
+        }
+
+        // Error
+        launchedExerciseViewModel.textError.observe(this) {
+            binding.launchedExerciseError.text = it
+        }
+        launchedExerciseViewModel.visibilityError.observe(this) {
+            binding.launchedExerciseError.visibility = it
+        }
     }
 
     private fun displayTextView(displayed: Boolean, linearLayout: LinearLayout) {
-        linearLayout.visibility = if(displayed) View.VISIBLE else View.GONE
+        linearLayout.visibility = if (displayed) View.VISIBLE else View.GONE
     }
 
     private fun onChangeSeriesLabel(nbSeries: String) {
-        binding.seriesLabel.text = if(nbSeries.toInt() == 1) "série restante" else "séries restantes"
+        binding.seriesLabel.text = if (nbSeries.toInt() == 1) "série restante" else "séries restantes"
     }
 
     override fun onSupportNavigateUp(): Boolean {

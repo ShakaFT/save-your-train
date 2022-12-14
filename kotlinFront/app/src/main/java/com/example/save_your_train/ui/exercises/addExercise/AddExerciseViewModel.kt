@@ -53,6 +53,7 @@ class AddExerciseViewModel: ViewModel() {
 
     @OptIn(DelicateCoroutinesApi::class)
     private suspend fun addExercise(exercise: Exercise): Boolean {
+        disableAddButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
                 addRemoteExercise(exercise)
@@ -63,17 +64,19 @@ class AddExerciseViewModel: ViewModel() {
                 false
             }
         }
-        return worked.await()
-    }
-
-    private fun displayError(display: Boolean, text: String = "") {
-        textError.postValue(text)
-        visibilityError.postValue(if (display) View.VISIBLE else View.GONE)
+        val result: Boolean = worked.await()
+        disableAddButton(false)
+        return result
     }
 
     private fun disableAddButton(disabled: Boolean) {
         addButtonClickable.postValue(!disabled)
         addButtonAlpha.postValue(if (disabled) alphaDisable else alphaAble)
+    }
+
+    private fun displayError(display: Boolean, text: String = "") {
+        textError.postValue(text)
+        visibilityError.postValue(if (display) View.VISIBLE else View.GONE)
     }
 
     private fun insertExerciseDb(exercise: Exercise) {

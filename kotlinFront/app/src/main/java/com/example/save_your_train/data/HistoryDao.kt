@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao
 interface HistoryDao {
-    @Query("SELECT * FROM history ORDER BY dateMs")
+    @Query("SELECT * FROM history ORDER BY dateMs DESC")
     fun getAll(): MutableList<History>
 
     @Query("SELECT * FROM history WHERE dateMs == :dateMs")
