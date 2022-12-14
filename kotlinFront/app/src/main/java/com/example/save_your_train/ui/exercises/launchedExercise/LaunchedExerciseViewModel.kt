@@ -10,15 +10,18 @@ import com.example.save_your_train.data.History
 import com.example.save_your_train.data.addRemoteHistory
 import kotlinx.coroutines.*
 
+
 class LaunchedExerciseViewModel: ViewModel() {
 
+    // Parameters
     private var name = ""
-    private var series = ""
+    private var series = "" // nbSeries before decrementation
     private var execution = ""
     private var repetition = ""
     private var rest = ""
     private var weight = ""
 
+    // Mutable Live Data
     val isFinished = MutableLiveData<Boolean>(false)
     var nbSeries = MutableLiveData<String>()
     var buttonName = MutableLiveData<String>()
@@ -33,7 +36,6 @@ class LaunchedExerciseViewModel: ViewModel() {
     var textError = MutableLiveData<String>()
     var visibilityError = MutableLiveData<Int>(View.GONE)
 
-    private var hasRest = false
 
     enum class ButtonNameCase(val buttonName: String) {
         NEXT("Prochaine série"),
@@ -41,14 +43,16 @@ class LaunchedExerciseViewModel: ViewModel() {
         REST("Lancer le repos")
     }
 
+
     fun initDisplay(name: String, execution: String, repetition: String, rest: String, weight: String, series: String) {
-        this.nbSeries.value = series
+        // Method used to pass parameters
         this.name = name
-        this.series = series
         this.execution = execution
         this.repetition = repetition
         this.rest = rest
         this.weight = weight
+
+        this.nbSeries.value = series
         this.displayExecution.value = execution.isNotEmpty()
         this.displayRepetition.value = repetition.isNotEmpty()
         this.displayWeight.value = weight.isNotEmpty()
@@ -61,15 +65,15 @@ class LaunchedExerciseViewModel: ViewModel() {
     }
 
     fun setButtonName() {
-        if(this.rest.isNotEmpty() && !this.displayRest.value!!) {
+        if (this.rest.isNotEmpty() && !this.displayRest.value!!) {
             this.buttonName.postValue(ButtonNameCase.REST.buttonName)
             return
         }
-        if(this.rest.isNotEmpty() && this.displayRest.value!!) {
-            this.buttonName.postValue(if(this.nbSeries.value!!.toInt() != 1) ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName)
+        if (this.rest.isNotEmpty() && this.displayRest.value!!) {
+            this.buttonName.postValue(if(this.nbSeries.value!! != "1") ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName)
             return
         }
-        this.buttonName.postValue(if(this.nbSeries.value!!.toInt() != 1) ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName)
+        this.buttonName.postValue(if(this.nbSeries.value!! != "1") ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName)
     }
 
     // Private functions
@@ -90,8 +94,9 @@ class LaunchedExerciseViewModel: ViewModel() {
     }
 
     private fun nextSeries() {
-        if(this.nbSeries.value != "1" && this.displayRest.value == false) this.nbSeries.postValue((this.nbSeries.value!!.toInt()-1).toString())
-        if(this.nbSeries.value == "1" && this.displayRest.value == false) this.stopExercise()
+
+        if (this.nbSeries.value != "1" && this.displayRest.value == false) this.nbSeries.postValue((this.nbSeries.value!!.toInt()-1).toString())
+        if (this.nbSeries.value == "1" && this.displayRest.value == false) this.stopExercise()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -118,7 +123,15 @@ class LaunchedExerciseViewModel: ViewModel() {
         this.displayRest.value = false
         this.displayRepetition.value = false
 
-        val history = History(System.currentTimeMillis().toDouble(), name, execution, repetition, rest, series, weight)
+        val history = History(
+            System.currentTimeMillis().toDouble(),
+            name,
+            execution,
+            repetition,
+            rest,
+            series,
+            weight
+        )
 
         CoroutineScope(Dispatchers.IO).launch {
             if (saveHistory(history)) {
