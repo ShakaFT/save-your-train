@@ -21,6 +21,10 @@
             android:exported="false"
             android:label="@string/title_activity_active_exercise" />
         <activity
+            android:name=".ui.history.activeHistory.ActiveHistoryActivity"
+            android:exported="false"
+            android:label="@string/title_history" />
+        <activity
             android:name=".ui.exercises.addExercise.AddExerciseActivity"
             android:exported="false"
             android:label="@string/title_activity_add_exercise" />
