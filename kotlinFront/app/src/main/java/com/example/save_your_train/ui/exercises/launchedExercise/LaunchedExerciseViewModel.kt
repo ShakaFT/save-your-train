@@ -27,8 +27,8 @@ class LaunchedExerciseViewModel: ViewModel() {
     var displayRest = MutableLiveData<Boolean>(false)
     var displayWeight = MutableLiveData<Boolean>()
 
-    val nextSeriesButtonClickable = MutableLiveData<Boolean>(false)
-    val nextSeriesButtonAlpha = MutableLiveData<Float>(alphaDisable)
+    val nextSeriesButtonClickable = MutableLiveData<Boolean>()
+    val nextSeriesButtonAlpha = MutableLiveData<Float>()
 
     var textError = MutableLiveData<String>()
     var visibilityError = MutableLiveData<Int>(View.GONE)
