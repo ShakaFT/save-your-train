@@ -17,6 +17,9 @@ class ActiveExerciseViewModel : ViewModel() {
     val isLaunched = MutableLiveData<Boolean>(false)
     val isFinished = MutableLiveData<Boolean>(false)
 
+    val deleteButtonClickable = MutableLiveData<Boolean>()
+    val deleteButtonAlpha = MutableLiveData<Float>()
+
     val launchButtonClickable = MutableLiveData<Boolean>(false)
     val launchButtonAlpha = MutableLiveData<Float>(alphaDisable)
     val textError = MutableLiveData<String>()
@@ -48,6 +51,11 @@ class ActiveExerciseViewModel : ViewModel() {
 
     // Private methods
 
+    private fun disableDeleteButton(disabled: Boolean) {
+        deleteButtonClickable.postValue(!disabled)
+        deleteButtonAlpha.postValue(if (disabled) alphaDisable else alphaAble)
+    }
+
     private fun disableLaunchButton(disabled: Boolean) {
         launchButtonClickable.postValue(!disabled)
         launchButtonAlpha.postValue(if (disabled) alphaDisable else alphaAble)
@@ -60,6 +68,7 @@ class ActiveExerciseViewModel : ViewModel() {
 
     @OptIn(DelicateCoroutinesApi::class)
     private suspend fun removeExercise(exercise: Exercise): Boolean {
+        disableDeleteButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
                 removeRemoteExercise(exercise)
@@ -71,7 +80,9 @@ class ActiveExerciseViewModel : ViewModel() {
                 false
             }
         }
-        return worked.await()
+        val result: Boolean = worked.await()
+        disableDeleteButton(false)
+        return result
     }
 
     private fun removeExerciseDb(exercise: Exercise) {

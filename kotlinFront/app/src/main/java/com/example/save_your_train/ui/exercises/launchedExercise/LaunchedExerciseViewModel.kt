@@ -1,9 +1,13 @@
 package com.example.save_your_train.ui.exercises.launchedExercise
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.save_your_train.alphaAble
+import com.example.save_your_train.alphaDisable
 import com.example.save_your_train.data.AppDatabase
 import com.example.save_your_train.data.History
+import com.example.save_your_train.data.addRemoteHistory
 import kotlinx.coroutines.*
 
 class LaunchedExerciseViewModel: ViewModel() {
@@ -22,6 +26,12 @@ class LaunchedExerciseViewModel: ViewModel() {
     var displayRepetition = MutableLiveData<Boolean>()
     var displayRest = MutableLiveData<Boolean>(false)
     var displayWeight = MutableLiveData<Boolean>()
+
+    val nextSeriesButtonClickable = MutableLiveData<Boolean>(false)
+    val nextSeriesButtonAlpha = MutableLiveData<Float>(alphaDisable)
+
+    var textError = MutableLiveData<String>()
+    var visibilityError = MutableLiveData<Int>(View.GONE)
 
     private var hasRest = false
 
@@ -64,10 +74,15 @@ class LaunchedExerciseViewModel: ViewModel() {
 
     // Private functions
 
-    /* private fun displayError(display: Boolean, text: String = "") {
+    private fun disableNextSeriesButton(disabled: Boolean) {
+        nextSeriesButtonClickable.postValue(!disabled)
+        nextSeriesButtonAlpha.postValue(if (disabled) alphaDisable else alphaAble)
+    }
+
+    private fun displayError(display: Boolean, text: String = "") {
         textError.postValue(text)
         visibilityError.postValue(if (display) View.VISIBLE else View.GONE)
-    } */
+    }
 
     private fun insertHistoryDb(history: History) {
         val historyDao = AppDatabase.data!!.historyDao()
@@ -81,17 +96,20 @@ class LaunchedExerciseViewModel: ViewModel() {
 
     @OptIn(DelicateCoroutinesApi::class)
     private suspend fun saveHistory(history: History): Boolean {
+        disableNextSeriesButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
-                // addRemoteHistory(history)
+                addRemoteHistory(history)
                 insertHistoryDb(history)
                 true
             } catch (e: Exception) {
-                // displayError(true, "Une erreur est survenue, veuillez réessayer plus tard...")
+                displayError(true, "Une erreur est survenue, veuillez réessayer plus tard...")
                 false
             }
         }
-        return worked.await()
+        val result: Boolean = worked.await()
+        disableNextSeriesButton(false)
+        return result
     }
 
     private fun stopExercise() {

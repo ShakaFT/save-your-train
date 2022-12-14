@@ -26,12 +26,28 @@ suspend fun addRemoteExercise(exercise: Exercise) {
     callAPI("/exercise/add", "POST", payload)
 }
 
+suspend fun addRemoteHistory(history: History) {
+    val payload: Map<String, Any> = mapOf(
+        "email" to email,
+        "exercise" to history.toMap()
+    )
+    callAPI("/history/add", "POST", payload)
+}
+
 suspend fun removeRemoteExercise(exercise: Exercise) {
     val payload: Map<String, Any> = mapOf(
         "email" to email,
         "exerciseName" to exercise.name
     )
     callAPI("/exercise/delete", "POST", payload)
+}
+
+suspend fun removeRemoteHistory(history: History) {
+    val payload: Map<String, Any> = mapOf(
+        "email" to email,
+        "dateMs" to history.dateMs
+    )
+    callAPI("/history/delete", "POST", payload)
 }
 
 // Private utils functions

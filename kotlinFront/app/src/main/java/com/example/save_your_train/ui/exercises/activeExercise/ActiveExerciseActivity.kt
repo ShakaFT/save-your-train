@@ -87,6 +87,14 @@ class ActiveExerciseActivity: AppCompatActivity() {
             binding.activeExerciseError.visibility = it
         }
 
+        // Delete Button
+        activeExerciseViewModel.deleteButtonClickable.observe(this) {
+            binding.removeExerciseButton.isClickable = it
+        }
+        activeExerciseViewModel.deleteButtonAlpha.observe(this) {
+            binding.removeExerciseButton.alpha = it
+        }
+
         // Launch Button
         activeExerciseViewModel.launchButtonClickable.observe(this) {
             binding.exerciseLaunchButton.isClickable = it

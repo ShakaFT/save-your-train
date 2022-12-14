@@ -89,6 +89,22 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         launchedExerciseViewModel.buttonName.observe(this) {
             binding.nextSeriesButton.text = it
         }
+
+        // Button
+        launchedExerciseViewModel.nextSeriesButtonClickable.observe(this) {
+            binding.nextSeriesButton.isClickable = it
+        }
+        launchedExerciseViewModel.nextSeriesButtonAlpha.observe(this) {
+            binding.nextSeriesButton.alpha = it
+        }
+
+        // Error
+        launchedExerciseViewModel.textError.observe(this) {
+            binding.launchedExerciseError.text = it
+        }
+        launchedExerciseViewModel.visibilityError.observe(this) {
+            binding.launchedExerciseError.visibility = it
+        }
     }
 
     private fun displayTextView(displayed: Boolean, linearLayout: LinearLayout) {
