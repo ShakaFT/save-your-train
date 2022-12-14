@@ -51,6 +51,7 @@ class LaunchedExerciseViewModel: ViewModel() {
         this.repetition = repetition
         this.rest = rest
         this.weight = weight
+        this.series = series
 
         this.nbSeries.value = series
         this.displayExecution.value = execution.isNotEmpty()
