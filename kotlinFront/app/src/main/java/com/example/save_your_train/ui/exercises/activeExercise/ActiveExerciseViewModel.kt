@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
-import com.example.save_your_train.data.AppDatabase
-import com.example.save_your_train.data.Exercise
-import com.example.save_your_train.data.JsonData
-import com.example.save_your_train.data.removeRemoteExercise
+import com.example.save_your_train.data.*
 import kotlinx.coroutines.*
 
 
@@ -25,6 +22,11 @@ class ActiveExerciseViewModel : ViewModel() {
     val textError = MutableLiveData<String>()
     val visibilityError = MutableLiveData<Int>(View.GONE)
 
+    val execution = MutableLiveData<String>()
+    val rest = MutableLiveData<String>()
+    val repetition = MutableLiveData<String>()
+    val weight = MutableLiveData<String>()
+    val series = MutableLiveData<String>()
     // Public methods
 
     fun onChangeText(exec: String, repet: String, rest: String, weight: String) {
@@ -88,5 +90,21 @@ class ActiveExerciseViewModel : ViewModel() {
     private fun removeExerciseDb(exercise: Exercise) {
         val exerciseDao = AppDatabase.data!!.exerciseDao()
         exerciseDao.delete(exercise)
+    }
+
+    public fun fillExercise(exerciseName: String){
+        // Get first history in db
+        CoroutineScope(Dispatchers.IO).launch {
+            val historyDao: HistoryDao = AppDatabase.data!!.historyDao()
+            val histories = historyDao.findByName(exerciseName)
+            if(histories.isNotEmpty()) {
+                val history = histories.first()
+                execution.postValue(history.execution)
+                rest.postValue(history.rest)
+                repetition.postValue(history.repetition)
+                weight.postValue(history.weight)
+                if (history.series != "1") series.postValue(history.series)
+            }
+        }
     }
 }

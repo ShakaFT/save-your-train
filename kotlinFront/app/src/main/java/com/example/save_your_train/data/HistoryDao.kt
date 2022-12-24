@@ -8,6 +8,9 @@ interface HistoryDao {
     @Query("SELECT * FROM history ORDER BY dateMs DESC")
     fun getAll(): MutableList<History>
 
+    @Query("SELECT * FROM history WHERE name == :name ORDER BY dateMs DESC")
+    fun findByName(name: String): MutableList<History>
+
     @Query("SELECT * FROM history WHERE dateMs == :dateMs")
     fun findByDate(dateMs: String): History
 

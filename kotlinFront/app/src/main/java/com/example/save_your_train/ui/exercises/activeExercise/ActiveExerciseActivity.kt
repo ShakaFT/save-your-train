@@ -47,6 +47,7 @@ class ActiveExerciseActivity: AppCompatActivity() {
         binding.removeExerciseButton.setOnClickListener { getAlertPopup().show() }
         binding.exerciseLaunchButton.setOnClickListener { activeExerciseViewModel.onClickLaunchButton() }
 
+        activeExerciseViewModel.fillExercise(intent.getStringExtra("name")!!);
         setObserve()
 
     }
@@ -101,6 +102,27 @@ class ActiveExerciseActivity: AppCompatActivity() {
         }
         activeExerciseViewModel.launchButtonAlpha.observe(this) {
             binding.exerciseLaunchButton.alpha = it
+        }
+
+        // Field value
+        activeExerciseViewModel.execution.observe(this) {
+            binding.executionField.setText(it)
+        }
+
+        activeExerciseViewModel.rest.observe(this) {
+            binding.restField.setText(it)
+        }
+
+        activeExerciseViewModel.repetition.observe(this) {
+            binding.repetitionField.setText(it)
+        }
+
+        activeExerciseViewModel.weight.observe(this) {
+            binding.weightField.setText(it)
+        }
+
+        activeExerciseViewModel.series.observe(this) {
+            binding.seriesField.setText(it)
         }
     }
 
