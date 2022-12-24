@@ -49,7 +49,6 @@ class ActiveExerciseActivity: AppCompatActivity() {
 
         activeExerciseViewModel.fillExercise(intent.getStringExtra("name")!!);
         setObserve()
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

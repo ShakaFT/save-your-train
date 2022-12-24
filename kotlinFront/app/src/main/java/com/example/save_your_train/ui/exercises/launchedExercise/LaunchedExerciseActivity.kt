@@ -54,6 +54,14 @@ class LaunchedExerciseActivity: AppCompatActivity() {
         binding.nextSeriesButton.setOnClickListener {
             launchedExerciseViewModel.onClickNextSeriesButton()
         }
+
+        binding.startExecTimer.setOnClickListener {
+            launchedExerciseViewModel.onClickStartTimer()
+        }
+
+        binding.startRestTimer.setOnClickListener {
+            launchedExerciseViewModel.onClickStartTimer()
+        }
     }
 
     // Private functions
@@ -90,12 +98,30 @@ class LaunchedExerciseActivity: AppCompatActivity() {
             binding.nextSeriesButton.text = it
         }
 
+        launchedExerciseViewModel.execValue.observe(this) {
+            binding.timerForExecution.text = it
+        }
+
+        launchedExerciseViewModel.restValue.observe(this) {
+            binding.timerForRest.text = it
+        }
+
         // Button
         launchedExerciseViewModel.nextSeriesButtonClickable.observe(this) {
             binding.nextSeriesButton.isClickable = it
         }
         launchedExerciseViewModel.nextSeriesButtonAlpha.observe(this) {
             binding.nextSeriesButton.alpha = it
+        }
+
+        launchedExerciseViewModel.startTimerButtonClickable.observe(this) {
+            binding.startExecTimer.isClickable = it
+            binding.startRestTimer.isClickable = it
+        }
+
+        launchedExerciseViewModel.startTimerButtonAlpha.observe(this) {
+            binding.startExecTimer.alpha = it
+            binding.startRestTimer.alpha = it
         }
 
         // Error

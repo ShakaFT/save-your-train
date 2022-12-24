@@ -80,8 +80,18 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/restLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/startRestTimer"
                 app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/startRestTimer"
+                android:text="Lancer le repos"
+                app:layout_constraintTop_toBottomOf="@id/timerForRest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </LinearLayout>
 
@@ -116,8 +126,18 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/executionLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/startExecTimer"
                 app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/startExecTimer"
+                android:text="Lancer l'exécution"
+                app:layout_constraintTop_toBottomOf="@id/timerForExecution"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </LinearLayout>
 
