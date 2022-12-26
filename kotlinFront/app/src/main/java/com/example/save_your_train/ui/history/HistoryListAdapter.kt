@@ -34,7 +34,7 @@ class HistoryListAdapter: RecyclerView.Adapter<HistoryListAdapter.HistoryItemVie
                 // Go to Active History Activity
                 val intent = Intent(binding.root.context, ActiveHistoryActivity::class.java)
                 intent.putExtra("name", history.name)
-                intent.putExtra("dateMs", history.dateMs.toLong())
+                intent.putExtra("dateMs", history.dateMs.toDouble())
                 intent.putExtra("execution", history.execution)
                 intent.putExtra("rest", history.rest)
                 intent.putExtra("repetition", history.repetition)

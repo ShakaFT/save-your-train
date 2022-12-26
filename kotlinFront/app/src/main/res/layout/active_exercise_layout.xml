@@ -192,7 +192,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="#FF0000"
-        android:text="Une erreur est survenue, veuillez réessayer plus tard..."
+        android:text=""
         app:layout_constraintTop_toBottomOf="@id/exerciseLaunchButton"
         app:layout_constraintBottom_toTopOf="@id/removeExerciseButton"
         app:layout_constraintStart_toStartOf="parent"

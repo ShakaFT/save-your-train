@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.113" />
         <entry key="app/src/main/res/layout/active_exercise.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/layout/active_exercise_layout.xml" value="0.15260416666666668" />
+        <entry key="app/src/main/res/layout/active_history_layout.xml" value="0.16041666666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/add_exercise_layout.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/exercice_item_layout.xml" value="0.19610507246376813" />
