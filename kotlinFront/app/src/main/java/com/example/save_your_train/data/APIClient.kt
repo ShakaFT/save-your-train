@@ -18,6 +18,16 @@ import org.json.JSONObject
 
 // Public functions
 
+/* suspend fun addRemoteAccount(account: Account) {
+    val payload: Map<String, Any> = mapOf(
+        "email": account.email,
+        "firstName": account.firstName,
+        "lastName": account.lastName,
+        "password": account.password,
+    )
+    callAPI("/account/add", "POST", payload)
+} */
+
 suspend fun addRemoteExercise(exercise: Exercise) {
     val payload: Map<String, Any> = mapOf(
         "email" to email,
@@ -49,6 +59,14 @@ suspend fun removeRemoteHistory(history: History) {
     )
     callAPI("/history/delete", "POST", payload)
 }
+
+/* suspend fun signIn(account: Account) {
+    val payload: Map<String, Any> = mapOf(
+        "email": account.email,
+        "password": account.password,
+    )
+    callAPI("/account/sign_in", "POST", payload)
+} */
 
 // Private utils functions
 
