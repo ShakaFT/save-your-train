@@ -4,5 +4,6 @@ class AccountModel (
         val email: String,
         val firstName: String = "",
         val lastName: String = "",
-        val password: String = ""
-    ) { }
+        val password: String = "",
+        val confirmationPassword: String = ""
+    )

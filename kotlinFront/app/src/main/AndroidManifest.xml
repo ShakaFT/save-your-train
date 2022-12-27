@@ -29,6 +29,14 @@
             android:exported="false"
             android:label="@string/title_activity_add_exercise" />
         <activity
+            android:name=".ui.account.signIn.SignInActivity"
+            android:exported="false"
+            android:label="@string/title_sign_in" />
+        <activity
+            android:name=".ui.account.signUp.SignUpActivity"
+            android:exported="false"
+            android:label="@string/title_sign_up" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">

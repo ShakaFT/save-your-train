@@ -10,14 +10,6 @@ import com.example.save_your_train.ui.profile.AccountModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-/* val dataStore = DataStoreManager(context)
-lifecycleScope.launch {
-    println("current email :" + dataStore.getAccount.first())
-}
-lifecycleScope.launch {
-    dataStore.setAccount(...)
-} */
-
 public class AccountDataStore(private val context: Context) {
 
     // to make sure there is only one instance

@@ -29,6 +29,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/currentEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -46,6 +47,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/currentFirstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -63,6 +65,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/currentLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -71,7 +74,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/exerciseAddButton"
+                android:id="@+id/signUpButton"
                 android:backgroundTint="@color/white"
                 android:text="@string/sign_out_button"
                 android:textColor="#FF0000" />
