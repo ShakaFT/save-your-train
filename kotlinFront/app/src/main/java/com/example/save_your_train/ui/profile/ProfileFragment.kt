@@ -25,10 +25,10 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         // TODO remove this code later
-        val textView: TextView = binding.textProfile
+        /* val textView: TextView = binding.textProfile
         profileViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
+        } */
 
         return binding.root
     }

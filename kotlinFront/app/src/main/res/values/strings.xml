@@ -43,4 +43,10 @@
     <string name="rest_label">Temps de repos</string>
     <string name="repetitions">répétitions</string>
 
+    <!-- Profile Fragment -->
+    <string name="email">Email</string>
+    <string name="first_name">Prénom</string>
+    <string name="last_name">Nom</string>
+    <string name="sign_out_button">Se déconnecter</string>
+
 </resources>
