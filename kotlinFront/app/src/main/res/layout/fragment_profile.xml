@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/signUpButton"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/cultured"
                 android:text="@string/sign_out_button"
                 android:textColor="#FF0000" />
 
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/goToMap"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/cultured"
                 android:text="@string/go_to_map_button"
                 android:textColor="#FF0000" />
     </TableLayout>
