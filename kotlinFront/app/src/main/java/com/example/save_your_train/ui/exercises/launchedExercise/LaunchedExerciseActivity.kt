@@ -72,14 +72,14 @@ class LaunchedExerciseActivity: AppCompatActivity() {
             if (it) finish()
         }
 
-        launchedExerciseViewModel.displayRest.observe(this) {
-            displayTextView(it, binding.restColumn)
-        }
-
         launchedExerciseViewModel.nbSeries.observe(this) {
             launchedExerciseViewModel.setButtonName()
             onChangeSeriesLabel(it)
             binding.numberOfSeries.text = it
+        }
+
+        launchedExerciseViewModel.displayRest.observe(this) {
+            displayTextView(it, binding.restColumn)
         }
 
         launchedExerciseViewModel.displayExecution.observe(this) {
@@ -92,6 +92,10 @@ class LaunchedExerciseActivity: AppCompatActivity() {
 
         launchedExerciseViewModel.displayWeight.observe(this) {
             displayTextView(it, binding.weightLine)
+        }
+
+        launchedExerciseViewModel.displaySeries.observe(this) {
+            displayTextView(it, binding.seriesLine)
         }
 
         launchedExerciseViewModel.buttonName.observe(this) {

@@ -1,6 +1,8 @@
 package com.example.save_your_train.ui.exercises.launchedExercise
 
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +34,7 @@ class LaunchedExerciseViewModel: ViewModel() {
     var displayRepetition = MutableLiveData<Boolean>()
     var displayRest = MutableLiveData<Boolean>(false)
     var displayWeight = MutableLiveData<Boolean>()
+    var displaySeries = MutableLiveData<Boolean>(true)
 
     val nextSeriesButtonClickable = MutableLiveData<Boolean>()
     val nextSeriesButtonAlpha = MutableLiveData<Float>()
@@ -39,6 +42,7 @@ class LaunchedExerciseViewModel: ViewModel() {
     val startTimerButtonAlpha = MutableLiveData<Float>()
 
     private lateinit var timer: CountDownTimer
+    private var timerIsLaunched: Boolean = false
 
     var textError = MutableLiveData<String>()
     var visibilityError = MutableLiveData<Int>(View.GONE)
@@ -64,48 +68,54 @@ class LaunchedExerciseViewModel: ViewModel() {
         this.displayExecution.value = execution.isNotEmpty()
         this.displayRepetition.value = repetition.isNotEmpty()
         this.displayWeight.value = weight.isNotEmpty()
+        disableButtonForTwoSeconds()
     }
 
     fun onClickNextSeriesButton() {
         if(this.rest.isNotEmpty() && this.displayRest.value == true && !this.restValue.value.isNullOrEmpty()) {
-            if(this.restValue.value!! < this.rest) {
-                println("test1")
+            if(this.timerIsLaunched) {
                 this.timer.cancel()
-                restValue.postValue(rest)
-                startTimerButtonClickable.postValue(true)
-                startTimerButtonAlpha.postValue(1F)
+                restValue.value = rest
+                startTimerButtonClickable.value = true
+                startTimerButtonAlpha.value = 1F
+                this.timerIsLaunched = false
             }
         }
         if(this.execution.isNotEmpty() && this.displayExecution.value == true && !this.execValue.value.isNullOrEmpty()) {
-            if(this.execValue.value!! < this.execution) {
-                println("test2")
+            if(this.timerIsLaunched) {
                 this.timer.cancel()
-                execValue.postValue(execution)
-                startTimerButtonClickable.postValue(true)
-                startTimerButtonAlpha.postValue(1F)
+                execValue.value = execution
+                startTimerButtonClickable.value = true
+                startTimerButtonAlpha.value = 1F
+                this.timerIsLaunched = false
             }
         }
-        if (this.rest.isNotEmpty()) updateDisplay()
+        if (this.rest.isNotEmpty() && this.nbSeries.value != "1") updateDisplay()
         setButtonName()
         nextSeries()
     }
 
     fun onClickStartTimer() {
         startTimer()
-        startTimerButtonClickable.postValue(false)
-        startTimerButtonAlpha.postValue(0.3F)
+        startTimerButtonClickable.value = false
+        startTimerButtonAlpha.value = 0.3F
+    }
+
+    private fun disableButtonForTwoSeconds() {
+        disableNextSeriesButton(true)
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                disableNextSeriesButton(false)
+            }
+        , 2000)
     }
 
     fun setButtonName() {
-        if (this.rest.isNotEmpty() && !this.displayRest.value!!) {
-            this.buttonName.postValue(ButtonNameCase.REST.buttonName)
+        if (this.rest.isNotEmpty() && !this.displayRest.value!! && this.nbSeries.value != "1") {
+            this.buttonName.value = ButtonNameCase.REST.buttonName
             return
         }
-        if (this.rest.isNotEmpty() && this.displayRest.value!!) {
-            this.buttonName.postValue(if(this.nbSeries.value!! != "1") ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName)
-            return
-        }
-        this.buttonName.postValue(if(this.nbSeries.value!! != "1") ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName)
+        this.buttonName.value = if(this.nbSeries.value!! != "1") ButtonNameCase.NEXT.buttonName else ButtonNameCase.STOP.buttonName
     }
 
     // Private functions
@@ -126,8 +136,9 @@ class LaunchedExerciseViewModel: ViewModel() {
     }
 
     private fun nextSeries() {
-        if (this.nbSeries.value != "1" && this.displayRest.value == false) this.nbSeries.postValue((this.nbSeries.value!!.toInt()-1).toString())
-        if (this.nbSeries.value == "1" && this.displayRest.value == false) this.stopExercise()
+        if (this.nbSeries.value == "1") this.stopExercise()
+        if (this.nbSeries.value != "1" && this.displayRest.value == false) this.nbSeries.value = (this.nbSeries.value!!.toInt()-1).toString()
+        disableButtonForTwoSeconds()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -153,6 +164,7 @@ class LaunchedExerciseViewModel: ViewModel() {
         this.displayExecution.value = false
         this.displayRest.value = false
         this.displayRepetition.value = false
+        this.displaySeries.value = false
 
         val history = History(
             System.currentTimeMillis().toDouble(),
@@ -176,25 +188,27 @@ class LaunchedExerciseViewModel: ViewModel() {
         this.displayExecution.value = (if(!this.displayRest.value!!) this.execution.isNotEmpty() else false)
         this.displayRepetition.value = (if(!this.displayRest.value!!) this.repetition.isNotEmpty() else false)
         this.displayWeight.value = (if(!this.displayRest.value!!) this.weight.isNotEmpty() else false)
+        disableButtonForTwoSeconds()
     }
 
     private fun startTimer() {
         timer = object : CountDownTimer(if(this.displayRest.value == true) rest.toLong()*1000 else execution.toLong()*1000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
+                if(!timerIsLaunched) timerIsLaunched = true
                 val value = (millisUntilFinished / 1000).toString()
                 if(displayRest.value == true) {
-                    restValue.postValue(value)
+                    restValue.value = value
                 } else {
-                    execValue.postValue(value)
+                    execValue.value = value
                 }
             }
 
             override fun onFinish() {
-                restValue.postValue(rest)
-                execValue.postValue(execution)
-                startTimerButtonClickable.postValue(true)
-                startTimerButtonAlpha.postValue(1F)
+                restValue.value = rest
+                execValue.value = execution
+                startTimerButtonClickable.value = true
+                startTimerButtonAlpha.value = 1F
             }
         }.start()
     }
