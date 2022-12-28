@@ -37,6 +37,9 @@ class ProfileFragment : Fragment() {
         binding.signUpButton.setOnClickListener {
             profileViewModel.onClickSignOutButton(accountDataStore)
         }
+        binding.goToMap.setOnClickListener {
+            onClickMap()
+        }
         println(2)
         setAccountData(accountDataStore)
         println(3)
@@ -66,5 +69,11 @@ class ProfileFragment : Fragment() {
                 binding.root.context, SignInActivity::class.java
             ))
         }
+    }
+
+    private fun onClickMap() {
+        binding.root.context.startActivity(Intent(
+            binding.root.context, MapsActivity::class.java
+        ))
     }
 }

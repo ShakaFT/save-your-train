@@ -9,11 +9,11 @@
     <TableLayout
         android:id="@+id/profileView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:stretchColumns="*"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" >
 
@@ -79,6 +79,13 @@
                 android:text="@string/sign_out_button"
                 android:textColor="#FF0000" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/goToMap"
+                android:backgroundTint="@color/white"
+                android:text="Aller sur la map"
+                android:textColor="#FF0000" />
     </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

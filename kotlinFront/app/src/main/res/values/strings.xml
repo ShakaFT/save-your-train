@@ -6,6 +6,7 @@
     <string name="title_exercises">Exercices</string>
     <string name="title_history">Historique</string>
     <string name="title_profile">Profil</string>
+    <string name="title_activity_maps">Carte</string>
 
     <!-- Sign In / Sign Up Activity -->
     <string name="title_sign_in">Je me connecte</string>
@@ -64,5 +65,10 @@
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom</string>
     <string name="sign_out_button">Se déconnecter</string>
+
+    <!-- Maps Activity -->
+    <string name="location_permission_denied">Permission de localisation refusée</string>
+    <string name="permission_required_toast">Permission requise</string>
+    <string name="permission_rationale_location">" L'accès au service de localisation est nécessaire pour utiliser la fonctionnalité 'ma localisation', qui affiche votre position actuelle sur la carte."</string>
 
 </resources>
