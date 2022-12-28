@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.databinding.FragmentProfileBinding
 import com.example.save_your_train.ui.account.signIn.SignInActivity
+import com.example.save_your_train.ui.profile.maps.MapsActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 

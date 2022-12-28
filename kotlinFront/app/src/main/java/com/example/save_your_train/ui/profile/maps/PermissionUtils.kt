@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.example.save_your_train.ui.profile
+package com.example.save_your_train.ui.profile.maps
 
 import android.Manifest
 import android.Manifest.permission

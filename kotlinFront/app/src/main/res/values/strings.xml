@@ -65,6 +65,7 @@
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom</string>
     <string name="sign_out_button">Se déconnecter</string>
+    <string name="go_to_map_button">Voir les salles</string>
 
     <!-- Maps Activity -->
     <string name="location_permission_denied">Permission de localisation refusée</string>

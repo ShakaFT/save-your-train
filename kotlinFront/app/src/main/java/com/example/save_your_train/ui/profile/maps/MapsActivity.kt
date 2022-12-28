@@ -1,4 +1,4 @@
-package com.example.save_your_train.ui.profile
+package com.example.save_your_train.ui.profile.maps
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat
 import android.Manifest
 import com.example.save_your_train.R
 import com.example.save_your_train.databinding.MapsLayoutBinding
-import com.example.save_your_train.ui.profile.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
-import com.example.save_your_train.ui.profile.PermissionUtils.isPermissionGranted
+import com.example.save_your_train.ui.profile.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
+import com.example.save_your_train.ui.profile.maps.PermissionUtils.isPermissionGranted
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
