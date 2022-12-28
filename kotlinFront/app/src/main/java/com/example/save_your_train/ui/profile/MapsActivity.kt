@@ -14,6 +14,8 @@ import com.example.save_your_train.ui.profile.PermissionUtils.isPermissionGrante
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(),
     OnMapReadyCallback {
@@ -43,6 +45,24 @@ class MapsActivity : AppCompatActivity(),
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(map: GoogleMap) {
+        val fitnessPark = LatLng(45.189076, 5.729324)
+        map.addMarker(
+            MarkerOptions()
+                .position(fitnessPark)
+                .title("Fitness Park")
+        )
+        val basicFit = LatLng(45.165706, 5.711761)
+        map.addMarker(
+            MarkerOptions()
+                .position(basicFit)
+                .title("Basic-Fit")
+        )
+        val appartFitness = LatLng(45.241624, 5.678929)
+        map.addMarker(
+            MarkerOptions()
+                .position(appartFitness)
+                .title("L'Appart Fitness")
+        )
         this.map = map
         enableMyLocation()
     }
