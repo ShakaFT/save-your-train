@@ -2,6 +2,7 @@ package com.example.save_your_train.data
 
 import com.example.save_your_train.baseUrlApi
 import com.example.save_your_train.email
+import com.example.save_your_train.ui.profile.AccountModel
 import com.google.gson.Gson
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -18,15 +19,15 @@ import org.json.JSONObject
 
 // Public functions
 
-/* suspend fun addRemoteAccount(account: Account) {
+suspend fun addRemoteAccount(account: AccountModel) {
     val payload: Map<String, Any> = mapOf(
-        "email": account.email,
-        "firstName": account.firstName,
-        "lastName": account.lastName,
-        "password": account.password,
+        "email" to account.email,
+        "firstName" to account.firstName,
+        "lastName" to account.lastName,
+        "password" to account.password,
     )
     callAPI("/account/add", "POST", payload)
-} */
+}
 
 suspend fun addRemoteExercise(exercise: Exercise) {
     val payload: Map<String, Any> = mapOf(
@@ -60,13 +61,14 @@ suspend fun removeRemoteHistory(history: History) {
     callAPI("/history/delete", "POST", payload)
 }
 
-/* suspend fun signIn(account: Account) {
+suspend fun signInRemote(account: AccountModel): Boolean {
     val payload: Map<String, Any> = mapOf(
-        "email": account.email,
-        "password": account.password,
+        "email" to account.email,
+        "password" to account.password,
     )
-    callAPI("/account/sign_in", "POST", payload)
-} */
+    val userData: Map<String, *> = callAPI("/account/sign_in", "POST", payload)
+    return true
+}
 
 // Private utils functions
 

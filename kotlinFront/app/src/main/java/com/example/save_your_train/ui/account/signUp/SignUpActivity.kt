@@ -52,5 +52,21 @@ class SignUpActivity: AppCompatActivity() {
                 binding.root.context.startActivity(Intent(binding.root.context, MainActivity::class.java))
             }
         }
+
+        // Sign Up Button
+        signUpViewModel.signUpButtonClickable.observe(this) {
+            binding.signUpButton.isClickable = it
+        }
+        signUpViewModel.signUpButtonAlpha.observe(this) {
+            binding.signUpButton.alpha = it
+        }
+
+        // Error Text View
+        signUpViewModel.textError.observe(this) {
+            binding.signUpError.text = it
+        }
+        signUpViewModel.visibilityError.observe(this) {
+            binding.signUpError.visibility = it
+        }
     }
 }

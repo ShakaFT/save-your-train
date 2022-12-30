@@ -33,18 +33,16 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         val accountDataStore = AccountDataStore(requireContext())
-        println(1)
+
         binding.signUpButton.setOnClickListener {
             profileViewModel.onClickSignOutButton(accountDataStore)
         }
         binding.goToMap.setOnClickListener {
             onClickMap()
         }
-        println(2)
+
         setAccountData(accountDataStore)
-        println(3)
         setObserve()
-        println(4)
 
         return binding.root
     }
