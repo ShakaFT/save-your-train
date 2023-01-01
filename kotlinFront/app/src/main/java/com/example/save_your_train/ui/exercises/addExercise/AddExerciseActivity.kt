@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.AddExerciseLayoutBinding
 
@@ -34,7 +35,7 @@ class AddExerciseActivity : AppCompatActivity() {
                 binding.exerciseNameField.text.toString(),
                 binding.exerciseDescriptionField.text.toString()
             )
-            addExerciseViewModel.onClickAddButton(exercise)
+            addExerciseViewModel.onClickAddButton(exercise, AccountDataStore(baseContext))
         }
         setTextChangedListener(binding.exerciseNameField)
 

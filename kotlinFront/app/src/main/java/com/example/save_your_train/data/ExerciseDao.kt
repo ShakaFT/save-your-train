@@ -12,8 +12,11 @@ interface ExerciseDao {
     fun findByName(name: String): Exercise
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg exercises: Exercise)
+    fun insert(vararg exercise: Exercise)
 
     @Delete
     fun delete(exercise: Exercise)
+
+    @Query("DELETE FROM exercise")
+    fun deleteAll()
 }

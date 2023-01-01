@@ -15,8 +15,11 @@ interface HistoryDao {
     fun findByDate(dateMs: String): History
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg history: History)
+    fun insert(vararg history: History)
 
     @Delete
     fun delete(history: History)
+
+    @Query("DELETE FROM history")
+    fun deleteAll()
 }

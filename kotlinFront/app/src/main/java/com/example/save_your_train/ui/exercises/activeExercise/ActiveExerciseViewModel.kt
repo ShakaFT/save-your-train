@@ -7,6 +7,7 @@ import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
 import com.example.save_your_train.data.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 
 
 class ActiveExerciseViewModel : ViewModel() {
@@ -43,9 +44,9 @@ class ActiveExerciseViewModel : ViewModel() {
         isLaunched.postValue(true)
     }
 
-    fun onClickRemoveExercise(exercise: Exercise) {
+    fun onClickRemoveExercise(exercise: Exercise, accountDataStore: AccountDataStore) {
         CoroutineScope(Dispatchers.IO).launch {
-            if (removeExercise(exercise)) {
+            if (removeExercise(exercise, accountDataStore)) {
                 isFinished.postValue(true)
             }
         }
@@ -69,11 +70,11 @@ class ActiveExerciseViewModel : ViewModel() {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private suspend fun removeExercise(exercise: Exercise): Boolean {
+    private suspend fun removeExercise(exercise: Exercise, accountDataStore: AccountDataStore): Boolean {
         disableDeleteButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
-                removeRemoteExercise(exercise)
+                removeRemoteExercise(exercise, accountDataStore.getAccount.first()!!.email)
                 removeExerciseDb(exercise)
                 true
             }

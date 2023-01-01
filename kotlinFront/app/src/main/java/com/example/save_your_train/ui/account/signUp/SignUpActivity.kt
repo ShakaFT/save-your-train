@@ -50,6 +50,7 @@ class SignUpActivity: AppCompatActivity() {
         signUpViewModel.isSignedUp.observe(this) {
             if (it) {
                 binding.root.context.startActivity(Intent(binding.root.context, MainActivity::class.java))
+                finish()
             }
         }
 

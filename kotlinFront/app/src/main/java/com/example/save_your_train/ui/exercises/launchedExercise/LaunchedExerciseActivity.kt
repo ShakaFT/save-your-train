@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.databinding.LaunchedExerciseLayoutBinding
 
 
@@ -52,7 +53,7 @@ class LaunchedExerciseActivity: AppCompatActivity() {
 
         // Set Listener
         binding.nextSeriesButton.setOnClickListener {
-            launchedExerciseViewModel.onClickNextSeriesButton()
+            launchedExerciseViewModel.onClickNextSeriesButton(AccountDataStore(baseContext))
         }
 
         binding.startExecTimer.setOnClickListener {

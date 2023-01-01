@@ -39,9 +39,9 @@ def sign_in():
     user_doc = db.collection(constants.COLLECTION_USER).document(email).get()
 
     if not user_doc.exists:
-        return jsonify(user_sign_in=False, reason="email unknown")
+        return jsonify(userSignIn=False, reason="email unknown")
     if password != user_doc.to_dict()["password"]:
-        return jsonify(user_sign_in=False, reason="password incorrect")
+        return jsonify(userSignIn=False, reason="password incorrect")
 
     # get data
     exercises = db.collection(constants.COLLECTION_EXERCISES).document(email).get().to_dict()

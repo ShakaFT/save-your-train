@@ -6,6 +6,7 @@ import android.widget.TableRow
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.data.History
 import com.example.save_your_train.databinding.ActiveHistoryLayoutBinding
@@ -108,7 +109,8 @@ class ActiveHistoryActivity: AppCompatActivity() {
                         binding.rest.text.toString(),
                         binding.series.text.toString(),
                         binding.weight.text.toString()
-                    )
+                    ),
+                    AccountDataStore(baseContext)
                 )
             },
         )

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.data.Exercise
 import com.example.save_your_train.databinding.ActiveExerciseLayoutBinding
 import com.example.save_your_train.getPopup
@@ -65,7 +66,8 @@ class ActiveExerciseActivity: AppCompatActivity() {
             "Cette action est irréversible.",
             positiveFunction = {
                 activeExerciseViewModel.onClickRemoveExercise(
-                    Exercise(supportActionBar?.title.toString(), binding.descriptionContent.text.toString())
+                    Exercise(supportActionBar?.title.toString(), binding.descriptionContent.text.toString()),
+                    AccountDataStore(baseContext)
                 )
             },
         )

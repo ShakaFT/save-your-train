@@ -62,8 +62,7 @@ class SignInViewModel: ViewModel() {
     private suspend fun signIn(accountDataStore: AccountDataStore, account: AccountModel): Boolean {
         val worked = GlobalScope.async {
             try {
-                if (signInRemote(account)) {
-                    accountDataStore.setAccount(account)
+                if (signInRemote(accountDataStore, account)) {
                     true
                 } else {
                     displayError(true, "L'email ou le mot de passe est incorrect")

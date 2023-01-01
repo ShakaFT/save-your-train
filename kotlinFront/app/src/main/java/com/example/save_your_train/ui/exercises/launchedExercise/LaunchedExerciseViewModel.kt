@@ -8,10 +8,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
+import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.data.AppDatabase
 import com.example.save_your_train.data.History
 import com.example.save_your_train.data.addRemoteHistory
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 
 
 class LaunchedExerciseViewModel: ViewModel() {
@@ -71,7 +73,7 @@ class LaunchedExerciseViewModel: ViewModel() {
         disableButtonForTwoSeconds()
     }
 
-    fun onClickNextSeriesButton() {
+    fun onClickNextSeriesButton(accountDataStore: AccountDataStore) {
         if(this.rest.isNotEmpty() && this.displayRest.value == true && !this.restValue.value.isNullOrEmpty()) {
             if(this.timerIsLaunched) {
                 this.timer.cancel()
@@ -92,7 +94,7 @@ class LaunchedExerciseViewModel: ViewModel() {
         }
         if (this.rest.isNotEmpty() && this.nbSeries.value != "1") updateDisplay()
         setButtonName()
-        nextSeries()
+        nextSeries(accountDataStore)
     }
 
     fun onClickStartTimer() {
@@ -132,21 +134,21 @@ class LaunchedExerciseViewModel: ViewModel() {
 
     private fun insertHistoryDb(history: History) {
         val historyDao = AppDatabase.data!!.historyDao()
-        historyDao.insertAll(history)
+        historyDao.insert(history)
     }
 
-    private fun nextSeries() {
-        if (this.nbSeries.value == "1") this.stopExercise()
+    private fun nextSeries(accountDataStore: AccountDataStore) {
+        if (this.nbSeries.value == "1") this.stopExercise(accountDataStore)
         if (this.nbSeries.value != "1" && this.displayRest.value == false) this.nbSeries.value = (this.nbSeries.value!!.toInt()-1).toString()
         disableButtonForTwoSeconds()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private suspend fun saveHistory(history: History): Boolean {
+    private suspend fun saveHistory(history: History, accountDataStore: AccountDataStore): Boolean {
         disableNextSeriesButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
-                addRemoteHistory(history)
+                addRemoteHistory(history, accountDataStore.getAccount.first()!!.email)
                 insertHistoryDb(history)
                 true
             } catch (e: Exception) {
@@ -159,7 +161,7 @@ class LaunchedExerciseViewModel: ViewModel() {
         return result
     }
 
-    private fun stopExercise() {
+    private fun stopExercise(accountDataStore: AccountDataStore) {
         this.displayWeight.value = false
         this.displayExecution.value = false
         this.displayRest.value = false
@@ -177,7 +179,7 @@ class LaunchedExerciseViewModel: ViewModel() {
         )
 
         CoroutineScope(Dispatchers.IO).launch {
-            if (saveHistory(history)) {
+            if (saveHistory(history, accountDataStore)) {
                 isFinished.postValue(true)
             }
         }

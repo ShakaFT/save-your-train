@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         lifecycleScope.launch {
             val currentAccount = AccountDataStore(baseContext).getAccount.first() ?: AccountModel("")
+            email = currentAccount.email
+
             if (currentAccount.email.isEmpty()) {
                 // Display Sign Up Page
                 binding.root.context.startActivity(Intent(binding.root.context, SignInActivity::class.java))

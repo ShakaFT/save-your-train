@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
+import com.example.save_your_train.data.AccountDataStore
 import com.example.save_your_train.data.AppDatabase
 import com.example.save_your_train.data.History
 import com.example.save_your_train.data.removeRemoteHistory
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 
 class ActiveHistoryViewModel: ViewModel() {
 
@@ -21,9 +23,9 @@ class ActiveHistoryViewModel: ViewModel() {
     val visibilityError = MutableLiveData<Int>(View.GONE)
     // Public methods
 
-    fun onClickRemoveHistory(history: History) {
+    fun onClickRemoveHistory(history: History, accountDataStore: AccountDataStore) {
         CoroutineScope(Dispatchers.IO).launch {
-            if (removeHistory(history)) {
+            if (removeHistory(history, accountDataStore)) {
                 isFinished.postValue(true)
             }
         }
@@ -42,11 +44,11 @@ class ActiveHistoryViewModel: ViewModel() {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private suspend fun removeHistory(history: History): Boolean {
+    private suspend fun removeHistory(history: History, accountDataStore: AccountDataStore): Boolean {
         disableDeleteButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
-                removeRemoteHistory(history)
+                removeRemoteHistory(history, accountDataStore.getAccount.first()!!.email)
                 removeHistoryDb(history)
                 true
             }

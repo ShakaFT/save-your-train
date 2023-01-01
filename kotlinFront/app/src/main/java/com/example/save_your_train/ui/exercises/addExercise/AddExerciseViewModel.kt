@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.save_your_train.alphaAble
 import com.example.save_your_train.alphaDisable
-import com.example.save_your_train.data.AppDatabase
-import com.example.save_your_train.data.Exercise
-import com.example.save_your_train.data.ExerciseDao
-import com.example.save_your_train.data.addRemoteExercise
+import com.example.save_your_train.data.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 
 
 class AddExerciseViewModel: ViewModel() {
@@ -24,9 +22,9 @@ class AddExerciseViewModel: ViewModel() {
 
     // Public functions
 
-    fun onClickAddButton(exercise: Exercise) {
+    fun onClickAddButton(exercise: Exercise, accountDataStore: AccountDataStore) {
         CoroutineScope(Dispatchers.IO).launch {
-            if (addExercise(exercise)) {
+            if (addExercise(exercise, accountDataStore)) {
                 isFinished.postValue(true)
             }
         }
@@ -52,11 +50,11 @@ class AddExerciseViewModel: ViewModel() {
     // Private functions
 
     @OptIn(DelicateCoroutinesApi::class)
-    private suspend fun addExercise(exercise: Exercise): Boolean {
+    private suspend fun addExercise(exercise: Exercise, accountDataStore: AccountDataStore): Boolean {
         disableAddButton(true) // Disable button during process
         val worked = GlobalScope.async {
             try {
-                addRemoteExercise(exercise)
+                addRemoteExercise(exercise, accountDataStore.getAccount.first()!!.email)
                 insertExerciseDb(exercise)
                 true
             } catch (e: Exception) {
@@ -81,7 +79,7 @@ class AddExerciseViewModel: ViewModel() {
 
     private fun insertExerciseDb(exercise: Exercise) {
         val exerciseDao = AppDatabase.data!!.exerciseDao()
-        exerciseDao.insertAll(exercise)
+        exerciseDao.insert(exercise)
     }
 
     @OptIn(DelicateCoroutinesApi::class)
